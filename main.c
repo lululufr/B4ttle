@@ -1,8 +1,11 @@
 #include <stdio.h>
- 
+#include <stdlib.h>
+#include "monster.h"
+
 int main ()
 {
-        printf("salut\n");
+        card alexis =declare("alexis");
+        printcard(alexis);
  
         return 0;
 }

@@ -1,0 +1,5 @@
+# ninja log v5
+3	187	6935195381374056	build.ninja	cbc58c55630ed4d7
+2	80	6935129150765670	CMakeFiles/B4ttle.dir/display.c.obj	2fc9fd894790c1e7
+67	153	6935173376064340	B4ttle.exe	51fd4872dc6827d6
+1	67	6935173375240443	CMakeFiles/B4ttle.dir/main.c.obj	9f156cfd6d55115d
