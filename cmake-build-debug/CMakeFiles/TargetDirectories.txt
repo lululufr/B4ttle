@@ -1,0 +1,3 @@
+C:/Users/Alexis/Documents/Github/B4ttle/cmake-build-debug/CMakeFiles/B4ttle.dir
+C:/Users/Alexis/Documents/Github/B4ttle/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Alexis/Documents/Github/B4ttle/cmake-build-debug/CMakeFiles/rebuild_cache.dir
