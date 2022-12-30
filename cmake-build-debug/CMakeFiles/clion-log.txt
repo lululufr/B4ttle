@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2022.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.2.3/bin/ninja/win/ninja.exe" -G Ninja -S C:\Users\Alexis\Documents\Github\B4ttle -B C:\Users\Alexis\Documents\Github\B4ttle\cmake-build-debug
+C:\Windows\system32\wsl.exe --distribution Ubuntu-22.04 --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc -G 'CodeBlocks - Unix Makefiles' -S /mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle -B /mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug"
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/Alexis/Documents/Github/B4ttle/cmake-build-debug
+-- Build files have been written to: /mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug
