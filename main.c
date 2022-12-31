@@ -2,13 +2,15 @@
 #include<stdlib.h>
 
 int main() {
+    //sprintf("SUPER JEU DE OUF");
+
     WINDOW *w;
-    char list[5][8] = { "One", "Two", "Three", "Four", "Five" };
-    char item[8];
+    char list[5][20] = { "Nouvelle Partie", "Charger Partie", "Option", "Bibliotheque", "Quitter" };
+    char item[20];
     int ch, i = 0, width = 7;
     initscr(); // initialize Ncurses
 
-    w = newwin( 10, 12, 1, 1 ); // create a new window
+    w = newwin( 10, 24, 1, 1 ); // create a new window
 
     box( w, 0, 0 ); // sets default borders for the window
 
@@ -18,7 +20,7 @@ int main() {
             wattron( w, A_STANDOUT ); // highlights the first item.
         else
             wattroff( w, A_STANDOUT );
-        sprintf(item, "%-7s",  list[i]);
+        sprintf(item, "%-13s",  list[i]);
         mvwprintw( w, i+1, 2, "%s", item );
     }
     wrefresh( w ); // update the terminal screen
@@ -32,7 +34,7 @@ int main() {
 
     while(( ch = wgetch(w)) != 'q'){
 // right pad with spaces to make the items appear with even width.
-        sprintf(item, "%-7s",  list[i]);
+        sprintf(item, "%-19s",  list[i]);
         mvwprintw( w, i+1, 2, "%s", item );
 
 // use a variable to increment or decrement the value based on the input.
