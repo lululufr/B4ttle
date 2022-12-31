@@ -1,3 +1,0 @@
-/mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug/CMakeFiles/B4ttle.dir
-/mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/lucas/OneDrive/Documents/Git/B4ttle/cmake-build-debug/CMakeFiles/rebuild_cache.dir
