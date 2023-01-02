@@ -1,8 +1,10 @@
 #include<curses.h>
 #include<stdlib.h>
+#include "menu.h"
+
 
 int main() {
-    //sprintf("SUPER JEU DE OUF");
+
 
     WINDOW *w;
     char list[5][20] = { "Nouvelle Partie", "Charger Partie", "Option", "Bibliotheque", "Quitter" };
@@ -10,11 +12,14 @@ int main() {
     int ch, i = 0, width = 7;
     initscr(); // initialize Ncurses
 
-    w = newwin( 10, 24, 1, 1 ); // create a new window
+    //w = newwin( 10, 24, 1, 1 ); // create a new window
+    w = newwin( 0, 0, 0, 0 ); // create a new window
 
-    box( w, 0, 0 ); // sets default borders for the window
+    //box( w, 2, 2 ); // sets default borders for the window
 
 // now print all the menu items and highlight the first one
+
+
     for( i=0; i<5; i++ ) {
         if( i == 0 )
             wattron( w, A_STANDOUT ); // highlights the first item.
@@ -29,15 +34,16 @@ int main() {
 
     keypad( w, TRUE ); // enable keyboard input for the window.
 
-    curs_set( 0 ); // hide the default screen cursor.
-// get the input
+    curs_set( 0 ); // Cache le curseur par defaut
 
-    while(( ch = wgetch(w)) != 'q'){
-// right pad with spaces to make the items appear with even width.
+// Prendre les entrés
+    while( ch = wgetch(w)){
+
+// Permet de retirer la subbrillance
         sprintf(item, "%-19s",  list[i]);
         mvwprintw( w, i+1, 2, "%s", item );
 
-// use a variable to increment or decrement the value based on the input.
+// Permet de naviguer sur le menu en incrémentant i
         switch( ch ) {
             case KEY_UP:
                 i--;
@@ -48,13 +54,18 @@ int main() {
                 i = ( i>4 ) ? 0 : i;
                 break;
         }
+        if (ch == '\n'){
+            launching(i);
+        }
 
-// now highlight the next item in the list.
+
+// Met en subbrillance l'item selectionné
         wattron( w, A_STANDOUT );
         sprintf(item, "%-7s",  list[i]);
         mvwprintw( w, i+1, 2, "%s", item);
         wattroff( w, A_STANDOUT );
     }
+
     delwin( w );
     endwin();
 }
