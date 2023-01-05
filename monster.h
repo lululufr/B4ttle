@@ -25,7 +25,6 @@ card declare( char * cardname){
     char * full = malloc(sizeof(char)*(strlen(path)+11));
     strcpy(full,first);
     strcat(full,path);
-    printf("%s", full);
 
     FILE *file = fopen(full, "r");
         if(file){
