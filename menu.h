@@ -1,4 +1,3 @@
-
 #ifndef MAIN_C_MENU_H
 #define MAIN_C_MENU_H
 
@@ -22,6 +21,14 @@ void launching(int i){
             break;
 
         case 4 : //quitter
+
+            endwin();
+            exit(EXIT_SUCCESS);
+            break;
+
+        default :
+            endwin();
+            printf("Une erreur est survenu lors du choix dans le menu");
             exit(EXIT_SUCCESS);
             break;
     }
