@@ -6,6 +6,7 @@
 int main() {
 
     print_title();
+    load_bar();
 
 menu();
 
