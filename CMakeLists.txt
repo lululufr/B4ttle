@@ -12,4 +12,4 @@ add_executable(B4ttle
         monster.h
         fromInternet.c
         ${SOURCE_FILES}
-        menu.h)
+        menu.h bibliotheque.h)

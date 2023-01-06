@@ -7,6 +7,7 @@
 #include "menu.h"
 #include <string.h>
 #include <unistd.h>
+#include "bibliotheque.h"
 //Le menu
 
 void loading(){
@@ -84,10 +85,12 @@ void launching(int i){
             break;
 
         case 3 : // Bibliotheque
+            endwin();
+            //printf("\n \n");
+            print_bibliotheque();
             break;
 
         case 4 : //quitter
-
             endwin();
             exit(EXIT_SUCCESS);
             break;
@@ -101,7 +104,7 @@ void launching(int i){
 }
 //le menu
 
-void menu() {
+int menu() {
 
     WINDOW *w;
     char list[5][20] = {"Nouvelle Partie", "Charger Partie", "Option", "Bibliotheque", "Quitter"};
@@ -141,18 +144,18 @@ void menu() {
         mvwprintw(w, i + 1, 2, "%s", item);
 
 // Permet de naviguer sur le menu en incrémentant i
-        switch (ch) {
-            case KEY_UP:
+
+            if (ch == KEY_UP) {
                 i--;
                 i = (i < 0) ? 4 : i;
-                break;
-            case KEY_DOWN:
-                i++;
-                i = (i > 4) ? 0 : i;
-                break;
-        }
+            }
+                if (ch == KEY_DOWN) {
+                    i++;
+                    i = (i > 4) ? 0 : i;
+                }
+
         if (ch == '\n') {
-            launching(i);
+            return i;
         }
 
 
@@ -165,5 +168,8 @@ void menu() {
 
     delwin(w);
     endwin();
+    printf("\n Au revoir \n");
+
+    return i;
 }
 #endif //MAIN_C_MENU_H
