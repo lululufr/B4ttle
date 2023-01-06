@@ -1,0 +1,1 @@
+LANCELOT_Romain | 024 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |
