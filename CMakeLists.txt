@@ -7,9 +7,8 @@ include_directories(. )
 set(SOURCE_FILES /usr/include/curses.h menu.h)
 
 add_executable(B4ttle
-        display.c
         main.c
         monster.h
         fromInternet.c
         ${SOURCE_FILES}
-        menu.h bibliotheque.h)
+        menu.h bibliotheque.h action.h display.h)
