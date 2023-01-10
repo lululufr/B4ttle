@@ -21,7 +21,6 @@ void print_bibliotheque() {
         FILE *carte = fopen(carte_actuelle, "r");
         if (carte == NULL) {
             perror("Erreur pour ouvrir la carte");
-
         }
 
         char *line = malloc(LINE_SIZE);
