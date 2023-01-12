@@ -36,7 +36,6 @@ void print_title(){
 }
 
 
-
 int load_bar()
 {
 
