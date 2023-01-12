@@ -20,7 +20,7 @@ int read_print_map(char * nameofthefile) {
     char buffer[COLS];
     FILE *map_file = fopen(nameofthefile, "r");
     if (map_file == NULL) {
-        perror("Error opening map file");
+        printf("Erreur lors de l'ouverture du fichier contenant la carte");
         return 1;
     }
 
