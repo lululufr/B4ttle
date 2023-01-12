@@ -12,6 +12,7 @@
 #define ROWS 26
 #define COLS 22
 
+
 int read_print_map(char * nameofthefile) {
     int i = 0;
     int j = 0;
