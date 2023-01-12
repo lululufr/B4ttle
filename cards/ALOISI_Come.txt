@@ -1,1 +1,1 @@
-ALOISI_Come | 05 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |
+ALOISI_Come | 05 | Point de Vie | Attaque | Defense | Description personnage | Compétences | Description Competence |

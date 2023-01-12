@@ -8,6 +8,67 @@
 #include <ncurses.h>
 
 
+
+#define ROWS 26
+#define COLS 22
+
+int read_print_map(char * nameofthefile) {
+    int i = 0;
+    int j = 0;
+
+    char buffer[COLS];
+    FILE *map_file = fopen(nameofthefile, "r");
+    if (map_file == NULL) {
+        perror("Error opening map file");
+        return 1;
+    }
+
+
+    char **map = (char **)malloc(ROWS * sizeof(char *));
+    for(; i < ROWS; i++) {
+        map[i] = (char *)malloc(COLS * sizeof(char));
+    }
+
+    for(i = 0; i < ROWS; i++) {
+        if (fgets(buffer, COLS, map_file) != NULL){
+            for(j = 0; j < COLS; j++) {
+                map[i][j] = buffer[j];
+            }
+        }
+    }
+
+
+    initscr();
+    noecho();
+
+    // affichage de la CARTEEEEEEE WESHHHH
+    for(i = 0; i < ROWS; i++) {
+        refresh();
+        printf("%s", map[i]);
+    }
+
+
+    getch();
+
+    // Clean up de fin :D
+    endwin();
+    fclose(map_file);
+    for(i = 0; i < ROWS; i++) {
+        free(map[i]);
+    }
+    free(map);
+    return 0;
+}
+
+
+
+#endif
+
+
+//code alexis =
+
+
+/*
 typedef struct Map{
     char * map_name;
     char ** map;
@@ -45,7 +106,7 @@ void read_map(Map * Map,char * mapname){
     fscanf(file,"%d | %d", &hauteur, &largeur);
 
     printf("%d ----- %d",hauteur,largeur);
-    /*char buffer;
+    char buffer;
     while((buffer =fgetc(file)!= '\0')){
 
     }
@@ -63,7 +124,7 @@ void read_map(Map * Map,char * mapname){
         ++i;
         j=0;
     }
-*/
+
 
 
 
@@ -80,20 +141,8 @@ void print_map(Map Map){
         mvprintw(i, 0, "%s", Map.map[i]);
     }
 }
+*/
 
 
+//code alexis
 
-#endif
-
-//char** currentMap = malloc(sizeof (char *)*2);
-//int i=0,j=0;
-//
-//while ((buffer = fgetc(file)) != EOF){
-//
-//    while ((buffer = fgetc(file)) != '\0'){
-//        linebuffer = realloc(linebuffer, (2 + j) * sizeof(char));
-//        linebuffer[j] = buffer;
-//    }
-//    currentMap= realloc(currentmap, (i+2)*sizeof(char *));
-//    currentMap[i]=linebuffer;
-//}

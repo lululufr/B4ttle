@@ -8,8 +8,10 @@
 #include <string.h>
 #include <unistd.h>
 #include "bibliotheque.h"
-//Le menu
+#include "display.h"
 
+//Le menu
+int menu();
 void loading(){
 
 };
@@ -75,6 +77,7 @@ void launching(int i){
     switch (i){
 
         case 0 : // nouvelle partie
+            read_print_map("maps/firstmap.txt");
             break;
 
         case 1 : // Charger partie
@@ -84,7 +87,7 @@ void launching(int i){
             break;
 
         case 3 : // Bibliotheque
-            endwin();
+            //endwin();
             //printf("\n \n");
             print_bibliotheque();
             break;

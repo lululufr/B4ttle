@@ -11,8 +11,6 @@ void print_bibliotheque() {
 
     DIR *dir = opendir("cards");
 
-    // Ouverture du dossier
-
     struct dirent *entry;
     while ((entry = readdir(dir)) != NULL) {
         char carte_actuelle[50] = "cards/";
@@ -25,24 +23,35 @@ void print_bibliotheque() {
 
         char *line = malloc(LINE_SIZE);
 
-        printf("->");
+        initscr();
+        scrollok(stdscr, TRUE); // Active le défilement de la fenêtre
 
-        //wprintw(w, "->");
+        printw("->");
+
 
         while (fgets(line, LINE_SIZE, carte) != NULL) {
 
-            //wprintw(w, "%s", line);
-            printf("%s",line);
+            printw("%s \n",line);
+            refresh();
 
+            int ch = wgetch(stdscr); // Récupérer les entrées
+            if (ch == KEY_UP) {
+                scroll(stdscr); // Défiler vers le haut
+            } else if (ch == KEY_DOWN) {
+                wscrl(stdscr, 1); // Défiler vers le bas
+            }
         }
+
 
         free(line);
         fclose(carte);
-
-        //printf("\n");
-        //wrefresh(w);
     }
+
+
     closedir(dir);
+
+    getch();
+    endwin();
 
 }
 

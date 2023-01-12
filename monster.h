@@ -38,12 +38,12 @@ card declare( char * cardname){
 
     return card;
 }
-void printcard(card card){
+/*void printcard(card card){
 
     printf("\n%s\n%d\n%d\n%s",card.name,card.hp,card.atk,card.desc);
 
 
-}
+}*/
 
 
 
