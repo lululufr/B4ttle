@@ -13,6 +13,11 @@
 #define COLS 22
 
 
+typedef struct Map{
+    char * map;
+    int width;
+}Map;
+
 int read_print_map(char * nameofthefile) {
     int i = 0;
     int j = 0;
@@ -146,4 +151,36 @@ void print_map(Map Map){
 
 
 //code alexis
+
+int readmap(char * filename, Map ** map){
+    FILE *map_file = fopen(filename, "r");
+    if (map_file == NULL) {
+        printf("Erreur lors de l'ouverture du fichier contenant la carte");
+        return 1;
+    }
+    char * new_map = malloc(sizeof(char)*2);
+    char buffer;
+    int i=0,j=0,width=0;
+    while (fgetc(map_file)!=EOF) {
+        fseek(map_file,-1, SEEK_CUR);
+        while ((buffer = fgetc(map_file) != '\n')) {
+            new_map= realloc(new_map,sizeof (char)* (strlen(new_map)+1));
+            new_map[i*width+j]=buffer;
+            j++;
+        }
+        if (i==0)
+            width=j;
+        j=0;
+        i++;
+    }
+    (*map)->map = new_map;
+    (*map)->width=width;
+}
+
+void printmap(Map map){
+    int i=0,j=0;
+    while (map.map[i*map.width+j]!='\0'){
+
+    }
+}
 

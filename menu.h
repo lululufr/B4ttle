@@ -77,7 +77,8 @@ void launching(int i){
     switch (i){
 
         case 0 : // nouvelle partie
-            read_print_map("maps/firstmap.txt");
+            Map * currentMap=malloc(sizeof(Map)) ;
+            readmap("maps/firstmap.txt", &currentMap);
             break;
 
         case 1 : // Charger partie

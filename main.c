@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "menu.h"
 #include "bibliotheque.h"
-#include "display.h"
+//#include "display.h"
 //#define HAUTEUR2 13
 //#define LARGEUR2 22
 
