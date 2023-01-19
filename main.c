@@ -14,7 +14,6 @@ int main() {
 
     for(;;) {
         launching(menu()); //la fonction qui lance nos menusmenu();
-
     }
     ////read_map( newMap,"firstmap.txt");
     ////print_map(*newMap);
