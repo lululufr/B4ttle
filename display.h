@@ -69,16 +69,17 @@ typedef struct Map{
 
 
 
-int readmap(char * filename, Map ** map){
+int readmap(char * filename, Map ** map) {
     FILE *map_file = fopen(filename, "r");
     if (map_file == NULL) {
         printf("Erreur lors de l'ouverture du fichier contenant la map");
         return 1;
     }
-//    while (fgetc(map_file)!=EOF){
-//        fseek(map_file,-1, SEEK_CUR);
-//        printf("%c", fgetc(map_file));
-//    }
+
+    //while (fgetc(map_file)!=EOF){
+    //    fseek(map_file,-1, SEEK_CUR);
+    //    printf("%c", fgetc(map_file));
+    //}
 
 
     char *new_map = malloc(sizeof(char) * 2);
