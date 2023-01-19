@@ -80,7 +80,7 @@ void launching(int i){
         case 0 : // nouvelle partie
             //Map * currentMap=malloc(sizeof(Map)) ; //marche pas
             //readmap("maps/firstmap.txt", &currentMap); //marche pas
-            read_print_map("maps/firstmap.txt");
+            //read_print_map("maps/firstmap.txt");
             break;
 
         case 1 : // Charger partie

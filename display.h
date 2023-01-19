@@ -68,89 +68,6 @@ int read_print_map(char * nameofthefile) {
 
 
 
-#endif
-
-
-//code alexis =
-
-
-/*
-typedef struct Map{
-    char * map_name;
-    char ** map;
-    int hauteur;
-}Map ;
-
-
-
-
-void read_map(Map * Map,char * mapname){
-
-
-    char * first = malloc(sizeof (char)*50);
-    first = "..\\maps\\";
-    char * full = malloc(sizeof(char)*(strlen(mapname)+11));
-    strcpy(full,first);
-    strcat(full,mapname);
-    FILE *file = fopen(full,"r");
-    printf("test");
-    //char** currentMap = malloc(sizeof (char *)*2);
-    //currentMap[0]= malloc(sizeof (char)*2);
-    //int i=0,j=0;
-    //while ((buffer = fgetc(file)) != EOF){
-    //    while((buffer = fgetc(file)) != '\0'){
-    //        currentMap = realloc(currentMap,(2+j)*sizeof (char));
-    //        currentMap[i][j]=buffer;
-    //        ++j;
-    //    }
-    //    currentMap = realloc(currentMap,(2+i)*sizeof (char *));
-    //    ++i;
-    //    j=0;
-    //}
-
-    int hauteur, largeur;
-    fscanf(file,"%d | %d", &hauteur, &largeur);
-
-    printf("%d ----- %d",hauteur,largeur);
-    char buffer;
-    while((buffer =fgetc(file)!= '\0')){
-
-    }
-
-    char** currentMap = malloc(sizeof (char * )*hauteur);
-    int i=0,j=0;
-    for(i=0;i<=hauteur;++i){
-        currentMap[i]=malloc(sizeof(char)*largeur);
-    }
-
-    while ((fgetc(file)) != EOF){
-        while((fgetc(file)) != '\0'){
-            ++j;
-        }
-        ++i;
-        j=0;
-    }
-
-
-
-
-    //(*Map).map_name= malloc(sizeof(char)*strlen(mapname)+1);
-    //(*Map).hauteur=i;
-    //(*Map).map= currentMap;
-    //(*Map).map_name=mapname;
-}
-
-
-void print_map(Map Map){
-    int i;
-    for(i = 0; i < Map.hauteur; ++i) {
-        mvprintw(i, 0, "%s", Map.map[i]);
-    }
-}
-*/
-
-
-//code alexis
 
 int readmap(char * filename, Map ** map){
     FILE *map_file = fopen(filename, "r");
@@ -159,13 +76,13 @@ int readmap(char * filename, Map ** map){
         return 1;
     }
     char * new_map = malloc(sizeof(char)*2);
-    char buffer;
     int i=0,j=0,width=0;
     while (fgetc(map_file)!=EOF) {
         fseek(map_file,-1, SEEK_CUR);
-        while ((buffer = fgetc(map_file) != '\n')) {
+        while (fgetc(map_file) != '\n') {
+            fseek(map_file,-1, SEEK_CUR);
             new_map= realloc(new_map,sizeof (char)* (strlen(new_map)+1));
-            new_map[i*width+j]=buffer;
+            new_map[i*width+j]=fgetc(map_file);
             printf("%c",new_map[i*width+j]);
             j++;
         }
@@ -189,3 +106,4 @@ void printmap(Map map){
     }
 }
 
+#endif
