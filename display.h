@@ -18,53 +18,53 @@ typedef struct Map{
     int width;
 }Map;
 
-int read_print_map(char * nameofthefile) {
-    int i = 0;
-    int j = 0;
-
-    char buffer[COLS];
-    FILE *map_file = fopen(nameofthefile, "r");
-    if (map_file == NULL) {
-        printf("Erreur lors de l'ouverture du fichier contenant la carte");
-        return 1;
-    }
-
-
-    char **map = (char **)malloc(ROWS * sizeof(char *));
-    for(; i < ROWS; i++) {
-        map[i] = (char *)malloc(COLS * sizeof(char));
-    }
-
-    for(i = 0; i < ROWS; i++) {
-        if (fgets(buffer, COLS, map_file) != NULL){
-            for(j = 0; j < COLS; j++) {
-                map[i][j] = buffer[j];
-            }
-        }
-    }
-
-
-    initscr();
-    noecho();
-
-    // affichage de la CARTEEEEEEE WESHHHH
-    for(i = 0; i < ROWS; i++) {
-        refresh();
-        printf("%s", map[i]);
-    }
-
-
-    getch();
-
-    // Clean up de fin :D
-    endwin();
-    fclose(map_file);
-    for(i = 0; i < ROWS; i++) {
-        free(map[i]);
-    }
-    free(map);
-    return 0;
-}
+//int read_print_map(char * nameofthefile) {
+//    int i = 0;
+//    int j = 0;
+//
+//    char buffer[COLS];
+//    FILE *map_file = fopen(nameofthefile, "r");
+//    if (map_file == NULL) {
+//        printf("Erreur lors de l'ouverture du fichier contenant la carte");
+//        return 1;
+//    }
+//
+//
+//    char **map = (char **)malloc(ROWS * sizeof(char *));
+//    for(; i < ROWS; i++) {
+//        map[i] = (char *)malloc(COLS * sizeof(char));
+//    }
+//
+//    for(i = 0; i < ROWS; i++) {
+//        if (fgets(buffer, COLS, map_file) != NULL){
+//            for(j = 0; j < COLS; j++) {
+//                map[i][j] = buffer[j];
+//            }
+//        }
+//    }
+//
+//
+//    initscr();
+//    noecho();
+//
+//    // affichage de la CARTEEEEEEE WESHHHH
+//    for(i = 0; i < ROWS; i++) {
+//        refresh();
+//        printf("%s", map[i]);
+//    }
+//
+//
+//    getch();
+//
+//    // Clean up de fin :D
+//    endwin();
+//    fclose(map_file);
+//    for(i = 0; i < ROWS; i++) {
+//        free(map[i]);
+//    }
+//    free(map);
+//    return 0;
+//}
 
 
 
@@ -75,6 +75,12 @@ int readmap(char * filename, Map ** map){
         printf("Erreur lors de l'ouverture du fichier contenant la map");
         return 1;
     }
+//    while (fgetc(map_file)!=EOF){
+//        fseek(map_file,-1, SEEK_CUR);
+//        printf("%c", fgetc(map_file));
+//    }
+
+
     char * new_map = malloc(sizeof(char)*2);
     int i=0,j=0,width=0;
     while (fgetc(map_file)!=EOF) {

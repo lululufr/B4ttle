@@ -4,11 +4,10 @@
 #include<curses.h>
 #include <stdlib.h>
 #include <time.h>
-#include "menu.h"
 #include <string.h>
 #include <unistd.h>
 #include "bibliotheque.h"
-#include "display.h"
+//#include "display.h"
 
 //Le menu
 int menu();
