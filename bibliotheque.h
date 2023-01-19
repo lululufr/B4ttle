@@ -26,7 +26,7 @@ void print_bibliotheque() {
         initscr();
         scrollok(stdscr, TRUE); // Active le défilement de la fenêtre
 
-        //printw("->");
+        printw("->");
 
 
         while (fgets(line, LINE_SIZE, carte) != NULL) {
