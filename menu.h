@@ -4,10 +4,11 @@
 #include<curses.h>
 #include <stdlib.h>
 #include <time.h>
+#include "menu.h"
 #include <string.h>
 #include <unistd.h>
 #include "bibliotheque.h"
-//#include "display.h"
+#include "display.h"
 
 //Le menu
 int menu();
@@ -76,10 +77,9 @@ void launching(int i){
 
     switch (i){
 
-        case 0 : // nouvelle partie
-            //Map * currentMap=malloc(sizeof(Map)) ; //marche pas
-            //readmap("maps/firstmap.txt", &currentMap); //marche pas
-            //read_print_map("maps/firstmap.txt");
+        case 0 :
+            endwin();
+            play();
             break;
 
         case 1 : // Charger partie

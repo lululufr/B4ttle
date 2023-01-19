@@ -69,7 +69,10 @@ typedef struct Map{
 
 
 
-int readmap(char * filename, Map ** map) {
+int readmap(char * filename, Map ** map) { ////faire en sorte que le filename soit clean sans PATH pour pouvoir le mettre dans map.nom
+    char * first = malloc(sizeof (char)*12);
+    first = "..\\maps\\";
+
     FILE *map_file = fopen(filename, "r");
     if (map_file == NULL) {
         printf("Erreur lors de l'ouverture du fichier contenant la map");
@@ -97,9 +100,8 @@ int readmap(char * filename, Map ** map) {
         i++;
     }
 
-    printf("\n\n\n%d", width);
     (*map)->map = new_map;
-    (*map)->width = width;
+    //(*map)->nom = "Map de TEST";
 }
 
 
@@ -107,16 +109,14 @@ int readmap(char * filename, Map ** map) {
 
 void printmap(Map map){
 
- //   int i=0,j=0;
- //   while (map.map[i*map.width+j]!='\0'){
- //       for (j = 0; j <= map.width; ++j) {
- //           printf("%c", map.map[i*map.width+j]);
- //       }
- //       printf("\n");
- //       ++i;
- //   }
+    //printw("%s",map.map);
 
- printf("%s",map.map);
+
+    //getch();
+    //endwin();
+    //printf("%s",map.map);
+    printf("%s",map.map);
+
 
 }
 
