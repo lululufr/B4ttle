@@ -8,12 +8,9 @@
 //#define LARGEUR2 22
 
 int main() {
-    printf("slut");
-
     Map * newmap = malloc(sizeof (Map));
-    printf("whre");
     readmap("maps/firstmap.txt",&newmap);
-    //printmap(*newmap);
+    printmap(*newmap);
 
 
 
