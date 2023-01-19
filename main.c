@@ -8,7 +8,10 @@
 //#define LARGEUR2 22
 
 int main() {
-
+    Map * newmap = malloc(sizeof (Map));
+    readmap("maps/firstmap.txt",&newmap);
+    printmap(*newmap);
+    printf("\n\n");
     print_title();
     load_bar();
 
@@ -17,6 +20,5 @@ int main() {
     }
     ////read_map( newMap,"firstmap.txt");
     ////print_map(*newMap);
-    //readmap();
 
 }

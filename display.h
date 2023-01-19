@@ -155,7 +155,7 @@ void print_map(Map Map){
 int readmap(char * filename, Map ** map){
     FILE *map_file = fopen(filename, "r");
     if (map_file == NULL) {
-        printf("Erreur lors de l'ouverture du fichier contenant la carte");
+        printf("Erreur lors de l'ouverture du fichier contenant la map");
         return 1;
     }
     char * new_map = malloc(sizeof(char)*2);
@@ -166,6 +166,7 @@ int readmap(char * filename, Map ** map){
         while ((buffer = fgetc(map_file) != '\n')) {
             new_map= realloc(new_map,sizeof (char)* (strlen(new_map)+1));
             new_map[i*width+j]=buffer;
+            printf("%c",new_map[i*width+j]);
             j++;
         }
         if (i==0)
@@ -180,7 +181,11 @@ int readmap(char * filename, Map ** map){
 void printmap(Map map){
     int i=0,j=0;
     while (map.map[i*map.width+j]!='\0'){
-
+        for (j = 0; j <= map.width; ++j) {
+            printf("%c", map.map[i*map.width+j]);
+        }
+        printf("\n");
+        ++i;
     }
 }
 
