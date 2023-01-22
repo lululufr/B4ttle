@@ -71,14 +71,14 @@ int load_bar()
     return 0;
 }
 
-void launching(int i){
+void launching(int i,WINDOW * w){
 
 
     switch (i){
 
         case 0 :
-            endwin();
-            play();
+            //endwin();
+            play(w);
             break;
 
         case 1 : // Charger partie

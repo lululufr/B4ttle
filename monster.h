@@ -34,8 +34,6 @@ card declare( char * cardname){
         }
     card card;
     fscanf(file,"%s | %d | %d | %s",card.name,&card.hp,&card.atk,card.desc);
-//    fgets(card.desc,1,file);
-
     return card;
 }
 /*void printcard(card card){

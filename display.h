@@ -1,23 +1,12 @@
 #ifndef MAIN_C_DISPLAY_H
 #define MAIN_C_DISPLAY_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
 #include "maps/map.h"
 
-
-
-#define ROWS 26
-#define COLS 22
-
-
-typedef struct Map{
-    char * map;
-    char * nom;
-}Map;
 
 
 
@@ -31,15 +20,18 @@ int readmap(char * filename, Map ** map) { ////faire en sorte que le filename so
         return 1;
     }
 
+    char buffer[3];
+    fscanf(map_file,"%s/n",buffer);
+    int width = atoi(buffer);
     char *new_map = malloc(sizeof(char) * 2);
-    int i = 0, j = 0, width = 0;
+    int j = 0;
+    fseek(map_file, 4, SEEK_SET);
     while (fgetc(map_file) != EOF) {
 
         fseek(map_file, -1, SEEK_CUR);
         new_map = realloc(new_map, sizeof(char) * (strlen(new_map) +1));
         new_map[j] = fgetc(map_file);
         j++;
-        i++;
     }
 
     (*map)->map = new_map;
@@ -47,9 +39,6 @@ int readmap(char * filename, Map ** map) { ////faire en sorte que le filename so
     //printf("%s",new_map);
     //printw("%s",new_map);
 }
-
-
-
 
 
 void printmap(Map map,WINDOW * w){
