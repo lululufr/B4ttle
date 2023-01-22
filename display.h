@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
+#include "maps/map.h"
 
 
 
@@ -35,40 +36,54 @@ int readmap(char * filename, Map ** map) { ////faire en sorte que le filename so
     while (fgetc(map_file) != EOF) {
 
         fseek(map_file, -1, SEEK_CUR);
-        new_map = realloc(new_map, sizeof(char) * (strlen(new_map) + 1));
-        new_map[i * width + j] = fgetc(map_file);
-        if (i == 0)
-            width = j;
+        new_map = realloc(new_map, sizeof(char) * (strlen(new_map) +1));
+        new_map[j] = fgetc(map_file);
         j++;
         i++;
     }
 
     (*map)->map = new_map;
-    //(*map)->nom = "Map de TEST";
+    (*map)->width= width;
+    //printf("%s",new_map);
+    //printw("%s",new_map);
 }
 
 
 
 
-void printmap(Map map){
 
-    //printw("%s",map.map);
+void printmap(Map map,WINDOW * w){
+
+    //int i,j;
+    //while(map.map[j]!='\0'){
+    //    for (i = 0; i <= map.width-1 ; ++i) {
+    //        printw("%c",map.map[j]);
+    //        ++j;
+    //    }
+    //    printw("\n");
+    //    i=0;
+    //}
 
 
-    //getch();
-    //endwin();
-    //printf("%s",map.map);
-    printf("%s",map.map);
+
+    printw("%s",test);
+
+    getch();
+    refresh();
+
+    //printw("salut");
+    //Map * city1 = City1();
+    //printw("%s",city1->map);
+
 
 
 }
 
-void play() {
-
+void play(WINDOW * w) {
 
     Map *newmap = malloc(sizeof(Map));
     readmap("maps/firstmap.txt", &newmap);
-    printmap(*newmap);
+    printmap(*newmap,w);
 }
 
 #endif

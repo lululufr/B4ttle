@@ -11,4 +11,4 @@ add_executable(B4ttle
         monster.h
         fromInternet.c
         ${SOURCE_FILES}
-        menu.h bibliotheque.h action.h display.h)
+        menu.h bibliotheque.h action.h display.h maps/map.h)

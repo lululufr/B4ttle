@@ -10,11 +10,11 @@
 #include "bibliotheque.h"
 #include "display.h"
 
+ // create a new window
+
 //Le menu
 int menu();
-void loading(){
 
-};
 
 void print_title(){
 
@@ -37,7 +37,6 @@ void print_title(){
 
     printf("%s",title);
 }
-
 
 int load_bar()
 {
@@ -108,16 +107,19 @@ void launching(int i){
 }
 //le menu
 
-int menu() {
+int menu(WINDOW * w) {
 
-    WINDOW *w;
+
+
     char list[5][20] = {"Nouvelle Partie", "Charger Partie", "Option", "Bibliotheque", "Quitter"};
     char item[20];
     int ch, i = 0, width = 7;
     initscr(); // initialize Ncurses
 
+    w = newwin(0, 0, 0, 0);
+
 //w = newwin( 10, 24, 1, 1 ); // create a new window
-    w = newwin(0, 0, 0, 0); // create a new window
+
 
 //box( w, 2, 2 ); // sets default borders for the window
 
@@ -169,10 +171,6 @@ int menu() {
         mvwprintw(w, i + 1, 2, "%s", item);
         wattroff(w, A_STANDOUT);
     }
-
-    delwin(w);
-    endwin();
-    printf("\n Au revoir \n");
 
     return i;
 }

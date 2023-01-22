@@ -7,13 +7,20 @@
 //#define HAUTEUR2 13
 //#define LARGEUR2 22
 
+//#define w WINDOW * ;
+
+//
+
+
 int main() {
+
+    WINDOW * w;
+
     //print_title();
     ////load_bar();
     for(;;) {
-        launching(menu()); //la fonction qui lance nos menusmenu();
+        launching(menu(w),w); //la fonction qui lance nos menusmenu();
     }
-
 
 
 
