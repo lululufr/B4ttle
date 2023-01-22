@@ -77,7 +77,7 @@ void launching(int i,WINDOW * w){
     switch (i){
 
         case 0 :
-            //endwin();
+            endwin();
             play(w);
             break;
 

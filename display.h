@@ -8,16 +8,14 @@
 #include "maps/map.h"
 
 
-
-
-int readmap(char * filename, Map ** map) { ////faire en sorte que le filename soit clean sans PATH pour pouvoir le mettre dans map.nom
+char * readmap(char * filename /*,Map ** map*/) { ////faire en sorte que le filename soit clean sans PATH pour pouvoir le mettre dans map.nom
     char * first = malloc(sizeof (char)*12);
     first = "..\\maps\\";
 
     FILE *map_file = fopen(filename, "r");
     if (map_file == NULL) {
         printf("Erreur lors de l'ouverture du fichier contenant la map");
-        return 1;
+        //return 1;
     }
 
     char buffer[3];
@@ -34,10 +32,12 @@ int readmap(char * filename, Map ** map) { ////faire en sorte que le filename so
         j++;
     }
 
-    (*map)->map = new_map;
-    (*map)->width= width;
+    //(*map)->map = new_map;
+    //(*map)->width= width;
     //printf("%s",new_map);
     //printw("%s",new_map);
+
+    return new_map;
 }
 
 
@@ -53,14 +53,14 @@ void printmap(Map map,WINDOW * w){
     //    i=0;
     //}
 
+    //char * test;
+    //test = readmap("maps/city1");
 
-
-    printw("%s",test);
+    printw("%s",readmap("maps/city1"));
 
     getch();
     refresh();
 
-    //printw("salut");
     //Map * city1 = City1();
     //printw("%s",city1->map);
 
@@ -70,8 +70,8 @@ void printmap(Map map,WINDOW * w){
 
 void play(WINDOW * w) {
 
-    Map *newmap = malloc(sizeof(Map));
-    readmap("maps/firstmap.txt", &newmap);
+    Map *newmap = malloc(sizeof(Map)*2);
+    //readmap("maps/firstmap.txt"/*,&newmap*/);
     printmap(*newmap,w);
 }
 
