@@ -8,7 +8,7 @@
 #include "maps/map.h"
 
 
-char * readmap(char * filename /*,Map ** map*/) {
+char * readmap(char * filename ) {
 
     FILE *map_file = fopen(filename, "r");
     if (map_file == NULL) {
@@ -29,6 +29,7 @@ char * readmap(char * filename /*,Map ** map*/) {
 
     return new_map;
 }
+
 
 
 void printmap(){
