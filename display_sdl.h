@@ -102,12 +102,17 @@ SDL_Flip(ecran);
 int active = 1;
 SDL_Event event;
 while(active) {
-SDL_WaitEvent(&event);
-switch(event.type) {
-case SDL_QUIT : active = 0; break;
-case SDL_KEYUP : active = 0; break;
-default : break;
-}
+    SDL_WaitEvent(&event);
+        switch(event.type) {
+            case SDL_QUIT : active = 0; 
+                break;
+            case SDL_KEYDOWN : 
+                grille[10][20] = 10; 
+                SDL_Flip(ecran);
+                break;
+            default : 
+                break;
+        }
 }
 SDL_Quit();
 exit(EXIT_SUCCESS);
