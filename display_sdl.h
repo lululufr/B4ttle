@@ -17,6 +17,12 @@
 
 
 
+char** readFile(char *filename)
+{
+// il faut que cette fonction puisse retourner un tableau a 2 dimension
+
+}
+
 
 
 void SDLprinting(){
@@ -70,19 +76,21 @@ char grille[17][24] = {
 };
 
 
-SDL_Rect tilePos;
+//char * grille = readFile("maps/firstmap.txt");
+
+SDL_Rect valtile;
 SDL_Rect screenPos;
 int i, j;
 for(j = 0; j < 17; ++j) {
     for(i = 0; i < 24; ++i) {
         if(grille[j][i] == 0) continue;
-            tilePos.x = 35 * ((grille[j][i] - 1) % 6);
-            tilePos.y = 35 * ((grille[j][i] - 1) / 6);
-            tilePos.w = 35;
-            tilePos.h = 35;
+            valtile.x = 35 * ((grille[j][i] - 1) % 6);
+            valtile.y = 35 * ((grille[j][i] - 1) / 6);
+            valtile.w = 35;
+            valtile.h = 35;
             screenPos.x = i * 35;
             screenPos.y = j * 35;
-            SDL_BlitSurface(surface, &tilePos, ecran, &screenPos);
+            SDL_BlitSurface(surface, &valtile, ecran, &screenPos);
     }
 }
 SDL_Flip(ecran);
@@ -105,5 +113,10 @@ SDL_Quit();
 exit(EXIT_SUCCESS);
 
 }
+
+
+
+
+
 
 #endif
