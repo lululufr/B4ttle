@@ -9,12 +9,12 @@
 #include <unistd.h>
 #include "bibliotheque.h"
 #include "display.h"
+#include "display_sdl.h"  //faudra les remettres
 
  // create a new window
 
 //Le menu
 int menu();
-
 
 void print_title(){
 
@@ -71,14 +71,14 @@ int load_bar()
     return 0;
 }
 
-void launching(int i,WINDOW * w){
+void launching(int i){
 
 
     switch (i){
 
         case 0 :
             endwin();
-            play(w);
+            //printmap();
             break;
 
         case 1 : // Charger partie
@@ -108,8 +108,6 @@ void launching(int i,WINDOW * w){
 //le menu
 
 int menu(WINDOW * w) {
-
-
 
     char list[5][20] = {"Nouvelle Partie", "Charger Partie", "Option", "Bibliotheque", "Quitter"};
     char item[20];
@@ -172,6 +170,9 @@ int menu(WINDOW * w) {
         wattroff(w, A_STANDOUT);
     }
 
+    //delwin(w);
     return i;
 }
+
+
 #endif //MAIN_C_MENU_H

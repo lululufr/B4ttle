@@ -3,30 +3,23 @@
 #include <stdio.h>
 #include "menu.h"
 #include "bibliotheque.h"
-#include "display.h"
-//#define HAUTEUR2 13
-//#define LARGEUR2 22
+#include "display_sdl.h" //faudra changer ca
 
-//#define w WINDOW * ;
-
-//
-
+//#include <SDL/SDL.h>
+//#include <SDL/SDL_image.h>
 
 int main() {
 
-    WINDOW * w;
+    //WINDOW * w;
 
     //print_title();
     ////load_bar();
-    for(;;) {
-        launching(menu(w),w); //la fonction qui lance nos menusmenu();
-    }
+ 
+    //launching(menu(w)); //la fonction qui lance nos menusmenu();
 
+    SDLprinting();
 
-
-    //off
-    //read_map( newMap,"firstmap.txt");
-    //print_map(*newMap);
-    //play();
 
 }
+
+
