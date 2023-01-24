@@ -46,7 +46,7 @@ void SDLprinting(){
 }
 
 
-char tableau[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
+//char tableau[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
 int width=5;
 //char * grille = readFile("maps/firstmap.txt");
     Map * map= malloc(sizeof (Map)*20);
@@ -59,9 +59,9 @@ int width=5;
     int i, j;
     for(j = 0; j < 5; ++j) {
         for(i = 0; i < 5; ++i) {
-            if(tableau[i*width+j] == 0) continue;
-            valtile.x = 35 * ((tableau[i*width+j]- 1) % 6);
-            valtile.y = 35 * ((tableau[i*width+j] - 1) / 6);
+            if(map->map[i*width+j] == 0) continue;
+            valtile.x = 35 * ((map->map[i*width+j]- 1) % 6);
+            valtile.y = 35 * ((map->map[i*width+j] - 1) / 6);
             valtile.w = 35;
             valtile.h = 35;
             screenPos.x = i * 35;
@@ -84,7 +84,7 @@ while(active) {
             case SDL_QUIT : active = 0; 
                 break;
             case SDL_KEYDOWN : 
-                grille[10][20] = 10; 
+                //map.[10][20] = 10;
                 SDL_Flip(ecran);
                 break;
             default : 
