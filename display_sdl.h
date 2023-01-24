@@ -64,6 +64,7 @@ void SDLprinting(){
             map->map[y] = 0;
         }
     }
+
     //func changement symbole
 
     SDL_Rect tilePos;
