@@ -29,29 +29,29 @@ char** MapFile(char *filename){
 void SDLprinting(){
 
 
-if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-fprintf(stderr, "Error in SDL_Init : %s\n", SDL_GetError());
-exit(EXIT_FAILURE);
-}
-SDL_Surface * ecran = NULL;
-if((ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE |
-SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
-SDL_Quit();
-exit(EXIT_FAILURE);
-}
-SDL_WM_SetCaption("B4TTLE - esgi", NULL);
+    if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        fprintf(stderr, "Error in SDL_Init : %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+    SDL_Surface * ecran = NULL;
+    if((ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE |
+        SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
+        SDL_Quit();
+        exit(EXIT_FAILURE);
+    }
+    SDL_WM_SetCaption("B4TTLE - esgi", NULL);
 
 
 
 
-/* Votre travail ici */
+    /* Votre travail ici */
 
-SDL_Surface * surface = NULL;
-if((surface = IMG_Load("media/test_map_1.png")) == NULL) {
-    fprintf(stderr, "Error in SDL_LoadBMP(\"media/TK.png\") : %s\n", SDL_GetError());
-    SDL_FreeSurface(ecran);
-    SDL_Quit();
-    exit(EXIT_FAILURE);
+    SDL_Surface * surface = NULL;
+    if((surface = IMG_Load("media/test_map_1.png")) == NULL) {
+        fprintf(stderr, "Error in SDL_LoadBMP(\"media/TK.png\") : %s\n", SDL_GetError());
+        SDL_FreeSurface(ecran);
+        SDL_Quit();
+        exit(EXIT_FAILURE);
 }
 
 
@@ -78,6 +78,7 @@ int width=5;
     SDL_Flip(ecran);
 
 /* Votre travail ici */
+
 
 
 
