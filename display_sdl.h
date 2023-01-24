@@ -46,33 +46,34 @@ void SDLprinting(){
 }
 
 
-//char tableau[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
-int width=5;
+//char grille[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
 //char * grille = readFile("maps/firstmap.txt");
-    Map * map= malloc(sizeof (Map)*20);
+    Map * map = malloc(sizeof (Map)*20);
 
     MapFile(map,"maps/firstmap.txt");
 
+    SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
-    SDL_Rect valtile;
+
+    SDL_Rect tilePos;
     SDL_Rect screenPos;
     int i, j;
-    for(j = 0; j < 5; ++j) {
-        for(i = 0; i < 5; ++i) {
-            if(map->map[i*width+j] == 0) continue;
-            valtile.x = 35 * ((map->map[i*width+j]- 1) % 6);
-            valtile.y = 35 * ((map->map[i*width+j] - 1) / 6);
-            valtile.w = 35;
-            valtile.h = 35;
-            screenPos.x = i * 35;
-            screenPos.y = j * 35;
-            SDL_BlitSurface(surface, &valtile, ecran, &screenPos);
+    for(j = 0; j < 6; ++j) {
+        for(i = 0; i < 8; ++i) {
+            if(map->map[j*map->width+i] == 0) continue;
+            tilePos.x = 25 * ((map->map[j*map->width+i] -1 ) % 6)-47; //j = 2 width =8
+            tilePos.y = 25 * ((map->map[j*map->width+i] -1 ) / 6)-47;
+            tilePos.w = 25;
+            tilePos.h = 25;
+            screenPos.x = i * 25;
+            screenPos.y = j * 25;
+            SDL_BlitSurface(surface, &tilePos, ecran, &screenPos);
+
         }
     }
     SDL_Flip(ecran);
 
 /* Votre travail ici */
-
 
 
 
@@ -84,7 +85,7 @@ while(active) {
             case SDL_QUIT : active = 0; 
                 break;
             case SDL_KEYDOWN : 
-                //map.[10][20] = 10;
+
                 SDL_Flip(ecran);
                 break;
             default : 
