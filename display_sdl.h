@@ -32,9 +32,6 @@ void SDLprinting(){
     }
     SDL_WM_SetCaption("B4TTLE - esgi", NULL);
 
-
-
-
     /* Votre travail ici */
 
     SDL_Surface * surface = NULL;
@@ -43,7 +40,7 @@ void SDLprinting(){
         SDL_FreeSurface(ecran);
         SDL_Quit();
         exit(EXIT_FAILURE);
-}
+    }
 
 
 //char grille[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
@@ -92,7 +89,9 @@ while(active) {
                 break;
         }
 }
+
 SDL_Quit();
+    printf("%s", map->map);
 exit(EXIT_SUCCESS);
 
 }

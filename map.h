@@ -33,13 +33,15 @@ void MapFile(Map * map, char * filename){
         while (fgetc(map_file) != EOF) {
 
             fseek(map_file, -1, SEEK_CUR);
-            new_map = realloc(new_map, sizeof(char) * (strlen(new_map) + 1));
-            new_map[j] = fgetc(map_file);
+            //if(fgetc(map_file)!='\n'){
+                new_map = realloc(new_map, sizeof(char) * (strlen(new_map) + 1));
+                new_map[j] = fgetc(map_file);
+            //}
             j++;
         }
         (*map).name = filename;
         (*map).map = new_map ;
-        (*map).width = cpt;
+        (*map).width = cpt+1;
 }
 
 
