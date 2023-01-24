@@ -8,7 +8,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "bibliotheque.h"
-#include "display.h"
 #include "display_sdl.h"  //faudra les remettres
 
  // create a new window

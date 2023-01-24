@@ -8,21 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "map.h"
 
 
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-
-
-
-
-
-char** MapFile(char *filename){
-
-// il faut que cette fonction puisse retourner un tableau a 2 dimension
-
-}
 
 
 
@@ -58,6 +49,9 @@ void SDLprinting(){
 char tableau[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
 int width=5;
 //char * grille = readFile("maps/firstmap.txt");
+    Map * map= malloc(sizeof (Map)*20);
+
+    MapFile(map,"maps/firstmap.txt");
 
 
     SDL_Rect valtile;
