@@ -51,15 +51,29 @@ void SDLprinting(){
 
     SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
+//func changement symbole
+    int y;
+    for(y = 0; y < 8; ++y) {
+        if(map->map[y] == '#'){
+            map->map[y] = 0; //# = vide
+        }else if(map->map[y] == '%'){
+            map->map[y] = 12;
+        }else if(map->map[y] == '#'){
+            map->map[y] = 0;
+        }else if(map->map[y] == '#'){
+            map->map[y] = 0;
+        }
+    }
+    //func changement symbole
 
     SDL_Rect tilePos;
     SDL_Rect screenPos;
     int i, j;
-    for(j = 0; j < 6; ++j) {
+    for(j = 0; j < 8; ++j) {
         for(i = 0; i < 8; ++i) {
             if(map->map[j*map->width+i] == 0) continue;
-            tilePos.x = 25 * ((map->map[j*map->width+i] -1 ) % 6)-47; //j = 2 width =8
-            tilePos.y = 25 * ((map->map[j*map->width+i] -1 ) / 6)-47;
+            tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 6);
+            tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 6);
             tilePos.w = 25;
             tilePos.h = 25;
             screenPos.x = i * 25;
