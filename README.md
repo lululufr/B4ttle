@@ -1,5 +1,5 @@
 # B4ttle
 Langage C projet deuxième année
 
-new branch
+new branch for cards
 
