@@ -25,7 +25,6 @@ card declare( char * cardname){
     char * full = malloc(sizeof(char)*(strlen(path)+11));
     strcpy(full,first);
     strcat(full,path);
-    printf("%s", full);
 
     FILE *file = fopen(full, "r");
         if(file){
@@ -35,16 +34,14 @@ card declare( char * cardname){
         }
     card card;
     fscanf(file,"%s | %d | %d | %s",card.name,&card.hp,&card.atk,card.desc);
-//    fgets(card.desc,1,file);
-
     return card;
 }
-void printcard(card card){
+/*void printcard(card card){
 
     printf("\n%s\n%d\n%d\n%s",card.name,card.hp,card.atk,card.desc);
 
 
-}
+}*/
 
 
 

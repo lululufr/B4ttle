@@ -1,0 +1,9 @@
+merci de remplacer les noms aux maps/ sur cette map globale quand vous donnez des noms aux lieux
+
+
+  city1 --> route1 🡖
+   ↓              city2 --┬--> route4 ----🡖
+ route3 <-- route2 🡗      ↓                city4
+   ↓                    city5 --> route6 <-┘
+  city3 ---> route5 ----🡕           ↓
+                                 lastcity

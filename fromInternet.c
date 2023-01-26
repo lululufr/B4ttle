@@ -1,9 +1,10 @@
 //
-// Created by Alexis on 23/12/2022.
+// EVERYTHING FROM THIS FILE IS FETCHED FROM INTERNET
 //
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 char *str_replace(char *orig, char *rep, char *with) {
     char *result; // the return string
     char *ins;    // the next insert point

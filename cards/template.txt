@@ -1,6 +1,0 @@
-nom
-vie
-atk
-desc
-function
-func_desc

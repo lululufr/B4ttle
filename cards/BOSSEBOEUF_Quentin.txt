@@ -1,0 +1,1 @@
+BOSSEBOEUF_Quentin | 010 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |
