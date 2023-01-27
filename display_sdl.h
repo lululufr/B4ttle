@@ -25,7 +25,7 @@ void SDLprinting(){
         exit(EXIT_FAILURE);
     }
     SDL_Surface * ecran = NULL;
-    if((ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE |
+    if((ecran = SDL_SetVideoMode(960, 640, 32, SDL_HWSURFACE |
         SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
         SDL_Quit();
         exit(EXIT_FAILURE);
@@ -52,29 +52,19 @@ void SDLprinting(){
     SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
 //func changement symbole
-    int y;
-    for(y = 0; y < 8; ++y) {
-        if(map->map[y] == '#'){
-            map->map[y] = 0; //# = vide
-        }else if(map->map[y] == '%'){
-            map->map[y] = 12;
-        }else if(map->map[y] == '#'){
-            map->map[y] = 0;
-        }else if(map->map[y] == '#'){
-            map->map[y] = 0;
-        }
-    }
+
+#include "transformation.c"
 
     //func changement symbole
 
     SDL_Rect tilePos;
     SDL_Rect screenPos;
     int i, j;
-    for(j = 0; j < 8; ++j) {
-        for(i = 0; i < 8; ++i) {
+    for(j = 0; j < 40; ++j) {
+        for(i = 0; i < 40; ++i) {
             if(map->map[j*map->width+i] == 0) continue;
-            tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 6);
-            tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 6);
+            tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 40);
+            tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 40);
             tilePos.w = 25;
             tilePos.h = 25;
             screenPos.x = i * 25;
