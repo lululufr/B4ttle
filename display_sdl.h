@@ -25,7 +25,7 @@ void SDLprinting(){
         exit(EXIT_FAILURE);
     }
     SDL_Surface * ecran = NULL;
-    if((ecran = SDL_SetVideoMode(960, 640, 32, SDL_HWSURFACE |
+    if((ecran = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE |
         SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
         SDL_Quit();
         exit(EXIT_FAILURE);
@@ -78,7 +78,6 @@ void SDLprinting(){
 /* Votre travail ici */
 
 
-
 int active = 1;
 SDL_Event event;
 while(active) {
@@ -94,6 +93,7 @@ while(active) {
                 break;
         }
 }
+
 
 SDL_Quit();
     printf("%s", map->map);

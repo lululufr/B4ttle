@@ -3,23 +3,19 @@
 int y = 0;
 while(map->map[y]!='\0') {
     switch (map->map[y]) {
-        case 'a':
-            map->map[y]=1; //herbe
+        //case '*':
+        //    //map->map[y]=125; //herbe type2(fleur)
+        //    break;
+        case ' ':
+            int herbe = rand()%10;
+            if (herbe>1){map->map[y]=4;} //herbe type 1
+            else if (herbe<1){map->map[y]=125;}//herbe type 2 (fleur)
             break;
-        case 'b':
-            map->map[y]=2; //
+        case '#':
+            map->map[y]= 23 +40; // roche pleine
             break;
-        case 'c':
-            map->map[y]=3; //
-            break;
-        case 'd':
-            map->map[y]=4; //
-            break;
-        case 'e':
-            map->map[y]=5; //
-            break;
-        case 'f':
-            map->map[y]=6; //
+        case '*':
+            map->map[y]= 23 +120; //
             break;
         case 'g':
             map->map[y]=7; //
@@ -110,9 +106,6 @@ while(map->map[y]!='\0') {
             break;
         case '&':
             map->map[y]=36; //
-            break;
-        case ' ':
-            map->map[y]=37; //
             break;
         case '"':
             map->map[y]=38; //

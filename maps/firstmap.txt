@@ -1,26 +1,26 @@
-abcdefghijklmnopqrstuvwxyz123456789& "|(
--@oooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
-oooooooooooooooooooooooooooooooooooooooo
+#######################################
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                   *                 #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#                                     #
+#######################################
