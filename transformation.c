@@ -8,7 +8,7 @@ while(map->map[y]!='\0') {
         //    break;
         case ' ':
             int herbe = rand()%10;
-            if (herbe>1){map->map[y]=4;} //herbe type 1
+            if (herbe>1){map->map[y]=12;} //herbe type 1
             else if (herbe<1){map->map[y]=125;}//herbe type 2 (fleur)
             break;
         case '#':

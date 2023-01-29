@@ -14,5 +14,13 @@ int isValid(int move, Map * map){
         return 1;
     }
 }
+void evenement(int pos,Map * map){
+    if(map->map[pos] == 21) {
+        printf("hey");
+    }
+
+
+
+}
 
 #endif //B4TTLE_MOVEMENT_H

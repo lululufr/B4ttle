@@ -73,7 +73,12 @@ void SDLprinting(){
 
         SDL_WaitEvent(&event);
 
+        // Si c'est la croix rouge
+        if (event.type == SDL_QUIT) {
+            break;
+        }
 
+        // mouvement
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
@@ -115,10 +120,7 @@ void SDLprinting(){
             }
         }
 
-        // Si c'est la croix rouge
-        if (event.type == SDL_QUIT) {
-            break;
-        }
+        evenement(buffer,map);
 
 
         SDL_FillRect(ecran, NULL, 0);
