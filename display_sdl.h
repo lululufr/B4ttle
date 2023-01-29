@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "map.h"
-
+#include "movement.h"
 
 
 #include <SDL/SDL.h>
@@ -42,21 +42,23 @@ void SDLprinting(){
         exit(EXIT_FAILURE);
     }
 
-
-//char grille[25] = {23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23,0,23};
-//char * grille = readFile("maps/firstmap.txt");
     Map * map = malloc(sizeof (Map)*20);
 
     MapFile(map,"maps/firstmap.txt");
 
     SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
+    // LE MOUVEMENT MAIS CA MARCHE PAS
+    int pos = 2*map->width+5;
+    movement(&pos,map);
+    map->map[pos]='@';
 //func changement symbole
 
 #include "transformation.c"
 
     //func changement symbole
 
+    
     SDL_Rect tilePos;
     SDL_Rect screenPos;
     int i, j;
@@ -76,6 +78,7 @@ void SDLprinting(){
     SDL_Flip(ecran);
 
 /* Votre travail ici */
+
 
 
 int active = 1;

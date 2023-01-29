@@ -120,7 +120,7 @@ while(map->map[y]!='\0') {
             map->map[y]=41; //
             break;
         case '@':
-            map->map[y]=42; //
+            map->map[y]= 10 +40*2; //
             break;
 
 
