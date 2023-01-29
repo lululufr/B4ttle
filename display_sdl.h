@@ -48,57 +48,105 @@ void SDLprinting(){
 
     SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
-    // LE MOUVEMENT MAIS CA MARCHE PAS
-    int pos = 2*map->width+5;
-    movement(&pos,map);
-    map->map[pos]='@';
-//func changement symbole
+   SDL_Rect tilePos;
+   SDL_Rect screenPos;
+   int i, j;
+
 
 #include "transformation.c"
 
     //func changement symbole
 
-    
-    SDL_Rect tilePos;
-    SDL_Rect screenPos;
-    int i, j;
-    for(j = 0; j < 40; ++j) {
-        for(i = 0; i < 40; ++i) {
-            if(map->map[j*map->width+i] == 0) continue;
-            tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 40);
-            tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 40);
-            tilePos.w = 25;
-            tilePos.h = 25;
-            screenPos.x = i * 25;
-            screenPos.y = j * 25;
-            SDL_BlitSurface(surface, &tilePos, ecran, &screenPos);
 
+
+    SDL_Event event;
+
+
+    int pos = 45;
+    char mov = 0;
+
+    char temp = map->map[pos];
+    char newpos;
+    char buffer;
+
+    while (1) {
+
+        SDL_WaitEvent(&event);
+
+
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_UP:
+                    if (isValid(pos-map->width, map)){
+                        newpos= map->map[pos-map->width]; //valeur case après
+                        map->map[pos] = buffer; //case avant = case avant avant le déplacement
+                        buffer = newpos; // "nouvelle case avant" = case après
+                        map->map[pos-map->width]=0;
+                        pos-=map->width;
+                    }
+                    break;
+                case SDLK_DOWN:
+                    if (isValid(pos+map->width, map)){
+                        newpos= map->map[pos+map->width]; //valeur case après
+                        map->map[pos] = buffer; //case avant = case avant avant le déplacement
+                        buffer = newpos; // "nouvelle case avant" = case après
+                        map->map[pos+map->width]=0;
+                        pos+=map->width;
+                    }
+                    break;
+                case SDLK_LEFT:
+                    if (isValid(pos-1, map)) {
+                        newpos = map->map[pos - 1]; //valeur case après
+                        map->map[pos] = buffer; //case avant = case avant avant le déplacement
+                        buffer = newpos; // "nouvelle case avant" = case après
+                        map->map[pos - 1] = 0;
+                        --pos;
+                    }
+                    break;
+                case SDLK_RIGHT:
+                    if (isValid(pos+1, map)) {
+                        newpos = map->map[pos + 1]; //valeur case après
+                        map->map[pos] = buffer; //case avant = case avant avant le déplacement
+                        buffer = newpos; // "nouvelle case avant" = case après
+                        map->map[pos + 1] = 0;
+                        ++pos;
+                    }
+                    break;
+            }
         }
+
+        // Si c'est la croix rouge
+        if (event.type == SDL_QUIT) {
+            break;
+        }
+
+
+        SDL_FillRect(ecran, NULL, 0);
+
+        // Dessine la map
+        for(j = 0; j < 40; ++j) {
+            for(i = 0; i < 40; ++i) {
+                if(map->map[j*map->width+i] == 0) continue;
+                tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 40);
+                tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 40);
+                tilePos.w = 25;
+                tilePos.h = 25;
+                screenPos.x = i * 25;
+                screenPos.y = j * 25;
+                SDL_BlitSurface(surface, &tilePos, ecran, &screenPos);
+
+            }
+        }
+
+        // Met à jour l'écran
+        SDL_Flip(ecran);
     }
-    SDL_Flip(ecran);
 
-/* Votre travail ici */
-
-
-
-int active = 1;
-SDL_Event event;
-while(active) {
-    SDL_WaitEvent(&event);
-        switch(event.type) {
-            case SDL_QUIT : active = 0; 
-                break;
-            case SDL_KEYDOWN : 
-
-                SDL_Flip(ecran);
-                break;
-            default : 
-                break;
-        }
-}
+// Quitte SDL
+    SDL_Quit();
 
 
-SDL_Quit();
+
     printf("%s", map->map);
 exit(EXIT_SUCCESS);
 
