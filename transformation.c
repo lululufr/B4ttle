@@ -15,7 +15,7 @@ while(map->map[y]!='\0') {
             map->map[y]= 23 +40; // roche pleine
             break;
         case '*':
-            map->map[y]= 23 +120; //
+            map->map[y]= 21; //
             break;
         case 'g':
             map->map[y]=7; //
@@ -110,8 +110,8 @@ while(map->map[y]!='\0') {
         case '"':
             map->map[y]=38; //
             break;
-        case '|':
-            map->map[y]=39; //
+        case '!':
+            map->map[y]=10; //
             break;
         case '(':
             map->map[y]=40; //
