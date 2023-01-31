@@ -20,7 +20,6 @@ void evenement(int buffer){
     }
 
 
-
 }
 
 #endif //B4TTLE_MOVEMENT_H
