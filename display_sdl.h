@@ -53,11 +53,11 @@ void SDLprinting(){
    int i, j;
 
 
-#include "transformation.c"
+
 
     //func changement symbole
 
-
+#include "transformation.c"
 
     SDL_Event event;
 
@@ -66,7 +66,7 @@ void SDLprinting(){
     char mov = 0;
 
     char temp = map->map[pos];
-    char newpos;
+    int newpos;
     char buffer;
 
     while (1) {
@@ -120,7 +120,8 @@ void SDLprinting(){
             }
         }
 
-        evenement(buffer,map);
+        evenement(buffer);
+
 
 
         SDL_FillRect(ecran, NULL, 0);
