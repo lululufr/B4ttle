@@ -106,7 +106,7 @@ void attack(card * carte, int attack){
 
 
 void chose(chain chain){
-    
+
 }
 
 
