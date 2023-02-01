@@ -16,7 +16,7 @@ int isValid(int move, Map * map){
 }
 void evenement(int buffer){
     if(buffer == 21) {
-        printf("-hey-");
+        printf("-evenement !-");
     }
 
 

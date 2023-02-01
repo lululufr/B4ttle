@@ -9,13 +9,10 @@
     int id;
     int hp;
     int atk;
-    char desc[500];
-    //inserer une compétence
-
-    char * comp_desc ;
+    char * desc;
+    char * competence;
+    char * comp_desc;
 }card;
-
-
 
 
 card * Read_Card( char * cardname){

@@ -104,6 +104,15 @@ int Chain_length(Chain * chain){
     return cpt;
 }
 
+void Chain_print(const Chain * chain){
+    while (chain->next != NULL){
+        Print_Card(chain->carte);
+        printf("\n");
+        chain = chain->next;
+    }
+    Print_Card(chain->carte);
+}
+
 void attack(card * carte, int attack, Chain * enemyChain){
     if(Chain_length(enemyChain)) {
         if (carte->hp -= attack <= 0) {
