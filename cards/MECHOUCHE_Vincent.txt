@@ -1,1 +1,0 @@
-MECHOUCHE_Vincent | 026 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |

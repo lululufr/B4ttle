@@ -1,1 +1,0 @@
-CARK_Dryss | 012 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |

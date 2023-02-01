@@ -78,6 +78,7 @@ void launching(int i){
         case 0 :
             endwin();
             //printmap();
+            SDLprinting();
             break;
 
         case 1 : // Charger partie

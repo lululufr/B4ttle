@@ -11,12 +11,12 @@
 
 int main() {
 
-    //WINDOW * w;
+    WINDOW * w;
 
     //print_title();
     ////load_bar();
  
-    //launching(menu(w)); //la fonction qui lance nos menusmenu();
+    launching(menu(w)); //la fonction qui lance nos menusmenu(); //SDLprinting(); est dans nouvelle partie !!!
 
     //SDLprinting();
 

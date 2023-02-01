@@ -3,6 +3,7 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 
 int fight_print_sdl()
 {
@@ -10,9 +11,10 @@ int fight_print_sdl()
     SDL_Rect pos_own_1, pos_own_2, pos_own_3, pos_own_4 ,pos_ad_1,pos_ad_2,pos_ad_3,pos_ad_4;
     SDL_Rect stats_own_1, stats_own_2, stats_own_3, stats_own_4;
 
-    // Initialisation de SDL
+    // Init
     SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
+
 
     // images des cartes du haut
     card_own_1 = IMG_Load("cards_png/portrait.png");
@@ -37,19 +39,19 @@ int fight_print_sdl()
     pos_own_4.x = 650;
     pos_own_4.y = 50;
     //carré de stats du haut
-    stats_own_1.w = 70;
+    stats_own_1.w = 40;
     stats_own_1.h = 70;
     stats_own_1.x = pos_own_1.x + card_own_1->w;
     stats_own_1.y = pos_own_1.y;
-    stats_own_2.w = 70;
+    stats_own_2.w = 40;
     stats_own_2.h = 70;
     stats_own_2.x = pos_own_2.x + card_own_2->w;
     stats_own_2.y = pos_own_2.y;
-    stats_own_3.w = 70;
+    stats_own_3.w = 40;
     stats_own_3.h = 70;
     stats_own_3.x = pos_own_3.x + card_own_3->w;
     stats_own_3.y = pos_own_3.y;
-    stats_own_4.w = 70;
+    stats_own_4.w = 40;
     stats_own_4.h = 70;
     stats_own_4.x = pos_own_4.x + card_own_4->w;
     stats_own_4.y = pos_own_4.y;
@@ -125,8 +127,8 @@ int fight_print_sdl()
     //SDL_FreeSurface(card_adv_2);
     //SDL_FreeSurface(card_adv_3);
     //SDL_FreeSurface(card_adv_4);
-    TTF_Quit();
     SDL_Quit();
+
 
     return 0;
 }
