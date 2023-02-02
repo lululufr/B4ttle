@@ -25,7 +25,7 @@ void SDLprinting(){
         exit(EXIT_FAILURE);
     }
     SDL_Surface * ecran = NULL;
-    if((ecran = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE |
+    if((ecran = SDL_SetVideoMode(1280, 832, 32, SDL_HWSURFACE |
         SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
         SDL_Quit();
         exit(EXIT_FAILURE);
@@ -35,12 +35,13 @@ void SDLprinting(){
     /* Votre travail ici */
 
     SDL_Surface * surface = NULL;
-    if((surface = IMG_Load("media/test_map_1.png")) == NULL) {
+    if((surface = IMG_Load("media/mapping.png")) == NULL) {
         fprintf(stderr, "Error in SDL_LoadBMP(\"media/TK.png\") : %s\n", SDL_GetError());
         SDL_FreeSurface(ecran);
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
+
 
     Map * map = malloc(sizeof (Map)*20);
 
@@ -50,6 +51,7 @@ void SDLprinting(){
 
    SDL_Rect tilePos;
    SDL_Rect screenPos;
+    SDL_Rect persoPos;
    int i, j;
 
 
@@ -70,6 +72,7 @@ void SDLprinting(){
     char buffer;
 
     while (1) {
+
 
         SDL_WaitEvent(&event);
 
@@ -113,7 +116,7 @@ void SDLprinting(){
                         newpos = map->map[pos + 1]; //valeur case après
                         map->map[pos] = buffer; //case avant = case avant avant le déplacement
                         buffer = newpos; // "nouvelle case avant" = case après
-                        map->map[pos + 1] = 0;
+                        map->map[pos + 1] = 0 ;
                         ++pos;
                     }
                     break;
@@ -130,12 +133,12 @@ void SDLprinting(){
         for(j = 0; j < 40; ++j) {
             for(i = 0; i < 40; ++i) {
                 if(map->map[j*map->width+i] == 0) continue;
-                tilePos.x = 25 * ((map->map[j*map->width+i] -1) % 40);
-                tilePos.y = 25 * ((map->map[j*map->width+i] -1) / 40);
-                tilePos.w = 25;
-                tilePos.h = 25;
-                screenPos.x = i * 25;
-                screenPos.y = j * 25;
+                tilePos.x = 32 * ((map->map[j*map->width+i] -1) % 40);
+                tilePos.y = 32 * ((map->map[j*map->width+i] -1) / 40);
+                tilePos.w = 32;
+                tilePos.h = 32;
+                screenPos.x = i * 32;
+                screenPos.y = j * 32;
                 SDL_BlitSurface(surface, &tilePos, ecran, &screenPos);
 
             }
@@ -150,7 +153,7 @@ void SDLprinting(){
 
 
 
-    printf("%s", map->map);
+    //printf("%s", map->map);
 exit(EXIT_SUCCESS);
 
 }

@@ -14,7 +14,7 @@ int main() {
     WINDOW * w;
 
     print_title();
-    load_bar();
+    //load_bar();
  
     launching(menu(w)); //la fonction qui lance nos menusmenu(); //SDLprinting(); est dans nouvelle partie !!!
 
