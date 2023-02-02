@@ -27,12 +27,20 @@ while(map->map[y]!='\0') {
             map->map[y]= 3; //cailloux
             break;
 
-        case '@':
-            map->map[y]= 10 +40*2; //
-            break;
+       case '!': //enemis
+           //int enemis = rand()%6;
+           //if (enemis==1){map->map[y]=62;}
+         map->map[y]=65;
+          //else if (enemis==3){map->map[y]=64;}
+          //else if (enemis==4){map->map[y]=65;}
+          //else if (enemis==5){map->map[y]=66;}
+          //else if (enemis==6){map->map[y]=67;}
+          //else if (enemis==7){map->map[y]=68;}
 
+      //     };
+           break;
 
-}
+    }
 ++y;
 }
 /*
