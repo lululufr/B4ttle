@@ -17,7 +17,7 @@
 
 
 
-void SDLprinting(){
+void SDLprinting(int position,char * mapName){
 
 
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -45,7 +45,7 @@ void SDLprinting(){
 
     Map * map = malloc(sizeof (Map)*20);
 
-    MapFile(map,"maps/firstmap.txt");
+    MapFile(map,mapName);
 
     SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
 
@@ -64,7 +64,7 @@ void SDLprinting(){
     SDL_Event event;
 
 
-    int pos = 45;
+    int pos = position;
     char mov = 0;
 
     char temp = map->map[pos];
@@ -89,7 +89,7 @@ void SDLprinting(){
                         newpos= map->map[pos-map->width]; //valeur case après
                         map->map[pos] = buffer; //case avant = case avant avant le déplacement
                         buffer = newpos; // "nouvelle case avant" = case après
-                        map->map[pos-map->width]=0;
+                        map->map[pos-map->width]=62;
                         pos-=map->width;
                     }
                     break;
@@ -98,7 +98,7 @@ void SDLprinting(){
                         newpos= map->map[pos+map->width]; //valeur case après
                         map->map[pos] = buffer; //case avant = case avant avant le déplacement
                         buffer = newpos; // "nouvelle case avant" = case après
-                        map->map[pos+map->width]=0;
+                        map->map[pos+map->width]=59;
                         pos+=map->width;
                     }
                     break;
@@ -107,7 +107,7 @@ void SDLprinting(){
                         newpos = map->map[pos - 1]; //valeur case après
                         map->map[pos] = buffer; //case avant = case avant avant le déplacement
                         buffer = newpos; // "nouvelle case avant" = case après
-                        map->map[pos - 1] = 0;
+                        map->map[pos - 1] = 60;
                         --pos;
                     }
                     break;
@@ -116,7 +116,7 @@ void SDLprinting(){
                         newpos = map->map[pos + 1]; //valeur case après
                         map->map[pos] = buffer; //case avant = case avant avant le déplacement
                         buffer = newpos; // "nouvelle case avant" = case après
-                        map->map[pos + 1] = 0 ;
+                        map->map[pos + 1] = 61 ;
                         ++pos;
                     }
                     break;
@@ -127,7 +127,7 @@ void SDLprinting(){
 
 
 
-        SDL_FillRect(ecran, NULL, 0);
+        //SDL_FillRect(ecran, NULL, 0);
 
         // Dessine la map
         for(j = 0; j < 40; ++j) {
@@ -144,11 +144,11 @@ void SDLprinting(){
             }
         }
 
-        // Met à jour l'écran
+        // Met à jour l'écran !!!!!!!
         SDL_Flip(ecran);
     }
 
-// Quitte SDL
+
     SDL_Quit();
 
 
