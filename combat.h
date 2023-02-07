@@ -5,16 +5,7 @@
 #include "combat_display.h"
 
 
-//typedef struct card {
-//    int id;
-//    char name[50];
-//    int hp;
-//    int atk;
-//    char desc[500];
-//    //inserer une compétence
-//
-//    char * comp_desc ;
-//}card;
+
 
 
 
@@ -153,7 +144,7 @@ int fight(){
     opponent->carte = Read_Card("MECHOUCHE_Vincent");
     Chain_add_tail(opponent, Read_Card("OELSCHLAGER_Karl"));
     Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
-    Chain_add_tail(opponent, Read_Card("DUFRESNE_Jordan"));
+    Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
 
     int len;
     int i;

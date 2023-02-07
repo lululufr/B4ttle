@@ -31,6 +31,11 @@ card * Read_Card( char * cardname){
     } else{
         printf("erreur d'ouverture du fichier des cartes");
     }
+
+    //free(path);
+    //free(first);
+    free(full);
+
     card * card= malloc(sizeof (card)*8);
     card->name= malloc(sizeof (char ));
     int i =0;
@@ -94,7 +99,7 @@ card * Read_Card( char * cardname){
         card->comp_desc[i] = fgetc(file);
         i++;
     }
-
+    fclose(file);
     return card;
 }
 
@@ -116,6 +121,13 @@ void Print_stat(card * card){
     printf("%d --",card->atk);
 }
 
+//    Chain_add_tail(opponent, Read_Card(chose_card(srand(time(NULL)%31);
+/*char * chose_card(int n){
+    switch (n) {
+        case 1:
+            return "ALIYOU_Reda";
+    }
+}*/
 
 
 #endif

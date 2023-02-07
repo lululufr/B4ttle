@@ -210,6 +210,43 @@ int fight_print_sdl()
     }
 
 
+    // JEU
+    /*
+    SDL_Event event;
+    while (1) {
+
+
+        SDL_WaitEvent(&event);
+
+        // déplacement menu
+        chain * chosen card
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_LEFT:
+                    if(pos==0){
+                        pos=Chain_length(player);
+                    }else{
+                        --pos;
+                        chosen_card = Chain_get(player_chain,pos);
+                    }
+                    break;
+                case SDLK_RIGHT:
+                    if (pos==Chain_length(player)) {
+                        pos =0;
+                    }else{
+                        ++pos;
+                        chosen_card = Chain_get(player_chain,pos);
+
+                    }
+                    break;
+            }
+        }
+
+        ///
+
+
+
+
 
 
 
@@ -261,7 +298,7 @@ int fight_print_sdl(){
         Chain * chosen_card;
         int pos;
         if (event.type == SDL_KEYDOWN) {
-            switch (event.key.keysym.sym) {
+            switch (event.key.keysym.sym) {/*
                 case SDLK_LEFT:
                     if (pos == 0) {
                         //pos = Chain_length(player);
@@ -277,7 +314,7 @@ int fight_print_sdl(){
                         //++pos;
                         //chosen_card = Chain_get(player_chain, pos);
                     }
-                    break;
+                    break;*/
             }
         }
         }
