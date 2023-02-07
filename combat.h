@@ -143,10 +143,13 @@ Chain * Chain_get(Chain * chain, int id){
 int fight(){
     Chain * player = Chain_empty(); //init du premier maillons
     Chain * opponent = Chain_empty(); //init de la chaine adv
+
     player->carte = Read_Card("ELEFTERIOU_Alexis");
     Chain_add_tail(player, Read_Card("AMBRY_Lukas"));
     Chain_add_tail(player, Read_Card("SAGE_Julien"));
     Chain_add_tail(player, Read_Card("KAKOU_Marceau"));
+
+
     opponent->carte = Read_Card("MECHOUCHE_Vincent");
     Chain_add_tail(opponent, Read_Card("OELSCHLAGER_Karl"));
     Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
@@ -156,22 +159,6 @@ int fight(){
     int i;
     int tour=0; //pour compter le nombre de tour
     while (Chain_length(player) && Chain_length(opponent) && tour<=20){
-
-
-        //printf("\n \n \n");
-//
-        //printf("-----------------------------------------------------\n");
-        //printf("Joueur principale  : \n");
-        //printf("******** carte \n");
-        //    Chain_print(player);
-        //printf("-----------------------------------------------------\n\n");
-//
-//
-        //printf("-----------------------------------------------------\n");
-        //printf("Adversaire  : \n");
-        //printf("******** carte : \n");
-        //    Chain_print(opponent);
-        //printf("-----------------------------------------------------\n\n\n\n");
 
 
         len =Chain_length(player);
@@ -187,18 +174,12 @@ int fight(){
         }
 
 
+
+
+
         scanf("g\n");
         ++tour;
     }
-
-    //if(/*vainqueur*/){
-    //    return 1;
-    //}else{
-    //    return 0;
-    //}
-
-    //fight_print_sdl();
-    //versus();
 
 }
 
@@ -210,4 +191,4 @@ int fight(){
 
 
 
-#endif //B4TTLE_COMBAT_H
+#endif
