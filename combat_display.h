@@ -130,7 +130,9 @@ int fight_print_sdl(){
                         //++pos;
                         //chosen_card = Chain_get(player_chain, pos);
                     }
-                    break;*/
+                    break;
+                case SDLK_KP_ENTER:*/
+
             }
             print_card_sdl(Read_Card("ELEFTERIOU_Alexis"), screen, font, 100, 510);
         }
