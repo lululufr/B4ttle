@@ -8,20 +8,6 @@
 #include "combat.h"
 
 
-typedef struct SDL_card {
-
-    SDL_Surface * SDL_card;
-    SDL_Surface * message;
-
-}SDL_card;
-
-
-
-void prepare_card_sdl(card * card){
-    //SDL_Color color = {200,45,75};
-
-
-}
 
 void print_card_sdl(card *card,SDL_Surface * screen,TTF_Font *font,int x, int y){
 
@@ -54,6 +40,7 @@ void print_card_sdl(card *card,SDL_Surface * screen,TTF_Font *font,int x, int y)
 //ici
 
 
+
     char way[50] = "cards_png/";
     strcat(way, card->name);
     strcat(way, "\0");
@@ -80,12 +67,14 @@ void print_card_sdl(card *card,SDL_Surface * screen,TTF_Font *font,int x, int y)
     SDL_BlitSurface(message_hp, NULL, screen, &pos_hp);
     SDL_BlitSurface(message_atk, NULL, screen, &pos_atk);
 
-    //SDL_Flip(screen);
+
 
     SDL_FreeSurface(message_nom);
     SDL_FreeSurface(message_hp);
     SDL_FreeSurface(message_atk);
     SDL_FreeSurface(card->SDL_card);
+
+    SDL_Flip(screen);
 
 }
 
@@ -95,7 +84,6 @@ int fight_print_sdl(){
     //why on a pas besoin de init le sdl ?
     TTF_Init();
 
-    //prepare_card_sdl(Read_Card("ELEFTERIOU_Alexis"));
 
     SDL_Surface *screen;
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
@@ -109,7 +97,6 @@ int fight_print_sdl(){
     SDL_Event event;
 
 
-
     while (1)
     {
         SDL_FillRect(screen, NULL, 0x000000);
@@ -119,20 +106,13 @@ int fight_print_sdl(){
         }
 
 
-
-
-
-        print_card_sdl(Read_Card("ELEFTERIOU_Alexis"), screen, font, 100, 510);
-
-        // Met à jour l'écran !!!!!!!
-
-        SDL_Flip(screen);
         SDL_WaitEvent(&event);
 
 // déplacement menu
         //Chain * chosen_card;
         int pos;
-        if (event.type == SDL_KEYDOWN) {
+
+        if (event.type == SDL_KEYDOWN ) {
 
             switch (event.key.keysym.sym) {/*
                 case SDLK_LEFT:
@@ -152,7 +132,7 @@ int fight_print_sdl(){
                     }
                     break;*/
             }
-
+            print_card_sdl(Read_Card("ELEFTERIOU_Alexis"), screen, font, 100, 510);
         }
 
 
