@@ -3,14 +3,16 @@
 
 #include "monster.h"
 #include "combat_display.h"
-
-
-
+//#define card_action(competence) #competence
+//fPIC pour faire des fichiers .so
+//.so
+//-fPIC-shared
 
 
 
 typedef struct Chain {
     struct card * carte;
+
     struct Chain * next;
 } Chain;
 
@@ -104,14 +106,9 @@ void Chain_print(const Chain * chain){
     Print_Card(chain->carte);
 }
 
-void attack(card * carte, int attack, Chain * enemyChain){
-    if(Chain_length(enemyChain)) {
-        if (carte->hp -= attack <= 0) {
-            //
-        }
-    } else{
 
-    }
+void win(){
+    //TBD
 }
 
 void Chain_action(Chain * chain){
@@ -130,6 +127,17 @@ Chain * Chain_get(Chain * chain, int id){
     return current;
 }
 
+void attack(int attack, Chain * enemyChain, int enemy_id){
+    if(Chain_length(enemyChain)) {
+        Chain * enemy = malloc(sizeof (Chain));
+        enemy = Chain_get(enemyChain,enemy_id);
+        if (enemy->carte->hp -= attack <= 0) {
+            Chain_delete(enemyChain, enemy_id);
+        }
+    } else{
+
+    }
+}
 
 int fight(){
     Chain * player = Chain_empty(); //init du premier maillons

@@ -118,8 +118,7 @@ int fight_print_sdl(){
             break;
         }
 
-        // déplacement menu
-        //Chain * chosen_card;
+
 
 
 
