@@ -8,40 +8,84 @@
 #include "combat.h"
 
 
+typedef struct SDL_card {
+
+    SDL_Surface * SDL_card;
+    SDL_Surface * message;
+
+}SDL_card;
 
 
+
+void prepare_card_sdl(card * card){
+    //SDL_Color color = {200,45,75};
+
+
+}
 
 void print_card_sdl(card *card,SDL_Surface * screen,TTF_Font *font,int x, int y){
-    SDL_Surface * SDL_cards;
-    SDL_Rect pos, pos_stat;
-
-    SDL_Surface *message;
-    SDL_Color color = {200,45,75};
-
-//on va modif ca
-    char * str = malloc(sizeof(char)*strlen(card->name));
-
-    sprintf(str,"%s",card->name);
-
-    message = TTF_RenderText_Solid(font, str, color);
 
 
-    //char way[100] = "cards_png/";
-    //strcat(way, str);
-    SDL_cards = IMG_Load("cards_png/ELEFTERIOU_Alexis");
+    //SDL_Surface * SDL_card;
+    SDL_Rect pos, pos_nom,pos_hp,pos_atk;
+
+    SDL_Surface * message_nom,*message_hp,*message_atk;
+
+    SDL_Color rouge = {200,45,75};
+    SDL_Color blanc = {255,255,255};
+    SDL_Color vert = {45,45,125};
+
+//message
+    char * str = malloc(sizeof(char)*strlen(card->name)+15);
+
+        sprintf(str,"%s",card->name);
+        strcat(str,"\0");
+        message_nom = TTF_RenderText_Solid(font, str, blanc);
+
+
+        sprintf(str,"Vie : %d",card->hp);
+        strcat(str,"\0");
+        message_hp = TTF_RenderText_Solid(font, str, vert);
+
+        sprintf(str,"Attaque : %d",card->atk);
+        strcat(str,"\0");
+        message_atk = TTF_RenderText_Solid(font, str, rouge);
+
+//ici
+
+
+    char way[50] = "cards_png/";
+    strcat(way, card->name);
+    strcat(way, "\0");
+    //strcat(way, card->name);
+    card->SDL_card = IMG_Load(way);
+
+
+//ici
 
     pos.x = x;
     pos.y = y;
 
-    pos_stat.x = x+5;
-    pos_stat.y = y+5;
+    pos_nom.x = x -10;
+    pos_nom.y = y-20;
 
-    SDL_BlitSurface(SDL_cards, NULL, screen, &pos);
-    SDL_BlitSurface(message, NULL, screen, &pos_stat);
+    pos_hp.x = x + 10;
+    pos_hp.y = y + 20;
 
-    SDL_Flip(screen);
+    pos_atk.x = x +10;
+    pos_atk.y = y + 30;
 
-    free(str);
+    SDL_BlitSurface(card->SDL_card, NULL, screen, &pos);
+    SDL_BlitSurface(message_nom, NULL, screen, &pos_nom);
+    SDL_BlitSurface(message_hp, NULL, screen, &pos_hp);
+    SDL_BlitSurface(message_atk, NULL, screen, &pos_atk);
+
+    //SDL_Flip(screen);
+
+    SDL_FreeSurface(message_nom);
+    SDL_FreeSurface(message_hp);
+    SDL_FreeSurface(message_atk);
+    SDL_FreeSurface(card->SDL_card);
 
 }
 
@@ -49,14 +93,15 @@ void print_card_sdl(card *card,SDL_Surface * screen,TTF_Font *font,int x, int y)
 
 int fight_print_sdl(){
     //why on a pas besoin de init le sdl ?
-
     TTF_Init();
+
+    //prepare_card_sdl(Read_Card("ELEFTERIOU_Alexis"));
 
     SDL_Surface *screen;
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
 
     TTF_Font *font;
-    font = TTF_OpenFont("font/starjedi.ttf", 24);
+    font = TTF_OpenFont("font/starjedi.ttf", 12);
 
 
     // Boucle de rendu
@@ -64,9 +109,10 @@ int fight_print_sdl(){
     SDL_Event event;
 
 
+
     while (1)
     {
-
+        SDL_FillRect(screen, NULL, 0x000000);
 
         if (event.type == SDL_QUIT) {
             break;
@@ -76,16 +122,19 @@ int fight_print_sdl(){
         //Chain * chosen_card;
 
 
-        SDL_FillRect(screen, NULL, 0x000000);
+
         print_card_sdl(Read_Card("ELEFTERIOU_Alexis"), screen, font, 100, 510);
 
         // Met à jour l'écran !!!!!!!
-        SDL_Flip(screen);
 
+        SDL_Flip(screen);
         SDL_WaitEvent(&event);
 
+// déplacement menu
+        //Chain * chosen_card;
         int pos;
         if (event.type == SDL_KEYDOWN) {
+
             switch (event.key.keysym.sym) {/*
                 case SDLK_LEFT:
                     if (pos == 0) {
@@ -104,7 +153,10 @@ int fight_print_sdl(){
                     }
                     break;*/
             }
+
         }
+
+
     }
 
 

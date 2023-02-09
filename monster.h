@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+
  typedef struct card {
     char * name;
     int id;
@@ -12,6 +16,10 @@
     char * desc;
     char * competence;
     char * comp_desc;
+
+     SDL_Surface * SDL_card;
+
+
 }card;
 
 
