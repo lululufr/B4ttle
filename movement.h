@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "map.h"
+#include "combat_display.h"
 
 int isValid(int move, Map * map){
     if(map->map[move]==6 || map->map[move]==3){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
@@ -15,8 +16,9 @@ int isValid(int move, Map * map){
     }
 }
 void evenement(int buffer){
-    if(buffer == 21) {
-        printf("-evenement !-");
+
+    if(buffer == 65) {
+        fight_print_sdl();
     }
 
 

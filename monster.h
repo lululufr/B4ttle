@@ -17,8 +17,6 @@
     char * competence;
     char * comp_desc;
 
-     SDL_Surface * SDL_card;
-
 
 }card;
 
