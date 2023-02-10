@@ -22,8 +22,9 @@ card_sdl * init_card_sdl(card_sdl * cardsdl, card * card, TTF_Font *font){
     SDL_Color blanc = {255,255,255};
     SDL_Color vert = {45,45,125};
 
-    char str[100];
-    char way[100];
+    //char str[50];
+    char * way = malloc(sizeof(char)*strlen(card->name)+20);
+    char * str = malloc(sizeof(char)*strlen(card->name)+20);
 
     sprintf(way, "cards_png/%s", card->name);
     cardsdl->SDL_card = IMG_Load(way);
@@ -36,6 +37,9 @@ card_sdl * init_card_sdl(card_sdl * cardsdl, card * card, TTF_Font *font){
 
     sprintf(str, "Attaque : %d", card->atk);
     cardsdl->message_atk = TTF_RenderText_Solid(font, str, rouge);
+
+    free(way);
+    free(str);
 
  return cardsdl;
 
@@ -61,16 +65,20 @@ void print_card_sdl(card_sdl * card_sdl, SDL_Surface * screen,int x, int y){
     pos_atk.x = x + 30;
     pos_atk.y = y + 30;
 
-    SDL_BlitSurface(card_sdl->SDL_card, NULL, screen, &pos);
+
     SDL_BlitSurface(card_sdl->message_nom, NULL, screen, &pos_nom);
     SDL_BlitSurface(card_sdl->message_hp, NULL, screen, &pos_hp);
     SDL_BlitSurface(card_sdl->message_atk, NULL, screen, &pos_atk);
+    SDL_BlitSurface(card_sdl->SDL_card, NULL, screen, &pos);
 
 
-    //SDL_FreeSurface(card->SDL_card);
-    //SDL_FreeSurface(message_hp);
-    //SDL_FreeSurface(message_atk);
-    //SDL_FreeSurface(message_nom);
+
+    //SDL_FreeSurface(card_sdl->SDL_card);
+    //SDL_FreeSurface(card_sdl->message_hp);
+    //SDL_FreeSurface(card_sdl->message_atk);
+    //SDL_FreeSurface(card_sdl->message_nom);
+
+
 }
 
 
@@ -88,7 +96,7 @@ int fight_print_sdl(){
     font = TTF_OpenFont("font/starjedi.ttf", 12);
 
     //preparation
-    card_sdl * card1 = malloc(sizeof(card_sdl)+10);
+    card_sdl * card1 = malloc(sizeof(card_sdl)+100);
 
     init_card_sdl(card1,Read_Card("ELEFTERIOU_Alexis"),font);
     //preparation
@@ -109,14 +117,20 @@ int fight_print_sdl(){
         }
 
 //affichage
+        for(i=1;i<5;++i){
+            print_card_sdl(card1, screen, i*150, 510); // faudra print ca mdr
+        }
+        for(i=1;i<5;++i){
+            print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
+        }
 
 // déplacement menu
         //Chain * chosen_card;
         int pos;
-        bool start = true;
+        //bool start = true;
 
-        if (event.type == SDL_KEYDOWN || start) {
-            start  = false;
+        if (event.type == SDL_KEYDOWN) {
+            //start  = false;
             switch (event.key.keysym.sym) {/*
                 case SDLK_LEFT:
                     if (pos == 0) {
@@ -138,24 +152,18 @@ int fight_print_sdl(){
 
             }
 
-            for(i=1;i<5;++i){
-                print_card_sdl(card1, screen, i*150, 510); // faudra print ca mdr
-            }
-            for(i=1;i<5;++i){
-                print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
-            }
 
 
-            SDL_Flip(screen);
+
         }
-SDL_FillRect(screen, NULL, 0x000000);
-
+//SDL_FillRect(screen, NULL, 0x000000);
+    SDL_Flip(screen);
     }
 
 
 
 
-
+    free(card1);
 SDL_Quit();
 
 
