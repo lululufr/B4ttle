@@ -88,9 +88,9 @@ int fight_print_sdl(){
     font = TTF_OpenFont("font/starjedi.ttf", 12);
 
     //preparation
-    card_sdl card1;
+    card_sdl * card1 = malloc(sizeof(card_sdl)+10);
 
-    init_card_sdl(&card1,Read_Card("ELEFTERIOU_Alexis"),font);
+    init_card_sdl(card1,Read_Card("ELEFTERIOU_Alexis"),font);
     //preparation
 
 
@@ -107,21 +107,16 @@ int fight_print_sdl(){
         if (event.type == SDL_QUIT) {
             break;
         }
-//affichage
-        for(i=1;i<5;++i){ //haut
-            print_card_sdl(&card1, screen, i*150, 110); // faudra print ca mdr
-        }
-        for(i=1;i<5;++i){ //bas
-            print_card_sdl(&card1, screen, i*150 ,510); // faudra print ca mdr
-        }
-        SDL_Flip(screen);
+
 //affichage
 
 // déplacement menu
         //Chain * chosen_card;
         int pos;
+        bool start = true;
 
-        if (event.type == SDL_KEYDOWN) {
+        if (event.type == SDL_KEYDOWN || start) {
+            start  = false;
             switch (event.key.keysym.sym) {/*
                 case SDLK_LEFT:
                     if (pos == 0) {
@@ -143,7 +138,15 @@ int fight_print_sdl(){
 
             }
 
+            for(i=1;i<5;++i){
+                print_card_sdl(card1, screen, i*150, 510); // faudra print ca mdr
+            }
+            for(i=1;i<5;++i){
+                print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
+            }
 
+
+            SDL_Flip(screen);
         }
 SDL_FillRect(screen, NULL, 0x000000);
 
