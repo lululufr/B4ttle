@@ -15,6 +15,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#define SCREEN_WIDTH  1280
+#define SCREEN_HEIGHT 832
+
 
 
 void SDLprinting(int position,char * mapName){
@@ -25,7 +28,7 @@ void SDLprinting(int position,char * mapName){
         exit(EXIT_FAILURE);
     }
     SDL_Surface * ecran = NULL;
-    if((ecran = SDL_SetVideoMode(1280, 832, 32, SDL_HWSURFACE |
+    if((ecran = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE |
         SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
         SDL_Quit();
         exit(EXIT_FAILURE);

@@ -21,6 +21,8 @@ int main() {
 
     fight_print_sdl();
     //fight();
+    //TTF_Font *font;
+    //font = TTF_OpenFont("font/starjedi.ttf", 12);
 
 
 }

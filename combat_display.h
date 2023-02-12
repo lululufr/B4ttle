@@ -7,6 +7,9 @@
 #include "monster.h"
 #include "combat.h"
 
+#define SCREEN_WIDTH  1280
+#define SCREEN_HEIGHT 832
+
 typedef struct card_sdl{
 
     SDL_Surface * SDL_card;
@@ -82,6 +85,118 @@ void print_card_sdl(card_sdl * card_sdl, SDL_Surface * screen,int x, int y){
 }
 
 
+//la
+
+
+
+
+
+char ** optionMenu() {
+    const int numStrings = 3;
+    const int maxStringLength = 20;
+
+    char **stringArray = malloc(numStrings * sizeof(char *)+10);
+    for (int i = 0; i < numStrings; i++) {
+        stringArray[i] = malloc(maxStringLength * sizeof(char)+10);
+    }
+
+    strncpy(stringArray[0], "Attaque", maxStringLength);
+    strncpy(stringArray[1], "Pouvoir", maxStringLength);
+    strncpy(stringArray[2], "Passer", maxStringLength);
+
+    return stringArray;
+
+}
+
+
+int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOptions) {
+    int MENU_WIDTH = 150;
+    int MENU_HEIGHT = 150;
+    int MENU_X = 800;
+    int MENU_Y = 470; //(SCREEN_HEIGHT - MENU_HEIGHT) / 2;
+    int MENU_SPACING = 20;
+
+
+    SDL_Surface *menu = SDL_CreateRGBSurface(SDL_HWSURFACE, MENU_WIDTH, MENU_HEIGHT, 32, 0, 0, 0, 0);
+
+    SDL_FillRect(menu, NULL, SDL_MapRGB(menu->format, 255, 255, 255));
+
+    SDL_Color text_color = {0, 0, 0};
+    SDL_Rect option_pos = {MENU_SPACING, MENU_SPACING, 0, 0};
+    SDL_Surface *option_surfaces[numOptions];
+
+    for (int i = 0; i < numOptions; i++) {
+        option_surfaces[i] = TTF_RenderText_Solid(font, options[i], text_color);
+        SDL_BlitSurface(option_surfaces[i], NULL, menu, &option_pos);
+        option_pos.y += option_surfaces[i]->h + MENU_SPACING;
+    }
+
+    // Création d'une surface pour la sélection
+    SDL_Surface *selection = SDL_CreateRGBSurface(SDL_HWSURFACE, 16, option_surfaces[0]->h,
+                                                  32, 0, 0, 0, 0);
+    SDL_FillRect(selection, NULL, SDL_MapRGB(selection->format, 255, 0, 0));
+
+// Boucle principale
+    bool quit = false;
+    int selectedOption = 0;
+    while (!quit) {
+        // Gestion des événements
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_UP:
+                            selectedOption = (selectedOption - 1 + numOptions) % numOptions;
+                            break;
+                        case SDLK_DOWN:
+                            selectedOption = (selectedOption + 1) % numOptions;
+                            break;
+                        case SDLK_RETURN:
+                            quit = true;
+                            break;
+                        case SDLK_KP_ENTER:
+                            return selectedOption;
+
+                    }
+                    break;
+            }
+        }
+        // Affichage de la sélection
+
+        // Affichage du menu
+
+
+        SDL_Rect menu_pos = {MENU_X, MENU_Y, 0, 0};
+        SDL_BlitSurface(menu, NULL, screen, &menu_pos);
+        SDL_Rect selection_pos = {MENU_X + 2,
+                                  MENU_Y + MENU_SPACING + selectedOption * (option_surfaces[0]->h + MENU_SPACING), 0,
+                                  0};
+
+        SDL_BlitSurface(selection, NULL, screen, &selection_pos);
+
+
+
+
+        // Mise à jour de l'écran
+        SDL_Flip(screen);
+    }
+
+// Libération de la mém
+    SDL_FreeSurface(menu);
+    SDL_FreeSurface(selection);
+    for (int i = 0; i < numOptions; i++) {
+        SDL_FreeSurface(option_surfaces[i]);
+    }
+
+    return selectedOption;
+}
+
+
+
 
 int fight_print_sdl(){
     int i;
@@ -123,7 +238,9 @@ int fight_print_sdl(){
         for(i=1;i<5;++i){
             print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
         }
-
+//affichage menu
+        menuSelection(screen, font, optionMenu(), 3);
+//
 // déplacement menu
         //Chain * chosen_card;
         int pos;
