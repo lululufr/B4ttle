@@ -238,7 +238,7 @@ int choixadv(SDL_Surface* screen ,Chain * chain) {
 }
 
 
-int fight_print_sdl(){
+int fight_print_sdl(Chain * player, Chain * opponent){
     int choix;
     int i;
     //why on a pas besoin de init le sdl ?

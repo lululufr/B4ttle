@@ -11,7 +11,19 @@
 
 
 int main() {
+    Chain * player = Chain_empty(); //init du premier maillons
+    Chain * opponent = Chain_empty(); //init de la chaine adv
 
+    player->carte = Read_Card("ELEFTERIOU_Alexis");
+    Chain_add_tail(player, Read_Card("AMBRY_Lukas"));
+    Chain_add_tail(player, Read_Card("SAGE_Julien"));
+    Chain_add_tail(player, Read_Card("KAKOU_Marceau"));
+
+
+    opponent->carte = Read_Card("MECHOUCHE_Vincent");
+    Chain_add_tail(opponent, Read_Card("OELSCHLAGER_Karl"));
+    Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
+    Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
     //WINDOW * w;
 
     //print_title();
