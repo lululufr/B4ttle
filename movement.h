@@ -18,7 +18,7 @@ int isValid(int move, Map * map){
 void evenement(int buffer){
 
     if(buffer == 65) {
-        fight_print_sdl();
+        //fight_print_sdl();
     }
 
 

@@ -9,6 +9,7 @@
 //#include <SDL/SDL.h>
 //#include <SDL/SDL_image.h>
 
+
 int main() {
 
     //WINDOW * w;
@@ -18,8 +19,7 @@ int main() {
  
     //launching(menu(w)); //la fonction qui lance nos menusmenu(); //SDLprinting(); est dans nouvelle partie !!!
 
-
-    fight_print_sdl();
+    fight_print_sdl(player , opponent);
     //fight();
     //TTF_Font *font;
     //font = TTF_OpenFont("font/starjedi.ttf", 12);

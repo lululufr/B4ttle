@@ -192,7 +192,50 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
     return selectedOption;
 }
 
+int choixadv(SDL_Surface* screen ,Chain * chain) {
 
+
+    SDL_Surface *pointeur_adv ;
+
+
+    SDL_Surface *selection = SDL_CreateRGBSurface(SDL_HWSURFACE, 16, 30,
+                                                  32, 0, 0, 0, 0);
+
+    SDL_FillRect(selection, NULL, SDL_MapRGB(pointeur_adv->format, 255, 0, 0));
+
+    int selectedOption = 0;
+    int numOptions = Chain_length(chain);
+
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+            case SDL_QUIT:
+                return 9;
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
+                    case SDLK_RIGHT:
+                        selectedOption = (selectedOption - 1 + numOptions) % numOptions;
+                        break;
+                    case SDLK_LEFT:
+                        selectedOption = (selectedOption + 1) % numOptions;
+                        break;
+                    case SDLK_RETURN:
+                        return selectedOption;
+
+                }
+                break;
+
+
+                SDL_Rect selection_pos = {10,20, 30,30};
+
+                SDL_BlitSurface(pointeur_adv, NULL, screen, &selection_pos);
+
+                SDL_Flip(screen);
+        }
+
+    }
+}
 
 
 int fight_print_sdl(){
@@ -210,8 +253,24 @@ int fight_print_sdl(){
 
     //preparation
     card_sdl * card1 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card2 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card3 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card4 = malloc(sizeof(card_sdl)+100);
+
+    card_sdl * card_adv1 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card_adv2 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card_adv3 = malloc(sizeof(card_sdl)+100);
+    card_sdl * card_adv4 = malloc(sizeof(card_sdl)+100);
 
     init_card_sdl(card1,Read_Card("ELEFTERIOU_Alexis"),font);
+    init_card_sdl(card2,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card3,Read_Card("SAGE_Julien"),font);
+    init_card_sdl(card4,Read_Card("KAKOU_Marceau"),font);
+
+    init_card_sdl(card_adv1,Read_Card("ELEFTERIOU_Alexis"),font);
+    init_card_sdl(card_adv2,Read_Card("ELEFTERIOU_Alexis"),font);
+    init_card_sdl(card_adv3,Read_Card("ELEFTERIOU_Alexis"),font);
+    init_card_sdl(card_adv4,Read_Card("ELEFTERIOU_Alexis"),font);
     //preparation
 
 
@@ -230,12 +289,18 @@ int fight_print_sdl(){
         }
 
 //affichage
-        for(i=1;i<5;++i){
-            print_card_sdl(card1, screen, i*150, 510); // faudra print ca mdr
-        }
-        for(i=1;i<5;++i){
-            print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
-        }
+
+    print_card_sdl(card1, screen, 150, 510);
+    print_card_sdl(card2, screen, 300, 510);
+    print_card_sdl(card3, screen, 450, 510);
+    print_card_sdl(card4, screen, 600, 510);
+
+
+    print_card_sdl(card_adv1, screen, 150 ,110);
+    print_card_sdl(card_adv2, screen, 300 ,110);
+    print_card_sdl(card_adv3, screen, 450 ,110);
+    print_card_sdl(card_adv4, screen, 600 ,110);
+
 //affichage menu
         //menuSelection(screen, font, optionMenu(), 3);
 //
@@ -244,7 +309,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
       if (choix == 9) {
           break; // pourquitter
       }else if (choix == 0){
-          printf("hello 1 ");
+          choixadv(screen, opponent);
       }else if (choix == 1){
           printf("hello 2 ");
       }else if (choix == 2){
