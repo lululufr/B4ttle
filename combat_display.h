@@ -145,7 +145,7 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
-                    quit = true;
+                    return 9;
                     break;
                 case SDL_KEYDOWN:
                     switch (event.key.keysym.sym) {
@@ -156,9 +156,6 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
                             selectedOption = (selectedOption + 1) % numOptions;
                             break;
                         case SDLK_RETURN:
-                            quit = true;
-                            break;
-                        case SDLK_KP_ENTER:
                             return selectedOption;
 
                     }
@@ -199,6 +196,7 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
 
 
 int fight_print_sdl(){
+    int choix;
     int i;
     //why on a pas besoin de init le sdl ?
     TTF_Init();
@@ -239,40 +237,19 @@ int fight_print_sdl(){
             print_card_sdl(card1, screen, i*150 ,110); // faudra print ca mdr
         }
 //affichage menu
-        menuSelection(screen, font, optionMenu(), 3);
+        //menuSelection(screen, font, optionMenu(), 3);
 //
-// déplacement menu
-        //Chain * chosen_card;
-        int pos;
-        //bool start = true;
+choix = menuSelection(screen, font, optionMenu(), 3);
 
-        if (event.type == SDL_KEYDOWN) {
-            //start  = false;
-            switch (event.key.keysym.sym) {/*
-                case SDLK_LEFT:
-                    if (pos == 0) {
-                        //pos = Chain_length(player);
-                    } else {
-                        --pos;
-                        //chosen_card = Chain_get(player_chain, pos);
-                    }
-                    break;
-                case SDLK_RIGHT:
-                    if (pos == Chain_length(player)) {
-                        //pos = 0;
-                    } else {
-                        //++pos;
-                        //chosen_card = Chain_get(player_chain, pos);
-                    }
-                    break;
-                case SDLK_KP_ENTER:*/
-
-            }
-
-
-
-
-        }
+      if (choix == 9) {
+          break; // pourquitter
+      }else if (choix == 0){
+          printf("hello 1 ");
+      }else if (choix == 1){
+          printf("hello 2 ");
+      }else if (choix == 2){
+      printf("hello 3 ");
+  }
 //SDL_FillRect(screen, NULL, 0x000000);
     SDL_Flip(screen);
     }
