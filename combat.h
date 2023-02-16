@@ -9,10 +9,16 @@
 //-fPIC-shared
 
 
+typedef struct card_sdl{
+
+    SDL_Surface * SDL_card;
+    SDL_Surface * message_nom,*message_hp,*message_atk;
+
+} card_sdl ;
 
 typedef struct Chain {
     struct card * carte;
-
+    struct card_sdl * cardSdl;
     struct Chain * next;
 } Chain;
 
@@ -138,11 +144,17 @@ void attack(int attack, Chain * enemyChain, int enemy_id){
         Chain * enemy = malloc(sizeof (Chain));
         //enemy = Chain_get(enemyChain,enemy_id);
         if (enemy->carte->hp -= attack <= 0) {
-            Chain_delete(enemyChain, enemy_id);
+            //Chain_delete(enemyChain, enemy_id);
+        }else{
+            //char * str = malloc(sizeof(char)*30);
+            //sprintf(str, "Vie     %d", enemy->carte->hp);
+            //enemy->cardSdl->message_hp = TTF_RenderText_Solid(font, str, vert);
         }
     } else{
-
+        printf("chaine vide");
+        exit(EXIT_FAILURE);
     }
+
 }
 
 int fight(){

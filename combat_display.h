@@ -9,12 +9,7 @@
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 832
 
-typedef struct card_sdl{
 
-    SDL_Surface * SDL_card;
-    SDL_Surface * message_nom,*message_hp,*message_atk;
-
-} card_sdl ;
 
 
 
@@ -277,19 +272,17 @@ int fight_print_sdl(Chain * player, Chain * opponent){
    card_sdl * card_adv3 = malloc(sizeof(card_sdl)+200);
    card_sdl * card_adv4 = malloc(sizeof(card_sdl)+200);
 
-   //Chain * buffer = Chain_empty();
-   //*buffer= *player;
+
 //player
-    init_card_sdl(card1, player->carte,font);
-    //buffer= buffer->next;
-    init_card_sdl(card2,player->next->carte,font);
-    init_card_sdl(card3,player->next->next->carte,font);
-    init_card_sdl(card4,player->next->next->next->carte,font);
+    player->cardSdl = init_card_sdl(card1, player->carte,font);
+    player->next->cardSdl = init_card_sdl(card2,player->next->carte,font);
+    player->next->next->cardSdl = init_card_sdl(card3,player->next->next->carte,font);
+    player->next->next->next->cardSdl = init_card_sdl(card4,player->next->next->next->carte,font);
 //adv
-    init_card_sdl(card_adv1,opponent->carte,font);
-    init_card_sdl(card_adv2,opponent->next->carte,font);
-    init_card_sdl(card_adv3,opponent->next->next->carte,font);
-    init_card_sdl(card_adv4,opponent->next->next->next->carte,font);
+    opponent->cardSdl = init_card_sdl(card_adv1, opponent->carte,font);
+    opponent->next->cardSdl = init_card_sdl(card_adv2,opponent->next->carte,font);
+    opponent->next->next->cardSdl = init_card_sdl(card_adv3,opponent->next->next->carte,font);
+    opponent->next->next->next->cardSdl = init_card_sdl(card_adv4,opponent->next->next->next->carte,font);
 
     //preparation
 
