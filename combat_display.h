@@ -192,48 +192,66 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
     return selectedOption;
 }
 
-int choixadv(SDL_Surface* screen ,Chain * chain) {
+int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
 
+    SDL_Surface* pointeur_adv = SDL_CreateRGBSurface(SDL_HWSURFACE, 150, 10, 32, 0, 0, 0, 0);
+    SDL_FillRect(pointeur_adv, NULL, SDL_MapRGB(pointeur_adv->format, 254, 0, 0));
 
-    SDL_Surface *pointeur_adv ;
-
-
-    SDL_Surface *selection = SDL_CreateRGBSurface(SDL_HWSURFACE, 16, 30,
-                                                  32, 0, 0, 0, 0);
-
-    SDL_FillRect(selection, NULL, SDL_MapRGB(pointeur_adv->format, 255, 0, 0));
-
-    int selectedOption = 0;
+    int selectedOption = 1;
     int numOptions = Chain_length(chain);
 
     SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                return 9;
-                break;
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_RIGHT:
-                        selectedOption = (selectedOption - 1 + numOptions) % numOptions;
-                        break;
-                    case SDLK_LEFT:
-                        selectedOption = (selectedOption + 1) % numOptions;
-                        break;
-                    case SDLK_RETURN:
-                        return selectedOption;
+    while (1) {
+        // Effacer l'écran
+        SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
-                }
-                break;
-
-
-                SDL_Rect selection_pos = {10,20, 30,30};
-
+        // Afficher le menu
+        int i;
+        for (i = 1; i <= numOptions; i++) {
+            Chain * element = Chain_get(chain, i-1);
+            SDL_Color color = {255, 255, 255};
+            if (i == selectedOption) {
+                // Afficher le pointeur sur l'option sélectionnée
+                SDL_Rect selection_pos = {40+200*(i-1), 320, 5, 5};
                 SDL_BlitSurface(pointeur_adv, NULL, screen, &selection_pos);
-
-                SDL_Flip(screen);
+                //color = {255, 0, 0};
+            }
+            char * buffer = malloc(sizeof (char)* strlen(element->carte->name)+2);
+            strcpy(buffer,element->carte->name);
+            SDL_Surface* textSurface = TTF_RenderText_Solid(font, buffer, color);
+            SDL_Rect text_pos = {50+200*(i-1), 300, textSurface->w, textSurface->h};
+            SDL_BlitSurface(textSurface, NULL, screen, &text_pos);
+            SDL_FreeSurface(textSurface);
+            free(buffer);
         }
 
+        // Afficher le résultat à l'écran
+        SDL_Flip(screen);
+
+        // Lire les événements SDL
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+                case SDL_QUIT:
+                    return 9;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_LEFT:
+                            selectedOption = (selectedOption - 1 + numOptions+1) % (numOptions+1);
+                            break;
+                        case SDLK_RIGHT:
+                            selectedOption = (selectedOption + 1) % (numOptions+1);
+                            break;
+                        case SDLK_RETURN:
+                            if(selectedOption==5){
+                                choixadv(screen, chain,font);
+                            }
+                            SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+                            return selectedOption;
+                    }
+                    break;
+            }
+        }
     }
 }
 
@@ -252,25 +270,30 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     font = TTF_OpenFont("font/starjedi.ttf", 12);
 
     //preparation
-    card_sdl * card1 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card2 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card3 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card4 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card1 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card2 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card3 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card4 = malloc(sizeof(card_sdl)+100);
 
-    card_sdl * card_adv1 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card_adv2 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card_adv3 = malloc(sizeof(card_sdl)+100);
-    card_sdl * card_adv4 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card_adv1 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card_adv2 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card_adv3 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card_adv4 = malloc(sizeof(card_sdl)+100);
 
-    init_card_sdl(card1,Read_Card("ELEFTERIOU_Alexis"),font);
+   //Chain * buffer = malloc(sizeof(Chain)*2);
+   //buffer = player;
+//player
+    init_card_sdl(card1,Read_Card("MILLER_Lucas"),font);
+    //buffer= buffer->next;
     init_card_sdl(card2,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card3,Read_Card("SAGE_Julien"),font);
-    init_card_sdl(card4,Read_Card("KAKOU_Marceau"),font);
+    init_card_sdl(card3,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card4,Read_Card("MILLER_Lucas"),font);
+//adv
+    init_card_sdl(card_adv1,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card_adv2,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card_adv3,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card_adv4,Read_Card("MILLER_Lucas"),font);
 
-    init_card_sdl(card_adv1,Read_Card("ELEFTERIOU_Alexis"),font);
-    init_card_sdl(card_adv2,Read_Card("ELEFTERIOU_Alexis"),font);
-    init_card_sdl(card_adv3,Read_Card("ELEFTERIOU_Alexis"),font);
-    init_card_sdl(card_adv4,Read_Card("ELEFTERIOU_Alexis"),font);
     //preparation
 
 
@@ -290,16 +313,16 @@ int fight_print_sdl(Chain * player, Chain * opponent){
 
 //affichage
 
-    print_card_sdl(card1, screen, 150, 510);
-    print_card_sdl(card2, screen, 300, 510);
-    print_card_sdl(card3, screen, 450, 510);
-    print_card_sdl(card4, screen, 600, 510);
+   print_card_sdl(card1, screen, 150, 510);
+   print_card_sdl(card2, screen, 300, 510);
+   print_card_sdl(card3, screen, 450, 510);
+   print_card_sdl(card4, screen, 600, 510);
 
 
-    print_card_sdl(card_adv1, screen, 150 ,110);
-    print_card_sdl(card_adv2, screen, 300 ,110);
-    print_card_sdl(card_adv3, screen, 450 ,110);
-    print_card_sdl(card_adv4, screen, 600 ,110);
+   print_card_sdl(card_adv1, screen, 150 ,110);
+   print_card_sdl(card_adv2, screen, 300 ,110);
+   print_card_sdl(card_adv3, screen, 450 ,110);
+   print_card_sdl(card_adv4, screen, 600 ,110);
 
 //affichage menu
         //menuSelection(screen, font, optionMenu(), 3);
@@ -309,7 +332,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
       if (choix == 9) {
           break; // pourquitter
       }else if (choix == 0){
-          choixadv(screen, opponent);
+          choixadv(screen, opponent,font);
       }else if (choix == 1){
           printf("hello 2 ");
       }else if (choix == 2){
@@ -322,7 +345,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
 
 
 
-    free(card1);
+
 SDL_Quit();
 
 
