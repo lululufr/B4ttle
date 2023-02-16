@@ -20,9 +20,9 @@ typedef struct card_sdl{
 
 card_sdl * init_card_sdl(card_sdl * cardsdl, card * card, TTF_Font *font){
 
-    SDL_Color rouge = {200,45,75};
+    SDL_Color rouge = {255,35,35};
     SDL_Color blanc = {255,255,255};
-    SDL_Color vert = {45,45,125};
+    SDL_Color vert = {59,208,108};
 
     //char str[50];
     char * way = malloc(sizeof(char)*strlen(card->name)+20);
@@ -34,10 +34,10 @@ card_sdl * init_card_sdl(card_sdl * cardsdl, card * card, TTF_Font *font){
     sprintf(str, "%s", card->name);
     cardsdl->message_nom = TTF_RenderText_Solid(font, str, blanc);
 
-    sprintf(str, "Vie : %d", card->hp);
+    sprintf(str, "Vie     %d", card->hp);
     cardsdl->message_hp = TTF_RenderText_Solid(font, str, vert);
 
-    sprintf(str, "Attaque : %d", card->atk);
+    sprintf(str, "Attaque     %d", card->atk);
     cardsdl->message_atk = TTF_RenderText_Solid(font, str, rouge);
 
     free(way);
@@ -58,14 +58,14 @@ void print_card_sdl(card_sdl * card_sdl, SDL_Surface * screen,int x, int y){
     pos.x = x;
     pos.y = y;
 
-    pos_nom.x = x - 10;
+    pos_nom.x = x;
     pos_nom.y = y - 20;
 
-    pos_hp.x = x + 30;
-    pos_hp.y = y + 20;
+    pos_hp.x = x + 10;
+    pos_hp.y = y + 160;
 
-    pos_atk.x = x + 30;
-    pos_atk.y = y + 30;
+    pos_atk.x = x + 10;
+    pos_atk.y = y + 145;
 
 
     SDL_BlitSurface(card_sdl->message_nom, NULL, screen, &pos_nom);
@@ -254,6 +254,7 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
 
 int fight_print_sdl(Chain * player, Chain * opponent){
     int choix;
+    int choix_adv;
     int i;
     //why on a pas besoin de init le sdl ?
     TTF_Init();
@@ -276,19 +277,19 @@ int fight_print_sdl(Chain * player, Chain * opponent){
    card_sdl * card_adv3 = malloc(sizeof(card_sdl)+100);
    card_sdl * card_adv4 = malloc(sizeof(card_sdl)+100);
 
-   //Chain * buffer = malloc(sizeof(Chain)*2);
-   //buffer = player;
+   //Chain * buffer = Chain_empty();
+   //*buffer= *player;
 //player
-    init_card_sdl(card1,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card1, player->carte,font);
     //buffer= buffer->next;
     init_card_sdl(card2,Read_Card("MILLER_Lucas"),font);
     init_card_sdl(card3,Read_Card("MILLER_Lucas"),font);
     init_card_sdl(card4,Read_Card("MILLER_Lucas"),font);
 //adv
-    init_card_sdl(card_adv1,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card_adv2,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card_adv3,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card_adv4,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card_adv1,opponent->carte,font);
+    init_card_sdl(card_adv2,opponent->next->carte,font);
+    init_card_sdl(card_adv3,opponent->next->next->carte,font);
+    init_card_sdl(card_adv4,opponent->next->next->next->carte,font);
 
     //preparation
 
@@ -315,10 +316,10 @@ int fight_print_sdl(Chain * player, Chain * opponent){
    print_card_sdl(card4, screen, 600, 510);
 
 
-   print_card_sdl(card_adv1, screen, 150 ,110);
-   print_card_sdl(card_adv2, screen, 300 ,110);
-   print_card_sdl(card_adv3, screen, 450 ,110);
-   print_card_sdl(card_adv4, screen, 600 ,110);
+   print_card_sdl(card_adv1, screen, 250 ,50);
+   print_card_sdl(card_adv2, screen, 425 ,50);
+   print_card_sdl(card_adv3, screen, 600 ,50);
+   print_card_sdl(card_adv4, screen, 775 ,50);
 
 //affichage menu
         //menuSelection(screen, font, optionMenu(), 3);
@@ -328,7 +329,12 @@ choix = menuSelection(screen, font, optionMenu(), 3);
       if (choix == 9) {
           break; // pourquitter
       }else if (choix == 0){
-          choixadv(screen, opponent,font);
+          choix_adv = choixadv(screen, opponent,font);
+          if(choix_adv==9){
+              break;
+          }else{
+              //attack(current->carte->atk, Chain_get(opponent,choix_adv));
+          }
       }else if (choix == 1){
           printf("hello 2 ");
       }else if (choix == 2){
