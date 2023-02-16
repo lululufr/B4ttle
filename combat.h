@@ -94,7 +94,7 @@ int Chain_length(Chain * chain){
         cpt++;
         current = (*current).next;
     }
-    return cpt;
+    return cpt+1;
 }
 
 void Chain_print(const Chain * chain){

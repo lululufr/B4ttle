@@ -6,7 +6,6 @@
 #include <SDL/SDL_ttf.h>
 #include "monster.h"
 #include "combat.h"
-
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 832
 
@@ -83,9 +82,6 @@ void print_card_sdl(card_sdl * card_sdl, SDL_Surface * screen,int x, int y){
 
 
 }
-
-
-//la
 
 
 
