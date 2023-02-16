@@ -23,7 +23,7 @@ int main() {
     opponent->carte = Read_Card("MECHOUCHE_Vincent");
     Chain_add_tail(opponent, Read_Card("OELSCHLAGER_Karl"));
     Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
-    Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
+    Chain_add_tail(opponent, Read_Card("FRESSE_Balkis"));
     //WINDOW * w;
 
     //print_title();

@@ -264,7 +264,7 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
 
     TTF_Font *font;
-    font = TTF_OpenFont("font/starjedi.ttf", 12);
+    font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
 
     //preparation
    card_sdl * card1 = malloc(sizeof(card_sdl)+100);
@@ -282,9 +282,9 @@ int fight_print_sdl(Chain * player, Chain * opponent){
 //player
     init_card_sdl(card1, player->carte,font);
     //buffer= buffer->next;
-    init_card_sdl(card2,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card3,Read_Card("MILLER_Lucas"),font);
-    init_card_sdl(card4,Read_Card("MILLER_Lucas"),font);
+    init_card_sdl(card2,player->next->carte,font);
+    init_card_sdl(card3,player->next->next->carte,font);
+    init_card_sdl(card4,player->next->next->next->carte,font);
 //adv
     init_card_sdl(card_adv1,opponent->carte,font);
     init_card_sdl(card_adv2,opponent->next->carte,font);
@@ -310,10 +310,10 @@ int fight_print_sdl(Chain * player, Chain * opponent){
 
 //affichage
 
-   print_card_sdl(card1, screen, 150, 510);
-   print_card_sdl(card2, screen, 300, 510);
-   print_card_sdl(card3, screen, 450, 510);
-   print_card_sdl(card4, screen, 600, 510);
+   print_card_sdl(card1, screen, 50 , 410);
+   print_card_sdl(card2, screen, 225, 410);
+   print_card_sdl(card3, screen, 400, 410);
+   print_card_sdl(card4, screen, 575, 410);
 
 
    print_card_sdl(card_adv1, screen, 250 ,50);
