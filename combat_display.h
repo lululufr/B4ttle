@@ -267,15 +267,15 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
 
     //preparation
-   card_sdl * card1 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card2 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card3 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card4 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card1 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card2 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card3 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card4 = malloc(sizeof(card_sdl)+200);
 
-   card_sdl * card_adv1 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card_adv2 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card_adv3 = malloc(sizeof(card_sdl)+100);
-   card_sdl * card_adv4 = malloc(sizeof(card_sdl)+100);
+   card_sdl * card_adv1 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card_adv2 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card_adv3 = malloc(sizeof(card_sdl)+200);
+   card_sdl * card_adv4 = malloc(sizeof(card_sdl)+200);
 
    //Chain * buffer = Chain_empty();
    //*buffer= *player;
@@ -333,7 +333,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
           if(choix_adv==9){
               break;
           }else{
-              //attack(current->carte->atk, Chain_get(opponent,choix_adv));
+              attack(player->carte->atk,opponent,choix_adv);
           }
       }else if (choix == 1){
           printf("hello 2 ");

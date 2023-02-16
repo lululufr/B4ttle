@@ -128,9 +128,15 @@ Chain * Chain_get(Chain * chain, int id){
 }
 
 void attack(int attack, Chain * enemyChain, int enemy_id){
+    //SDL_Color rouge = {255,35,35};
+    //SDL_Color blanc = {255,255,255};
+    //SDL_Color vert = {59,208,108};
+    //TTF_Font *font;
+    //font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
+
     if(Chain_length(enemyChain)) {
         Chain * enemy = malloc(sizeof (Chain));
-        enemy = Chain_get(enemyChain,enemy_id);
+        //enemy = Chain_get(enemyChain,enemy_id);
         if (enemy->carte->hp -= attack <= 0) {
             Chain_delete(enemyChain, enemy_id);
         }
