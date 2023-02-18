@@ -142,9 +142,9 @@ void attack(int attack, Chain * enemyChain, int enemy_id){
 
     if(Chain_length(enemyChain)) {
         Chain * enemy = malloc(sizeof (Chain));
-        //enemy = Chain_get(enemyChain,enemy_id);
+        enemy = Chain_get(enemyChain,enemy_id);
         if (enemy->carte->hp -= attack <= 0) {
-            //Chain_delete(enemyChain, enemy_id);
+            Chain_delete(enemyChain, enemy_id);
         }else{
             //char * str = malloc(sizeof(char)*30);
             //sprintf(str, "Vie     %d", enemy->carte->hp);
