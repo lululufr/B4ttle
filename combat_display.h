@@ -311,10 +311,12 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     // Boucle de rendu
     int quit = 0;
     SDL_Event event;
+    int tour_carte=1;
 
-
-    while (1)
-    {
+    Chain * current;
+    while (tour_carte<= Chain_length(player)){
+        current= Chain_get(player, tour_carte);
+        ++tour_carte;
         SDL_WaitEvent(&event);
 
 
@@ -351,7 +353,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
           if(choix_adv==9){
               break;
           }else{
-              attack(player->carte->atk,opponent,choix_adv);
+              attack(player->carte->atk,opponent,choix_adv-1);
           }
       }else if (choix == 1){
           printf("hello 2 ");
