@@ -96,36 +96,13 @@ Chain* Chain_pop_head(Chain **chain) {
     return *chain;
 }
 
-void Chain_regenerate(Chain **chain) {
-    if (*chain == NULL) {
-        return;
-    }
 
-    Chain *current = *chain;
-    while (current->next != NULL) {
-        current = current->next;
-    }
-
-    Chain *head = Chain_pop_head(chain);
-    current->next = head;
-
-    while (head != NULL) {
-        Chain *next = Chain_pop_head(chain);
-        if (next != NULL) {
-            current->next = next;
-            current = next;
-        }
-        head = next;
-    }
-
-    *chain = head;
-}
 
 void Chain_delete(Chain **chain, int id) {
     Chain *current = *chain;
     Chain *previous = NULL;
     if(id==0){
-        Chain_regenerate(chain);
+        (*chain)->cardSdl=NULL;
         return;
     }
     int i = 0;
@@ -189,8 +166,16 @@ int Chain_length(Chain *chain) {
 //}
 
 
-void win(){
-    //TBD
+int win(Chain * player, Chain * opponent){
+    if(Chain_length(player)==1&&player->carte->hp<=0){
+        return 0;
+    }
+    if(Chain_length(opponent)==1 &&opponent->carte->hp<=0){
+        return -1;
+    }else{
+        return 1;
+    }
+
 }
 
 void Chain_action(Chain * chain){

@@ -90,7 +90,7 @@ void Print_Card(card * card){
     printf("%d --",card->hp);
     printf("%d --",card->atk);
     printf("%s --",card->desc);
-    printf("%s --",card->competence);
+    //printf("%s --",card->competence);
     printf("%s --",card->comp_desc);
 
 }

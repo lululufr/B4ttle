@@ -24,8 +24,11 @@ while(map->map[y]!='\0') {
             break;
 
         case '*':
-            map->map[y]= 3; //cailloux
+            int cailloux = rand()%10;
+            if (cailloux>5){map->map[y]=2;}
+            else{map->map[y]=3;}
             break;
+
 
        case '!': //enemis
            //int enemis = rand()%6;

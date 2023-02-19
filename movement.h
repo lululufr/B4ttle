@@ -35,7 +35,12 @@ void evenement(int buffer){
         Chain_add_tail(opponent, Random_Card());
         Chain_add_tail(opponent, Random_Card());
         Chain_add_tail(opponent, Random_Card());
+
         fight_print_sdl(player,opponent);
+        //SDLprinting((buffer-1),map);
+
+        SDL_FillRect(ecran, NULL, 0x84e476);
+        return buffer-1;
     }
 
 

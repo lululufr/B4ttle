@@ -28,8 +28,9 @@ void SDLprinting(int position,char * mapName){
         exit(EXIT_FAILURE);
     }
     SDL_Surface * ecran = NULL;
-    if((ecran = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE |
-        SDL_DOUBLEBUF)) == NULL) {fprintf(stderr, "Error in SDL_SetVideoMode : %s\n",SDL_GetError());
+    if((ecran = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
+
+        fprintf(stderr, "euurreur : : %s\n",SDL_GetError());
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
@@ -39,7 +40,7 @@ void SDLprinting(int position,char * mapName){
 
     SDL_Surface * surface = NULL;
     if((surface = IMG_Load("media/mapping.png")) == NULL) {
-        fprintf(stderr, "Error in SDL_LoadBMP(\"media/TK.png\") : %s\n", SDL_GetError());
+        fprintf(stderr, "errur SDL_LoadBMP(\"media/TK.png\") : %s\n", SDL_GetError());
         SDL_FreeSurface(ecran);
         SDL_Quit();
         exit(EXIT_FAILURE);
@@ -50,7 +51,7 @@ void SDLprinting(int position,char * mapName){
 
     MapFile(map,mapName);
 
-    SDL_FillRect(ecran, NULL, 0x4226ad); //on peut changer la couleur ici
+    SDL_FillRect(ecran, NULL, 0x84e476); //on peut changer la couleur ici
 
    SDL_Rect tilePos;
    SDL_Rect screenPos;
@@ -126,7 +127,9 @@ void SDLprinting(int position,char * mapName){
             }
         }
 
-        evenement(buffer);
+
+
+
 
 
 
@@ -149,6 +152,14 @@ void SDLprinting(int position,char * mapName){
 
         // Met à jour l'écran !!!!!!!
         SDL_Flip(ecran);
+
+
+
+
+
+        buffer = evenement(buffer,ecran);
+
+
     }
 
 

@@ -13,7 +13,6 @@
 
 
 
-
 card_sdl * init_card_sdl(card_sdl * cardsdl, card * card, TTF_Font *font){
 
     SDL_Color rouge = {255,35,35};
@@ -102,10 +101,10 @@ char ** optionMenu() {
 
 
 int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOptions) {
-    int MENU_WIDTH = 150;
-    int MENU_HEIGHT = 150;
-    int MENU_X = 800;
-    int MENU_Y = 470; //(SCREEN_HEIGHT - MENU_HEIGHT) / 2;
+    int MENU_WIDTH = 140;
+    int MENU_HEIGHT = 140;
+    int MENU_X = 1000;
+    int MENU_Y = 600; //(SCREEN_HEIGHT - MENU_HEIGHT) / 2;
     int MENU_SPACING = 20;
 
 
@@ -204,14 +203,14 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
             SDL_Color color = {255, 255, 255};
             if (i == selectedOption) {
                 // Afficher le pointeur sur l'option sélectionnée
-                SDL_Rect selection_pos = {40+200*(i-1), 320, 5, 5};
+                SDL_Rect selection_pos = {130+250*(i-1), 450, 5, 5};
                 SDL_BlitSurface(pointeur_adv, NULL, screen, &selection_pos);
                 //color = {255, 0, 0};
             }
             char * buffer = malloc(sizeof (char)* strlen(element->carte->name)+2);
             strcpy(buffer,element->carte->name);
             SDL_Surface* textSurface = TTF_RenderText_Solid(font, buffer, color);
-            SDL_Rect text_pos = {50+200*(i-1), 300, textSurface->w, textSurface->h};
+            SDL_Rect text_pos = {130+250*(i-1), 430, textSurface->w, textSurface->h};
             SDL_BlitSurface(textSurface, NULL, screen, &text_pos);
             SDL_FreeSurface(textSurface);
             free(buffer);
@@ -253,47 +252,72 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
 
 
 
-void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
+void print_tour(SDL_Surface *screen, card * text,TTF_Font *font) {
 
     SDL_Color text_color = {255, 255, 255};
     SDL_Color tour_color = {255, 35, 35};
-    SDL_Rect text_position;
-    SDL_Surface *text_surface;
+    SDL_Rect text_position,desc_position,comp_position;
+    SDL_Surface *text_surface,*desc_surface,*comp_surface;
 
-    SDL_Rect tour_position;
-    SDL_Surface *tour_surface;
+    SDL_Rect tour_position,descdesc_position,compcomp_position;
+    SDL_Surface *tour_surface, *descdesc_surface,*compcomp_surface;
 
 
     tour_surface = TTF_RenderText_Solid(font, "Tour de : ", tour_color);
     tour_position.x = 30;
-    tour_position.y = 20;
+    tour_position.y = 85;
     SDL_BlitSurface(tour_surface, NULL, screen, &tour_position);
 
     text_surface = TTF_RenderText_Solid(font, text, text_color); // Rendre la surface de texte avec la police, le texte et la couleur
     text_position.x = 30;
-    text_position.y = 35;
+    text_position.y = 100;
     SDL_BlitSurface(text_surface, NULL, screen, &text_position); // Dessiner la surface de texte à l'écran
+
+   desc_surface = TTF_RenderText_Solid(font, "Description :", tour_color);
+   desc_position.x = 30;
+   desc_position.y = 20;
+   SDL_BlitSurface(desc_surface, NULL, screen, &desc_position);
+
+   descdesc_surface = TTF_RenderText_Solid(font, text->desc, text_color);
+   descdesc_position.x = 30;
+   descdesc_position.y = 35;
+   SDL_BlitSurface(descdesc_surface, NULL, screen, &descdesc_position);
+
+    comp_surface = TTF_RenderText_Solid(font, "Competence :", tour_color);
+    comp_position.x = 30;
+    comp_position.y = 55;
+    SDL_BlitSurface(comp_surface, NULL, screen, &comp_position);
+
+    compcomp_surface = TTF_RenderText_Solid(font, text->comp_desc, text_color);
+    compcomp_position.x = 30;
+    compcomp_position.y = 70;
+    SDL_BlitSurface(compcomp_surface, NULL, screen, &compcomp_position);
 
 
     SDL_FreeSurface(text_surface); // Libérer la mémoire utilisée par la surface de texte
     SDL_FreeSurface(tour_surface);
+    SDL_FreeSurface(desc_surface); // Libérer la mémoire utilisée par la surface de texte
+    SDL_FreeSurface(descdesc_surface);
+    SDL_FreeSurface(comp_surface);
+    SDL_FreeSurface(compcomp_surface);
 
 }
 
 void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     // Afficher un écran noir
-    SDL_Color noir = {0,0,0};
+    SDL_Color bl = {255,255,255};
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
     // Écrire "Au tour de l'adversaire" au centre de l'écran
 
-    SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", noir);
+    SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", bl);
 
     SDL_Rect text_rect;
-    text_rect.x = ((screen->w - text_surface->w) / 2) + 10;
-    text_rect.y = ((screen->h - text_surface->h) / 2)+20;
+    text_rect.x =  100;
+    text_rect.y =  100;
 
-
+    SDL_BlitSurface(text_surface, NULL, screen, &text_rect);
+    SDL_FreeSurface(text_surface);
     //SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", noir);
 
 
@@ -308,19 +332,18 @@ void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     Uint32 start_time = SDL_GetTicks();
     Uint32 elapsed_time = 0;
 
-    while (elapsed_time < 3000) {
+    while (elapsed_time < 5000) {
     // Afficher la barre de chargement
     SDL_FillRect(screen, &progress_bar_rect, SDL_MapRGB(screen->format, 255, 255, 255));
 
-    SDL_FillRect(screen, &progress_rect, SDL_MapRGB(screen->format, 0, 255, 0));
+    SDL_FillRect(screen, &progress_rect, SDL_MapRGB(screen->format, 255, 0, 0));
 
     SDL_UpdateRect(screen, progress_bar_rect.x, progress_bar_rect.y, progress_bar_rect.w, progress_bar_rect.h);
-        SDL_BlitSurface(text_surface, NULL, screen, &text_rect);
-        SDL_FreeSurface(text_surface);
+
     // Attendre un peu pour simuler le chargement
     SDL_Delay(50);
 
-    // Mettre à jour la barre de chargement
+    // Mettre à jour la barre
     elapsed_time = SDL_GetTicks() - start_time;
     float progress = (float) elapsed_time / 5000;
     progress_rect.w = progress_bar_rect.w * progress;
@@ -337,10 +360,10 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
     TTF_Init();
 
     SDL_Surface *screen;
-    screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
+    screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     TTF_Font *font;
-    font = TTF_OpenFont("font/Roboto-Black.ttf", 14);
+    font = TTF_OpenFont("font/Roboto-Black.ttf", 16);
 
     //IMAGE EN BACK
     SDL_Surface *imageback = IMG_Load("media/background.jpg");
@@ -397,15 +420,15 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
             }
             if (print_card->next!=NULL) {
                 print_card = Chain_next(print_card, &cpt);
-                print_card_sdl(print_card->cardSdl, screen, 50 + 175 * cpt, 410);
+                print_card_sdl(print_card->cardSdl, screen, 100 + 225 * cpt, 600);
             }
             if (print_card->next!=NULL) {
                 print_card = Chain_next(print_card, &cpt);
-                print_card_sdl(print_card->cardSdl, screen, 50 + 175 * cpt, 410);
+                print_card_sdl(print_card->cardSdl, screen, 100 + 225 * cpt, 600);
             }
             if (print_card->next!=NULL) {
                 print_card= Chain_next(print_card,&cpt);
-                print_card_sdl(print_card->cardSdl, screen, 50+175*cpt, 410);
+                print_card_sdl(print_card->cardSdl, screen, 100 + 225 * cpt, 600);
             }
 
             cpt = 0;
@@ -418,21 +441,21 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
             }
             if (print_card->next!=NULL) {
                 print_card = Chain_next(print_card, &cpt);
-                print_card_sdl(print_card->cardSdl, screen, 200 + 175 * cpt, 110);
+                print_card_sdl(print_card->cardSdl, screen, 300 + 225 * cpt, 200);
             }
             if (print_card->next!=NULL) {
                 print_card = Chain_next(print_card, &cpt);
-                print_card_sdl(print_card->cardSdl, screen, 200 + 175 * cpt, 110);
+                print_card_sdl(print_card->cardSdl, screen, 300 + 225 * cpt, 200);
             }
             if (print_card->next!=NULL) {
                 print_card= Chain_next(print_card,&cpt);
-                print_card_sdl(print_card->cardSdl, screen, 200+175*cpt, 110);
+                print_card_sdl(print_card->cardSdl, screen, 300+225*cpt, 200);
             }
 
 
 
 
-            print_tour(screen, current->carte->name, font);
+            print_tour(screen, current->carte, font);
 //affichage menu
             //menuSelection(screen, font, optionMenu(), 3);
 //
@@ -479,6 +502,8 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
         tour_adversaire(screen,font);
         tour_carte = 0;
 
+
+        if(win(player, opponent)<=0){ break;}
     }
 
 
