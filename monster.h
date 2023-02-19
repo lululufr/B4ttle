@@ -46,6 +46,7 @@ card * Read_Card( char * cardname){
     card->name= malloc(sizeof (char ));
     int i =0;
     while (fgetc(file) != '\n') {
+        printf("nom");
         fseek(file, -1, SEEK_CUR);
         card->name = realloc(card->name, sizeof(char) * (strlen(card->name) + 1));
         card->name[i] = fgetc(file);
@@ -53,27 +54,31 @@ card * Read_Card( char * cardname){
     }
     i=0;
     char * buffer= malloc(sizeof (char ));
+    //while (fgetc(file) != '\n') {
+    //    fseek(file, -1, SEEK_CUR);
+    //    buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
+    //    buffer[i] = fgetc(file);
+    //    i++;
+    //    card->id = atoi(buffer);
+    //}
+    //i=0;
+    //free(buffer);
+    buffer = malloc(sizeof (char ));
     while (fgetc(file) != '\n') {
+        printf("hp");
+
         fseek(file, -1, SEEK_CUR);
         buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
         buffer[i] = fgetc(file);
         i++;
-        card->id = atoi(buffer);
+        card->hp = atoi(buffer);
     }
-   i=0;
-    free(buffer);
-    buffer = malloc(sizeof (char ));
-  while (fgetc(file) != '\n') {
-      fseek(file, -1, SEEK_CUR);
-      buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
-      buffer[i] = fgetc(file);
-      i++;
-      card->hp = atoi(buffer);
-  }
-  i=0;
+    i=0;
    free(buffer);
    buffer = malloc(sizeof (char ));
  while (fgetc(file) != '\n') {
+     printf("atk");
+
      fseek(file, -1, SEEK_CUR);
      buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
      buffer[i] = fgetc(file);
@@ -84,22 +89,24 @@ card * Read_Card( char * cardname){
    free(buffer);
     card->desc= malloc(sizeof (char ));
    while (fgetc(file) != '\n') {
+       printf("desc");
        fseek(file, -1, SEEK_CUR);
        card->desc = realloc(card->desc, sizeof(char) * (strlen(card->desc) + 1));
        card->desc[i] = fgetc(file);
        i++;
    }
-    i=0;
-    card->competence= malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
-        fseek(file, -1, SEEK_CUR);
-        card->competence = realloc(card->competence, sizeof(char) * (strlen(card->competence) + 1));
-        card->competence[i] = fgetc(file);
-        i++;
-    }
+    //i=0;
+    //card->competence= malloc(sizeof (char ));
+    //while (fgetc(file) != '\n') {
+    //    fseek(file, -1, SEEK_CUR);
+    //    card->competence = realloc(card->competence, sizeof(char) * (strlen(card->competence) + 1));
+    //    card->competence[i] = fgetc(file);
+    //    i++;
+    //}
     i=0;
     card->comp_desc= malloc(sizeof (char ));
     while (fgetc(file) != '\n') {
+        printf("compdesc");
         fseek(file, -1, SEEK_CUR);
         card->comp_desc = realloc(card->comp_desc, sizeof(char) * (strlen(card->comp_desc) + 1));
         card->comp_desc[i] = fgetc(file);
