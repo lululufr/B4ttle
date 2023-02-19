@@ -295,6 +295,15 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
     TTF_Font *font;
     font = TTF_OpenFont("font/Roboto-Black.ttf", 14);
 
+    //IMAGE EN BACK
+    SDL_Surface* imageback = IMG_Load("media/background.jpg");
+
+    SDL_Surface* backgroud = SDL_DisplayFormat(imageback);
+    SDL_FreeSurface(imageback);
+    SDL_Rect destRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+
+
+
     //preparation
     card_sdl *card1 = malloc(sizeof(card_sdl) + 200);
     card_sdl *card2 = malloc(sizeof(card_sdl) + 200);
@@ -324,7 +333,7 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
     // Boucle de rendu
     int quit = 0;
     SDL_Event event;
-    int tour_carte = 0, random;
+    int tour_carte = 0, random,random_2;
     Chain *current;
 
     while (1) {
@@ -337,17 +346,24 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
             }
 
 //affichage
+            SDL_BlitSurface(backgroud, NULL, screen, &destRect);//backgroud
+            if(card1)
+                print_card_sdl(card1, screen, 50, 410);
+            if(card2)
+                print_card_sdl(card2, screen, 225, 410);
+            if(card3)
+                print_card_sdl(card3, screen, 400, 410);
+            if(card4)
+                print_card_sdl(card4, screen, 575, 410);
 
-            print_card_sdl(card1, screen, 50, 410);
-            print_card_sdl(card2, screen, 225, 410);
-            print_card_sdl(card3, screen, 400, 410);
-            print_card_sdl(card4, screen, 575, 410);
-
-
-            print_card_sdl(card_adv1, screen, 250, 50);
-            print_card_sdl(card_adv2, screen, 425, 50);
-            print_card_sdl(card_adv3, screen, 600, 50);
-            print_card_sdl(card_adv4, screen, 775, 50);
+            if(card_adv1)
+                print_card_sdl(card_adv1, screen, 250, 50);
+            if(card_adv2)
+                print_card_sdl(card_adv2, screen, 425, 50);
+            if(card_adv3)
+                print_card_sdl(card_adv3, screen, 600, 50);
+            if(card_adv4)
+                print_card_sdl(card_adv4, screen, 775, 50);
 
 
             print_tour(screen, current->carte->name, font);
@@ -363,7 +379,7 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
                 if (choix_adv == 9) {
                     break;
                 } else {
-                    attack(current->carte->atk, opponent, choix_adv);
+                    attack(current->carte->atk, opponent, choix_adv,font);
                 }
             } else if (choix == 1) {
                 printf("hello 2 ");
@@ -371,18 +387,29 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
                 printf("hello 3 ");
             }
 //SDL_FillRect(screen, NULL, 0x000000);
+            //SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
             SDL_Flip(screen);
             ++tour_carte;
         }
+
         tour_carte = 0;
         while(tour_carte != Chain_length(opponent)){
+            printf("%d",tour_carte);
             current = Chain_get(opponent,tour_carte);
+            ++tour_carte;
             random = rand()%1;
+            random_2 =rand()% Chain_length(player);
             switch(random){
                 case 0:
-
+                    attack(current->carte->atk,player,random_2,font);
+                    break;
+                case 1:
+                    //tbd current->carte->comp();
+                    break;
             }
         }
+        tour_carte = 0;
+
     }
 
 
