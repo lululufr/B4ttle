@@ -4,22 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "combat.h"
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 
- typedef struct card {
-    char * name;
-    int id;
-    int hp;
-    int atk;
-    char * desc;
-    char * competence;
-    char * comp_desc;
 
-
-}card;
 
 
 card * Read_Card( char * cardname){
@@ -112,29 +101,35 @@ void Print_stat(card * card){
     printf("%d --",card->atk);
 }
 
-Chain * Read_Player(){
-    Chain * player = Chain_empty();
-    FILE * file = fopen("deck/deck",r);
-     if(file){
-        //good
-    } else{
-        printf("erreur d'ouverture du fichier des cartes");
+void Read_player(char * filename, Chain * player) {
+    char * first = malloc(sizeof (char)*50);
+    first = "./deck/";
+    char * full = malloc(((strlen(filename)+10)*sizeof (char)));
+    strcpy(full,first);
+    strcat(full,filename);
+    printf("%s", full); //1
+
+    FILE * file = fopen(full,"r");
+    if(file) {
+        int i = 0;
+        char * name = malloc(sizeof(char));
+        while (fgetc(file) != '\n') {
+            fseek(file, -1, SEEK_CUR);
+            name = realloc(name, sizeof(char) * (i + 1));
+            name[i] = fgetc(file);
+            i++;
+        }
+        name[i] = '\0';
+        printf("%s", name);
+        Chain_add_tail(player, Read_Card(name));
+        free(name);
+        fclose(file);
+    } else {
+        printf("erreur d'ouverture du fichier du deck");
         exit(EXIT_FAILURE);
     }
-
-    int i=0;
-    char * name= malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
-        fseek(file, -1, SEEK_CUR);
-        name = realloc(card->desc, sizeof(char) * (strlen(card->desc) + 1));
-        name[i] = fgetc(file);
-        i++;
-    }
-    
-
-
-
 }
+
 
 
 

@@ -335,7 +335,6 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
     Chain * print_card;
     //why on a pas besoin de init le sdl ?
     TTF_Init();
-    srand(time(NULL));
 
     SDL_Surface *screen;
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);

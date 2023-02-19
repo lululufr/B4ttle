@@ -1,6 +1,7 @@
 #ifndef B4TTLE_COMBAT_H
 #define B4TTLE_COMBAT_H
 
+#include "card.h"
 #include "monster.h"
 #include "combat_display.h"
 //#define card_action(competence) #competence
@@ -172,7 +173,7 @@ int Chain_length(Chain *chain) {
     return cpt + 1;
 }
 
-
+/*
 void Chain_print(const Chain * chain){
     while (chain->next != NULL){
         Print_Card(chain->carte);
@@ -181,7 +182,7 @@ void Chain_print(const Chain * chain){
     }
     Print_Card(chain->carte);
 }
-
+*/
 
 void win(){
     //TBD
