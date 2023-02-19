@@ -90,10 +90,10 @@ Chain* Chain_pop_head(Chain **chain) {
     if (*chain == NULL) {
         return NULL;
     }
-    Chain *head = *chain;
-    *chain = (*chain)->next;
-    head->next = NULL;
-    return head;
+    Chain *buffer = *chain;
+    *chain = buffer->next;
+    buffer = NULL;
+    return *chain;
 }
 
 void Chain_regenerate(Chain **chain) {
@@ -178,16 +178,16 @@ int Chain_length(Chain *chain) {
     return cpt + 1;
 }
 
-/*
-void Chain_print(const Chain * chain){
-    while (chain->next != NULL){
-        Print_Card(chain->carte);
-        printf("\n");
-        chain = chain->next;
-    }
-    Print_Card(chain->carte);
-}
-*/
+
+//void Chain_print(const Chain * chain){
+//    while (chain->next != NULL){
+//        Print_Card(chain->carte);
+//        printf("\n");
+//        chain = chain->next;
+//    }
+//    Print_Card(chain->carte);
+//}
+
 
 void win(){
     //TBD
