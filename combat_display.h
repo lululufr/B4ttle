@@ -136,7 +136,7 @@ int menuSelection(SDL_Surface* screen, TTF_Font* font, char** options, int numOp
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
-                    return 9;
+                    SDL_Quit();
                     break;
                 case SDL_KEYDOWN:
                     switch (event.key.keysym.sym) {
@@ -197,6 +197,7 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
         // Afficher le menu
+
         int i;
         for (i = 1; i <= numOptions; i++) {
             Chain * element = Chain_get(chain, i-1);
@@ -223,7 +224,7 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
-                    return 9;
+                    SDL_Quit();
                     break;
                 case SDL_KEYDOWN:
                     switch (event.key.keysym.sym) {
@@ -253,17 +254,27 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
 void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
 
     SDL_Color text_color = {255, 255, 255};
+    SDL_Color tour_color = {255, 35, 35};
     SDL_Rect text_position;
     SDL_Surface *text_surface;
 
-    //text_color = SDL_MapRGB(screen->format, (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF); // Convertir la couleur en format SDL
+    SDL_Rect tour_position;
+    SDL_Surface *tour_surface;
+
+
+    tour_surface = TTF_RenderText_Solid(font, "Tour de : ", tour_color);
+    tour_position.x = 30;
+    tour_position.y = 20;
+    SDL_BlitSurface(tour_surface, NULL, screen, &tour_position);
 
     text_surface = TTF_RenderText_Solid(font, text, text_color); // Rendre la surface de texte avec la police, le texte et la couleur
-    text_position.x = 20;
-    text_position.y = 20;
+    text_position.x = 30;
+    text_position.y = 35;
     SDL_BlitSurface(text_surface, NULL, screen, &text_position); // Dessiner la surface de texte à l'écran
-    SDL_FreeSurface(text_surface); // Libérer la mémoire utilisée par la surface de texte
 
+
+    SDL_FreeSurface(text_surface); // Libérer la mémoire utilisée par la surface de texte
+    SDL_FreeSurface(tour_surface);
 
 }
 
@@ -311,38 +322,37 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     // Boucle de rendu
     int quit = 0;
     SDL_Event event;
+    int tour_carte = 0, random;
+    Chain *current;
 
+    while (1) {
+        while ((tour_carte != Chain_length(player))) {
+            current = Chain_get(player, tour_carte);
+            //SDL_WaitEvent(&event);
 
-    while (1)
-    {
-        SDL_WaitEvent(&event);
-
-
-        if (event.type == SDL_QUIT) {
-            break;
-        }
+            if (event.type == SDL_QUIT) {
+                break;
+            }
 
 //affichage
 
-   print_card_sdl(card1, screen, 50 , 410);
-   print_card_sdl(card2, screen, 225, 410);
-   print_card_sdl(card3, screen, 400, 410);
-   print_card_sdl(card4, screen, 575, 410);
+            print_card_sdl(card1, screen, 50, 410);
+            print_card_sdl(card2, screen, 225, 410);
+            print_card_sdl(card3, screen, 400, 410);
+            print_card_sdl(card4, screen, 575, 410);
 
 
-   print_card_sdl(card_adv1, screen, 250 ,50);
-   print_card_sdl(card_adv2, screen, 425 ,50);
-   print_card_sdl(card_adv3, screen, 600 ,50);
-   print_card_sdl(card_adv4, screen, 775 ,50);
+            print_card_sdl(card_adv1, screen, 250, 50);
+            print_card_sdl(card_adv2, screen, 425, 50);
+            print_card_sdl(card_adv3, screen, 600, 50);
+            print_card_sdl(card_adv4, screen, 775, 50);
 
 
-
-
-        //print_tour(screen,"HelloWorld",font);
+            print_tour(screen, current->carte->name, font);
 //affichage menu
-        //menuSelection(screen, font, optionMenu(), 3);
+            //menuSelection(screen, font, optionMenu(), 3);
 //
-choix = menuSelection(screen, font, optionMenu(), 3);
+            choix = menuSelection(screen, font, optionMenu(), 3);
 
       if (choix == 9) {
           break; // pourquitter
@@ -359,11 +369,19 @@ choix = menuSelection(screen, font, optionMenu(), 3);
       printf("hello 3 ");
   }
 //SDL_FillRect(screen, NULL, 0x000000);
-    SDL_Flip(screen);
+            SDL_Flip(screen);
+            ++tour_carte;
+        }
+        tour_carte = 0;
+        while(tour_carte != Chain_length(opponent)){
+            current = Chain_get(opponent,tour_carte);
+            random = rand()%1;
+            switch(random){
+                case 0:
+
+            }
+        }
     }
-
-
-
 
 
 SDL_Quit();
