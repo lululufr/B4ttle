@@ -26,8 +26,8 @@ int main() {
     Chain_add_tail(opponent, Read_Card("FRESSE_Balkis"));
     //WINDOW * w;
 //
-    //print_title();
-    //load_bar();
+   // print_title();
+   // load_bar();
  //
     //launching(menu(w)); //la fonction qui lance nos menusmenu(); //SDLprinting(); est dans nouvelle partie !!!
 

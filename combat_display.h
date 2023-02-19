@@ -280,6 +280,51 @@ void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
 
 }
 
+void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
+    // Afficher un écran noir
+    SDL_Color blanc = {255,255,255};
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+
+    // Écrire "Au tour de l'adversaire" au centre de l'écran
+
+    SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", blanc);
+
+    SDL_Rect text_rect;
+    text_rect.x = ((screen->w - text_surface->w) / 2) + 10;
+    text_rect.y = ((screen->h - text_surface->h) / 2)+20;
+
+    SDL_BlitSurface(text_surface, NULL, screen, &text_rect);
+    SDL_FreeSurface(text_surface);
+
+
+    // Afficher la barre de chargement
+    SDL_Rect progress_bar_rect;
+    progress_bar_rect.x = (screen->w - 200) / 2;
+    progress_bar_rect.y = text_rect.y + text_surface->h + 20;
+    progress_bar_rect.w = 200;
+    progress_bar_rect.h = 20;
+    SDL_Rect progress_rect = progress_bar_rect;
+    progress_rect.w = 0;
+    Uint32 start_time = SDL_GetTicks();
+    Uint32 elapsed_time = 0;
+
+    while (elapsed_time < 5000) {
+    // Afficher la barre de chargement
+    SDL_FillRect(screen, &progress_bar_rect, SDL_MapRGB(screen->format, 255, 255, 255));
+
+    SDL_FillRect(screen, &progress_rect, SDL_MapRGB(screen->format, 0, 255, 0));
+
+    SDL_UpdateRect(screen, progress_bar_rect.x, progress_bar_rect.y, progress_bar_rect.w, progress_bar_rect.h);
+
+    // Attendre un peu pour simuler le chargement
+    SDL_Delay(50);
+
+    // Mettre à jour la barre de chargement
+    elapsed_time = SDL_GetTicks() - start_time;
+    float progress = (float) elapsed_time / 5000;
+    progress_rect.w = progress_bar_rect.w * progress;
+    }
+}
 
 int fight_print_sdl(Chain * player, Chain * opponent) {
     int choix;
@@ -303,29 +348,24 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
     SDL_Rect destRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
 
-
-    //preparation
-    card_sdl *card1 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card2 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card3 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card4 = malloc(sizeof(card_sdl) + 200);
-
-    card_sdl *card_adv1 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card_adv2 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card_adv3 = malloc(sizeof(card_sdl) + 200);
-    card_sdl *card_adv4 = malloc(sizeof(card_sdl) + 200);
+    //preparation des cartes
+    card_sdl * array_player[4];
+    card_sdl * array_adv[4];
 
 
-//player
-    player->cardSdl = init_card_sdl(card1, player->carte, font);
-    player->next->cardSdl = init_card_sdl(card2, player->next->carte, font);
-    player->next->next->cardSdl = init_card_sdl(card3, player->next->next->carte, font);
-    player->next->next->next->cardSdl = init_card_sdl(card4, player->next->next->next->carte, font);
-//adv
-    opponent->cardSdl = init_card_sdl(card_adv1, opponent->carte, font);
-    opponent->next->cardSdl = init_card_sdl(card_adv2, opponent->next->carte, font);
-    opponent->next->next->cardSdl = init_card_sdl(card_adv3, opponent->next->next->carte, font);
-    opponent->next->next->next->cardSdl = init_card_sdl(card_adv4, opponent->next->next->next->carte, font);
+    i=0;
+
+    for (i = 0; i < 4; ++i) {
+        array_player[i] = malloc(5 * sizeof(card_sdl)+100);
+        current= Chain_get(player,i);
+        current->cardSdl = init_card_sdl(array_player[i], current->carte, font);
+
+        array_adv[i] = malloc(5 * sizeof(card_sdl)+100);
+        current= Chain_get(opponent,i);
+        current->cardSdl =init_card_sdl(array_adv[i], current->carte, font);
+    }
+    i=0;
+
 
     //preparation
 
@@ -384,10 +424,11 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
             } else if (choix == 1) {
                 printf("hello 2 ");
             } else if (choix == 2) {
-                printf("hello 3 ");
+                //++tour_carte;
             }
 //SDL_FillRect(screen, NULL, 0x000000);
             //SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+
             SDL_Flip(screen);
             ++tour_carte;
         }
@@ -408,6 +449,7 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
                     break;
             }
         }
+        tour_adversaire(screen,font);
         tour_carte = 0;
 
     }

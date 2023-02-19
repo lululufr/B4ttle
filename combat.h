@@ -84,6 +84,7 @@ void Chain_pop_head(Chain **chain) {
     *chain = (*chain)->next;
 }
 
+
 void Chain_delete(Chain **chain, int id) {
     Chain *current = *chain;
     Chain *previous = NULL;
@@ -197,7 +198,7 @@ void attack(int attack, Chain * enemyChain, int enemy_id,TTF_Font *font){
         Chain * enemy = malloc(sizeof (Chain));
         enemy = Chain_get(enemyChain,enemy_id);
 
-        if (enemy->carte->hp -= attack <=0) {
+        if ((enemy->carte->hp -= attack) <=0) {
             enemy->cardSdl=NULL;
             Chain_delete(&enemyChain, enemy_id);
         }else{
