@@ -56,26 +56,65 @@ int Chain_add_tail(Chain * chaine, card * carte){
     return 0;
 }
 
-int Chain_delete(Chain * liste, int id){
-    Chain * current = liste;
-    Chain * previous = NULL;
+
+//int Chain_delete(Chain * liste, int id){
+//    Chain * current = liste;
+//    Chain * previous = NULL;
+//    if (id==0){
+//        Chain_pop_head(&liste);
+//    }
+//    int i = 0;
+//    while (i < id && current != NULL){
+//        previous = current;
+//        current = current->next;
+//        ++i;
+//    }
+//    if (current == NULL){
+//        return -1;
+//    }
+//    if (previous == NULL){
+//        *liste = *current->next;
+//    } else {
+//        previous->next = current->next;
+//    }
+//    free(current);
+//    return 0;
+//}
+void Chain_pop_head(Chain **chain) {
+    if (*chain == NULL) { // Vérifier si la liste est vide
+        return;
+    }
+    Chain *temp = *chain; // Stocker l'adresse du premier élément dans une variable temporaire
+    *chain = temp->next; // Mettre à jour la tête de la liste vers l'élément suivant
+    free(temp); // Libérer la mémoire de l'élément supprimé
+}
+
+void Chain_delete(Chain **chain, int id) {
+    Chain *current = *chain;
+    Chain *previous = NULL;
+    if(id==0){
+        Chain_pop_head(chain);
+    }
     int i = 0;
-    while (i < id && current != NULL){
+    while (current != NULL && i != id) {
         previous = current;
         current = current->next;
-        ++i;
+        i++;
     }
-    if (current == NULL){
-        return -1;
+    if (current == NULL) {
+        // L'élément n'a pas été trouvé
+        return;
     }
-    if (previous == NULL){
-        *liste = *current->next;
+    if (previous == NULL) {
+        // L'élément à supprimer est en tête de liste
+        *chain = current->next;
     } else {
+        // L'élément à supprimer est ailleurs dans la liste
         previous->next = current->next;
     }
     free(current);
-    return 0;
 }
+
 
 int Chain_insert(Chain * liste, int id, card * carte){
     Chain * current= liste;
@@ -125,7 +164,11 @@ void Chain_action(Chain * chain){
 
 Chain * Chain_get(Chain * chain, int id){
     Chain * current= chain;
+    printf("%d", id);
     int i=0;
+    if(i>=id){
+        return current;
+    }
     while (i!=id){
         current = (*current).next;
         ++i;
@@ -134,21 +177,20 @@ Chain * Chain_get(Chain * chain, int id){
 }
 
 void attack(int attack, Chain * enemyChain, int enemy_id){
-    //SDL_Color rouge = {255,35,35};
-    //SDL_Color blanc = {255,255,255};
-    //SDL_Color vert = {59,208,108};
-    //TTF_Font *font;
-    //font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
-
+    SDL_Color rouge = {255,35,35};
+    SDL_Color blanc = {255,255,255};
+    SDL_Color vert = {59,208,108};
+    TTF_Font *font;
+    font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
     if(Chain_length(enemyChain)) {
         Chain * enemy = malloc(sizeof (Chain));
         enemy = Chain_get(enemyChain,enemy_id);
         if (enemy->carte->hp -= attack <= 0) {
-            Chain_delete(enemyChain, enemy_id);
+            //Chain_delete(&enemyChain, enemy_id);
         }else{
-            //char * str = malloc(sizeof(char)*30);
-            //sprintf(str, "Vie     %d", enemy->carte->hp);
-            //enemy->cardSdl->message_hp = TTF_RenderText_Solid(font, str, vert);
+            char * str = malloc(sizeof(char)*30);
+            sprintf(str, "Vie     %d", enemy->carte->hp);
+            enemy->cardSdl->message_hp = TTF_RenderText_Solid(font, str, vert);
         }
     } else{
         printf("chaine vide");

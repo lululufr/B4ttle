@@ -6,6 +6,7 @@
 #include <SDL/SDL_ttf.h>
 #include "monster.h"
 #include "combat.h"
+#include <time.h>
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 832
 
@@ -195,7 +196,6 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
     while (1) {
         // Effacer l'écran
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-
         // Afficher le menu
 
         int i;
@@ -216,9 +216,9 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
             SDL_FreeSurface(textSurface);
             free(buffer);
         }
-
         // Afficher le résultat à l'écran
         SDL_Flip(screen);
+
 
         // Lire les événements SDL
         while (SDL_PollEvent(&event)) {
@@ -235,11 +235,13 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
                             selectedOption = (selectedOption + 1) % (numOptions+1);
                             break;
                         case SDLK_RETURN:
-                            if(selectedOption==5){
+                            if(selectedOption== Chain_length(chain)+1){
                                 choixadv(screen, chain,font);
                             }
                             SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-                            return selectedOption;
+                            return selectedOption-1;
+                        default:
+                            break;
                     }
                     break;
             }
@@ -279,13 +281,13 @@ void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
 }
 
 
-int fight_print_sdl(Chain * player, Chain * opponent){
+int fight_print_sdl(Chain * player, Chain * opponent) {
     int choix;
     int choix_adv;
     int i;
     //why on a pas besoin de init le sdl ?
     TTF_Init();
-
+    srand(time(NULL));
 
     SDL_Surface *screen;
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
@@ -294,27 +296,27 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     font = TTF_OpenFont("font/Roboto-Black.ttf", 14);
 
     //preparation
-   card_sdl * card1 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card2 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card3 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card4 = malloc(sizeof(card_sdl)+200);
+    card_sdl *card1 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card2 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card3 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card4 = malloc(sizeof(card_sdl) + 200);
 
-   card_sdl * card_adv1 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card_adv2 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card_adv3 = malloc(sizeof(card_sdl)+200);
-   card_sdl * card_adv4 = malloc(sizeof(card_sdl)+200);
+    card_sdl *card_adv1 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card_adv2 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card_adv3 = malloc(sizeof(card_sdl) + 200);
+    card_sdl *card_adv4 = malloc(sizeof(card_sdl) + 200);
 
 
 //player
-    player->cardSdl = init_card_sdl(card1, player->carte,font);
-    player->next->cardSdl = init_card_sdl(card2,player->next->carte,font);
-    player->next->next->cardSdl = init_card_sdl(card3,player->next->next->carte,font);
-    player->next->next->next->cardSdl = init_card_sdl(card4,player->next->next->next->carte,font);
+    player->cardSdl = init_card_sdl(card1, player->carte, font);
+    player->next->cardSdl = init_card_sdl(card2, player->next->carte, font);
+    player->next->next->cardSdl = init_card_sdl(card3, player->next->next->carte, font);
+    player->next->next->next->cardSdl = init_card_sdl(card4, player->next->next->next->carte, font);
 //adv
-    opponent->cardSdl = init_card_sdl(card_adv1, opponent->carte,font);
-    opponent->next->cardSdl = init_card_sdl(card_adv2,opponent->next->carte,font);
-    opponent->next->next->cardSdl = init_card_sdl(card_adv3,opponent->next->next->carte,font);
-    opponent->next->next->next->cardSdl = init_card_sdl(card_adv4,opponent->next->next->next->carte,font);
+    opponent->cardSdl = init_card_sdl(card_adv1, opponent->carte, font);
+    opponent->next->cardSdl = init_card_sdl(card_adv2, opponent->next->carte, font);
+    opponent->next->next->cardSdl = init_card_sdl(card_adv3, opponent->next->next->carte, font);
+    opponent->next->next->next->cardSdl = init_card_sdl(card_adv4, opponent->next->next->next->carte, font);
 
     //preparation
 
@@ -354,20 +356,20 @@ int fight_print_sdl(Chain * player, Chain * opponent){
 //
             choix = menuSelection(screen, font, optionMenu(), 3);
 
-      if (choix == 9) {
-          break; // pourquitter
-      }else if (choix == 0){
-          choix_adv = choixadv(screen, opponent,font);
-          if(choix_adv==9){
-              break;
-          }else{
-              attack(player->carte->atk,opponent,choix_adv);
-          }
-      }else if (choix == 1){
-          printf("hello 2 ");
-      }else if (choix == 2){
-      printf("hello 3 ");
-  }
+            if (choix == 9) {
+                break; // pourquitter
+            } else if (choix == 0) {
+                choix_adv = choixadv(screen, opponent, font);
+                if (choix_adv == 9) {
+                    break;
+                } else {
+                    attack(current->carte->atk, opponent, choix_adv);
+                }
+            } else if (choix == 1) {
+                printf("hello 2 ");
+            } else if (choix == 2) {
+                printf("hello 3 ");
+            }
 //SDL_FillRect(screen, NULL, 0x000000);
             SDL_Flip(screen);
             ++tour_carte;
