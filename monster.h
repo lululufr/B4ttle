@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "combat.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -36,6 +37,7 @@ card * Read_Card( char * cardname){
         //good
     } else{
         printf("erreur d'ouverture du fichier des cartes");
+        exit(EXIT_FAILURE);
     }
 
     //free(path);
@@ -110,6 +112,33 @@ void Print_stat(card * card){
     printf("%d --",card->atk);
 }
 
+Chain * Read_Player(){
+    Chain * player = Chain_empty();
+    FILE * file = fopen("deck/deck",r);
+     if(file){
+        //good
+    } else{
+        printf("erreur d'ouverture du fichier des cartes");
+        exit(EXIT_FAILURE);
+    }
+
+    int i=0;
+    char * name= malloc(sizeof (char ));
+    while (fgetc(file) != '\n') {
+        fseek(file, -1, SEEK_CUR);
+        name = realloc(card->desc, sizeof(char) * (strlen(card->desc) + 1));
+        name[i] = fgetc(file);
+        i++;
+    }
+    
+
+
+
+}
+
+
+
+
 card * Random_Card(){
     int i;
     i = rand()%31;
@@ -163,7 +192,7 @@ card * Random_Card(){
             Read_Card("FRESSE_Balkis");//
             break;
         case 16:
-            Read_Card("GAMBO-MAGAGI_Soumaya");////////
+            Read_Card("GAMBO-MAGAGI_Soumaya");//
             break;
         case 17:
             Read_Card("KAKOU_Marceau");//
@@ -211,19 +240,6 @@ card * Random_Card(){
 }
 
 
-void Read_deck(){
-
-}
-
-
-
-//    Chain_add_tail(opponent, Read_Card(chose_card(srand(time(NULL)%31);
-/*char * chose_card(int n){
-    switch (n) {
-        case 1:
-            return "ALIYOU_Reda";
-    }
-}*/
 
 
 #endif
