@@ -89,8 +89,8 @@ void Chain_delete(Chain **chain, int id) {
     Chain *current = *chain;
     Chain *previous = NULL;
     if(id==0){
+        Chain_pop_head(chain);
         return;
-        //Chain_pop_head(chain);
     }
     int i = 0;
     while (current != NULL && i != id) {
@@ -128,19 +128,6 @@ int Chain_insert(Chain * liste, int id, card * carte){
     return 0;
 }
 
-//int Chain_length(Chain * chain){
-//    if (chain == NULL) {
-//        return 0;
-//    }
-//    int cpt=0;
-//    Chain * current= chain;
-//    if(current->carte== NULL){return 0;}
-//    while (current->next!=NULL){
-//        cpt++;
-//        current = (*current).next;
-//    }
-//    return cpt;
-//}
 
 int Chain_length(Chain *chain) {
     int cpt = 0;
@@ -189,11 +176,17 @@ Chain * Chain_get(Chain * chain, int id){
     }
     return current;
 }
+Chain * Chain_next(Chain * chain, int * i){
+    ++(*i);
+    return chain->next;
+}
 
 void attack(int attack, Chain * enemyChain, int enemy_id,TTF_Font *font){
     SDL_Color rouge = {255,35,35};
     SDL_Color blanc = {255,255,255};
     SDL_Color vert = {59,208,108};
+    printf("test");
+
     if(Chain_length(enemyChain)) {
         Chain * enemy = malloc(sizeof (Chain));
         enemy = Chain_get(enemyChain,enemy_id);
