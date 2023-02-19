@@ -127,16 +127,33 @@ int Chain_insert(Chain * liste, int id, card * carte){
     return 0;
 }
 
-int Chain_length(Chain * chain){
-    int cpt=0;
-    Chain * current= chain;
-    if(current->carte== NULL){return 0;}
-    while (current->next!=NULL){
-        cpt++;
-        current = (*current).next;
+//int Chain_length(Chain * chain){
+//    if (chain == NULL) {
+//        return 0;
+//    }
+//    int cpt=0;
+//    Chain * current= chain;
+//    if(current->carte== NULL){return 0;}
+//    while (current->next!=NULL){
+//        cpt++;
+//        current = (*current).next;
+//    }
+//    return cpt;
+//}
+
+int Chain_length(Chain *chain) {
+    int cpt = 0;
+    Chain *current = chain;
+    if (current == NULL || current->carte == NULL) {
+        return 0;
     }
-    return cpt+1;
+    while (current->next != NULL) {
+        cpt++;
+        current = current->next;
+    }
+    return cpt + 1;
 }
+
 
 void Chain_print(const Chain * chain){
     while (chain->next != NULL){
