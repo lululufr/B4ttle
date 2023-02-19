@@ -7,11 +7,14 @@ typedef struct card {
     int hp;
     int atk;
     char * desc;
-    char * competence;
+    void * competence;
     char * comp_desc;
 }card;
 
 
-
+typedef struct fonction{
+    char * name;
+    //(*void)(void*, void*) function;
+}Fonction;
 
 #endif

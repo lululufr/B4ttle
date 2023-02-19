@@ -9,15 +9,15 @@
 #include "combat_display.h"
 #include "combat.h"
 #include "monster.h"
-
+#include "display_sdl.h"
 int isValid(int move, Map * map){
-    if(map->map[move]==6 || map->map[move]==3){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
+    if(map->map[move]==6 ||map->map[move]==7 ||map->map[move]==8 ||map->map[move]==9 ||map->map[move]==10 || map->map[move]==3|| map->map[move]==2){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
         return 0;          /*on peut mettre des OR dans le if*/
     }else{
         return 1;
     }
 }
-void evenement(int buffer){
+int evenement(char buffer, SDL_Surface * ecran){
 
     if(buffer == 65) {
         Chain * opponent = Chain_empty();

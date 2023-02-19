@@ -3,9 +3,7 @@
 int y = 0;
 while(map->map[y]!='\0') {
     switch (map->map[y]) {
-        //case '*':
-        //    //map->map[y]=125; //herbe type2(fleur)
-        //    break;
+
         case ' ':
             int herbe = rand()%10;
             if (herbe>=1){map->map[y]=1;} //herbe type 1

@@ -7,8 +7,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-
-
+//#include <dlfcn.h> //j'ai essayé plein de trucs mais j'ai pas réussi à les faire marcher.
+//#include <windows.h>
 
 
 card * Read_Card( char * cardname){
@@ -80,6 +80,9 @@ card * Read_Card( char * cardname){
         i++;
     }
     fclose(file);
+
+//#pragma comment(lib,card.name);
+
     return card;
 }
 
@@ -136,100 +139,135 @@ void Read_player(char * filename, Chain * player) {
 
 card * Random_Card(){
     int i;
-    i = rand()%31;
+    i = rand()%30;
     switch(i){
         case 0:
-            Read_Card("ALIYOU_Reda");//
+            printf("%d",i);
+            Read_Card("ALIYOU_Reda");
             break;
         case 1:
-            Read_Card("ALOISI_Come");//
+            printf("%d",i);
+            Read_Card("ALOISI_Come");
             break;
         case 2:
-            Read_Card("AMBRY_Lukas");//
+            printf("%d",i);
+            Read_Card("AMBRY_Lukas");
             break;
         case 3:
-            Read_Card("AZARKANE_Issam");//
+            printf("%d",i);
+            Read_Card("AZARKANE_Issam");
             break;
         case 4:
-            Read_Card("BATHILY_Oussoumane");//
+            printf("%d",i);
+            Read_Card("BATHILY_Oussoumane");
             break;
         case 5:
-            Read_Card("BENZENINE_Yassine");//
+            printf("%d",i);
+            Read_Card("BENZENINE_Yassine");
             break;
         case 6:
-            Read_Card("BOSSEBOEUF_Quentin");//
+            printf("%d",i);
+            Read_Card("BOSSEBOEUF_Quentin");
             break;
         case 7:
-            Read_Card("BOUAYOUN_Ayman");//
+            printf("%d",i);
+            Read_Card("BOUAYOUN_Ayman");
             break;
         case 8:
-            Read_Card("CARK_Dryss");//
+            printf("%d",i);
+            Read_Card("CARK_Dryss");
             break;
         case 9:
-            Read_Card("CHOUK_Steven");// problème d'image
+            printf("%d",i);
+            Read_Card("CHOUK_Steven");
             break;
         case 10:
-            Read_Card("DAUTREMEPUICH_Hugo");//
+            printf("%d",i);
+            Read_Card("DAUTREMEPUICH_Hugo");
             break;
         case 11:
-            Read_Card("DIABIRA_Mamadou");//
+            printf("%d",i);
+            Read_Card("DIABIRA_Mamadou");
             break;
         case 12:
-            Read_Card("DUFRESNE_Jordan");//
+            printf("%d",i);
+            Read_Card("DUFRESNE_Jordan");
             break;
         case 13:
-            Read_Card("ELEFTERIOU_Alexis");//
+            printf("%d",i);
+            Read_Card("ELEFTERIOU_Alexis");
             break;
         case 14:
-            Read_Card("FERROUJ_Anass");//
+            printf("%d",i);
+            Read_Card("FERROUJ_Anass");
             break;
         case 15:
-            Read_Card("FRESSE_Balkis");//
+            printf("%d",i);
+            Read_Card("FRESSE_Balkis");
             break;
         case 16:
-            Read_Card("GAMBO-MAGAGI_Soumaya");//
+            printf("%d",i);
+            Read_Card("GAMBO-MAGAGI_Soumaya");
             break;
         case 17:
-            Read_Card("KAKOU_Marceau");//
+            printf("%d",i);
+            Read_Card("KAKOU_Marceau");
             break;
         case 18:
-            Read_Card("KEOMANY_Steven");//
+            printf("%d",i);
+            Read_Card("KEOMANY_Steven");
             break;
         case 19:
-            Read_Card("KIGER_Maxence");//
+            printf("%d",i);
+            Read_Card("KIGER_Maxence");
             break;
         case 20:
+            printf("%d",i);
             Read_Card("KOBANOVIC_Anthony");//
             break;
         case 21:
-            Read_Card("LANCELOT_Romain");//
+            printf("%d",i);
+            Read_Card("LANCELOT_Romain");
             break;
         case 22:
-            Read_Card("MEALARES_Julien");//
+            printf("%d",i);
+            Read_Card("MEALARES_Julien");
             break;
         case 23:
-            Read_Card("MECHOUCHE_Vincent");//
+            printf("%d",i);
+            Read_Card("MECHOUCHE_Vincent");
             break;
         case 24:
-            Read_Card("MILLER_Lucas");//
+            printf("%d",i);
+            Read_Card("MILLER_Lucas");
             break;
         case 25:
+            printf("%d",i);
             Read_Card("MONTOUTE_Anthony-james");
             break;
         case 26:
-            Read_Card("OELSCHLAGER_Karl");//
+            printf("%d",i);
+            Read_Card("OELSCHLAGER_Karl");
             break;
         case 27:
-            Read_Card("PITORIN_Tom");//
+            printf("%d",i);
+            Read_Card("PITORIN_Tom");
             break;
         case 28:
-            Read_Card("PIVATY_Gabriel-Ange");//
+            printf("%d",i);
+            Read_Card("PIVATY_Gabriel-Ange");
             break;
         case 29:
-            Read_Card("SAGE_Julien");//
+            printf("%d",i);
+            Read_Card("SAGE_Julien");
             break;
         case 30:
-            Read_Card("YAHIA-ABDCHAFEE_Adam");//
+            printf("%d",i);
+            Read_Card("YAHIA-ABDCHAFEE_Adam");
+            break;
+        default:
+            printf("%d",i);
+            Read_Card("ELEFTERIOU_Alexis");
             break;
     }
 }

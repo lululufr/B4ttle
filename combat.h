@@ -4,7 +4,6 @@
 #include "card.h"
 #include "monster.h"
 #include "combat_display.h"
-//#define card_action(competence) #competence
 //fPIC pour faire des fichiers .so
 //.so
 //-fPIC-shared
@@ -55,45 +54,6 @@ int Chain_add_tail(Chain * chaine, card * carte){
         current->next->next = NULL;
     }
     return 0;
-}
-
-
-//int Chain_delete(Chain * liste, int id){
-//    Chain * current = liste;
-//    Chain * previous = NULL;
-//    if (id==0){
-//        Chain_pop_head(&liste);
-//    }
-//    int i = 0;
-//    while (i < id && current != NULL){
-//        previous = current;
-//        current = current->next;
-//        ++i;
-//    }
-//    if (current == NULL){
-//        return -1;
-//    }
-//    if (previous == NULL){
-//        *liste = *current->next;
-//    } else {
-//        previous->next = current->next;
-//    }
-//    free(current);
-//    return 0;
-//}
-//void Chain_pop_head(Chain **chain) {
-//    *chain = (*chain)->next;
-//}
-
-
-Chain* Chain_pop_head(Chain **chain) {
-    if (*chain == NULL) {
-        return NULL;
-    }
-    Chain *buffer = *chain;
-    *chain = buffer->next;
-    buffer = NULL;
-    return *chain;
 }
 
 
