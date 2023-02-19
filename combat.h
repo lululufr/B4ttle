@@ -80,16 +80,46 @@ int Chain_add_tail(Chain * chaine, card * carte){
 //    free(current);
 //    return 0;
 //}
-void Chain_pop_head(Chain **chain) {
+//void Chain_pop_head(Chain **chain) {
+//    *chain = (*chain)->next;
+//}
+
+
+Chain* Chain_pop_head(Chain **chain) {
+    if (*chain == NULL) {
+        return NULL;
+    }
+    Chain *head = *chain;
     *chain = (*chain)->next;
+    head->next = NULL;
+    return head;
 }
 
+void Chain_regenerate(Chain **chain) {
+    if (*chain == NULL) {
+        return;
+    }
+    Chain *current = *chain;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    Chain *head = Chain_pop_head(chain);
+    current->next = head;
+    while (head != NULL) {
+        Chain *next = Chain_pop_head(chain);
+        if (next != NULL) {
+            current->next = next;
+            current = next;
+        }
+        head = next;
+    }
+}
 
 void Chain_delete(Chain **chain, int id) {
     Chain *current = *chain;
     Chain *previous = NULL;
     if(id==0){
-        Chain_pop_head(chain);
+        Chain_regenerate(chain);
         return;
     }
     int i = 0;

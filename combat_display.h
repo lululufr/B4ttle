@@ -282,19 +282,19 @@ void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
 
 void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     // Afficher un écran noir
-    SDL_Color blanc = {255,255,255};
+    SDL_Color noir = {0,0,0};
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
     // Écrire "Au tour de l'adversaire" au centre de l'écran
 
-    SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", blanc);
+    SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", noir);
 
     SDL_Rect text_rect;
     text_rect.x = ((screen->w - text_surface->w) / 2) + 10;
     text_rect.y = ((screen->h - text_surface->h) / 2)+20;
 
-    SDL_BlitSurface(text_surface, NULL, screen, &text_rect);
-    SDL_FreeSurface(text_surface);
+
+    //SDL_Surface *text_surface = TTF_RenderText_Solid(font, "Au tour de l'adversaire", noir);
 
 
     // Afficher la barre de chargement
@@ -308,14 +308,15 @@ void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     Uint32 start_time = SDL_GetTicks();
     Uint32 elapsed_time = 0;
 
-    while (elapsed_time < 5000) {
+    while (elapsed_time < 3000) {
     // Afficher la barre de chargement
     SDL_FillRect(screen, &progress_bar_rect, SDL_MapRGB(screen->format, 255, 255, 255));
 
     SDL_FillRect(screen, &progress_rect, SDL_MapRGB(screen->format, 0, 255, 0));
 
     SDL_UpdateRect(screen, progress_bar_rect.x, progress_bar_rect.y, progress_bar_rect.w, progress_bar_rect.h);
-
+        SDL_BlitSurface(text_surface, NULL, screen, &text_rect);
+        SDL_FreeSurface(text_surface);
     // Attendre un peu pour simuler le chargement
     SDL_Delay(50);
 
