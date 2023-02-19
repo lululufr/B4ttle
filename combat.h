@@ -100,12 +100,15 @@ void Chain_regenerate(Chain **chain) {
     if (*chain == NULL) {
         return;
     }
+
     Chain *current = *chain;
     while (current->next != NULL) {
         current = current->next;
     }
+
     Chain *head = Chain_pop_head(chain);
     current->next = head;
+
     while (head != NULL) {
         Chain *next = Chain_pop_head(chain);
         if (next != NULL) {
@@ -114,6 +117,8 @@ void Chain_regenerate(Chain **chain) {
         }
         head = next;
     }
+
+    *chain = head;
 }
 
 void Chain_delete(Chain **chain, int id) {
