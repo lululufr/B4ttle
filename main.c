@@ -25,10 +25,10 @@ int main() {
     Chain_add_tail(opponent, Read_Card("PIVATY_Gabriel-Ange"));
     Chain_add_tail(opponent, Read_Card("FRESSE_Balkis"));
     //WINDOW * w;
-
+//
     //print_title();
     //load_bar();
- 
+ //
     //launching(menu(w)); //la fonction qui lance nos menusmenu(); //SDLprinting(); est dans nouvelle partie !!!
 
     fight_print_sdl(player , opponent);
