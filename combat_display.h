@@ -247,6 +247,27 @@ int choixadv(SDL_Surface* screen, Chain* chain, TTF_Font *font) {
 }
 
 
+
+
+
+void print_tour(SDL_Surface *screen, char *text,TTF_Font *font) {
+
+    SDL_Color text_color = {255, 255, 255};
+    SDL_Rect text_position;
+    SDL_Surface *text_surface;
+
+    //text_color = SDL_MapRGB(screen->format, (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF); // Convertir la couleur en format SDL
+
+    text_surface = TTF_RenderText_Solid(font, text, text_color); // Rendre la surface de texte avec la police, le texte et la couleur
+    text_position.x = 20;
+    text_position.y = 20;
+    SDL_BlitSurface(text_surface, NULL, screen, &text_position); // Dessiner la surface de texte à l'écran
+    SDL_FreeSurface(text_surface); // Libérer la mémoire utilisée par la surface de texte
+
+
+}
+
+
 int fight_print_sdl(Chain * player, Chain * opponent){
     int choix;
     int choix_adv;
@@ -259,7 +280,7 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     screen = SDL_SetVideoMode(975, 650, 32, SDL_HWSURFACE);
 
     TTF_Font *font;
-    font = TTF_OpenFont("font/Roboto-Black.ttf", 12);
+    font = TTF_OpenFont("font/Roboto-Black.ttf", 14);
 
     //preparation
    card_sdl * card1 = malloc(sizeof(card_sdl)+200);
@@ -290,10 +311,12 @@ int fight_print_sdl(Chain * player, Chain * opponent){
     // Boucle de rendu
     int quit = 0;
     SDL_Event event;
+    int tour_carte=1;
 
-
-    while (1)
-    {
+    Chain * current;
+    while (tour_carte<= Chain_length(player)){
+        current= Chain_get(player, tour_carte);
+        ++tour_carte;
         SDL_WaitEvent(&event);
 
 
@@ -314,6 +337,10 @@ int fight_print_sdl(Chain * player, Chain * opponent){
    print_card_sdl(card_adv3, screen, 600 ,50);
    print_card_sdl(card_adv4, screen, 775 ,50);
 
+
+
+
+        //print_tour(screen,"HelloWorld",font);
 //affichage menu
         //menuSelection(screen, font, optionMenu(), 3);
 //
@@ -326,7 +353,7 @@ choix = menuSelection(screen, font, optionMenu(), 3);
           if(choix_adv==9){
               break;
           }else{
-              attack(player->carte->atk,opponent,choix_adv);
+              attack(player->carte->atk,opponent,choix_adv-1);
           }
       }else if (choix == 1){
           printf("hello 2 ");
