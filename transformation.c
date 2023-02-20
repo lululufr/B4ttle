@@ -3,6 +3,11 @@
 int y = 0;
 while(map->map[y]!='\0') {
     switch (map->map[y]) {
+        case '~': //chemin
+
+            map->map[y]=225;
+
+        break;
 
         case ' ':
             int herbe = rand()%10;
@@ -28,9 +33,32 @@ while(map->map[y]!='\0') {
             break;
 
 
-       case '!': //enemis
-           //int enemis = rand()%6;
-           //if (enemis==1){map->map[y]=62;}
+        case '-':
+                //map->map[y-2] =51;
+                map->map[y-1] =52;
+                map->map[y]=53;
+                map->map[y+1] =54;
+                //map->map[y-40] =51;
+
+                //map->map[y-43] =58;
+                map->map[y-42] =55;
+                map->map[y-41] =56;
+                map->map[y-40] =57;
+                //map->map[y-43] =58;
+
+            break;
+            case 'w':
+                map->map[y] =51;
+                map->map[y-41] =58;
+                break;
+
+            case 'i': //chemin
+                map->map[y-1] =21;
+                map->map[y]=23;
+                map->map[y+1] =22;
+            break;
+
+       case '!':
          map->map[y]=65;
           //else if (enemis==3){map->map[y]=64;}
           //else if (enemis==4){map->map[y]=65;}

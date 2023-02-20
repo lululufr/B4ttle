@@ -10,8 +10,20 @@
 #include "combat.h"
 #include "monster.h"
 #include "display_sdl.h"
+
 int isValid(int move, Map * map){
-    if(map->map[move]==6 ||map->map[move]==7 ||map->map[move]==8 ||map->map[move]==9 ||map->map[move]==10 || map->map[move]==3|| map->map[move]==2){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
+    if(map->map[move]==6 ||
+    map->map[move]==7 ||
+    map->map[move]==8 ||
+    map->map[move]==9 ||
+    map->map[move]==10 ||
+    map->map[move]==3||
+    map->map[move]==2 ||
+    map->map[move]==58||
+    map->map[move]==55||
+    map->map[move]==56||
+    map->map[move]==57||
+    map->map[move]==58){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
         return 0;          /*on peut mettre des OR dans le if*/
     }else{
         return 1;
@@ -24,13 +36,8 @@ int evenement(char buffer, SDL_Surface * ecran){
         Chain * player = Chain_empty();
         player->carte = Read_Card("ELEFTERIOU_Alexis");
         Chain_add_tail(player, Read_Card("AMBRY_Lukas"));
-        Chain_add_tail(player, Read_Card("SAGE_Julien"));
-        Chain_add_tail(player, Read_Card("KAKOU_Marceau"));
-        /*player->carte = Read_Card("1");
-        Read_player("2",player);
-        Read_player("3",player);
-        Read_player("4",player);*/
-
+        Chain_add_tail(player, Read_Card("MEALARES_Julien"));
+        Chain_add_tail(player, Read_Card("KOBANOVIC_Anthony"));
         opponent->carte = Random_Card();
         Chain_add_tail(opponent, Random_Card());
         Chain_add_tail(opponent, Random_Card());
@@ -39,7 +46,7 @@ int evenement(char buffer, SDL_Surface * ecran){
         fight_print_sdl(player,opponent);
         //SDLprinting((buffer-1),map);
 
-        SDL_FillRect(ecran, NULL, 0x84e476);
+        SDL_FillRect(ecran, NULL, 0X9ed448);
         return buffer-1;
     }
 

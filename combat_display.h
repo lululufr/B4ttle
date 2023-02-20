@@ -341,11 +341,11 @@ void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     SDL_UpdateRect(screen, progress_bar_rect.x, progress_bar_rect.y, progress_bar_rect.w, progress_bar_rect.h);
 
     // Attendre un peu pour simuler le chargement
-    SDL_Delay(50);
+    SDL_Delay(20);
 
     // Mettre à jour la barre
     elapsed_time = SDL_GetTicks() - start_time;
-    float progress = (float) elapsed_time / 5000;
+    float progress = (float) elapsed_time / 2000;
     progress_rect.w = progress_bar_rect.w * progress;
     }
 }

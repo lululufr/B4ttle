@@ -20,7 +20,7 @@
 
 
 
-void SDLprinting(int position,char * mapName){
+void SDLprinting(int position,char * mapName){ //la fonction d'affichage global
 
 
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -51,7 +51,7 @@ void SDLprinting(int position,char * mapName){
 
     MapFile(map,mapName);
 
-    SDL_FillRect(ecran, NULL, 0x84e476); //on peut changer la couleur ici
+    SDL_FillRect(ecran, NULL, 0X9ed448); //on peut changer la couleur ici
 
    SDL_Rect tilePos;
    SDL_Rect screenPos;
@@ -155,9 +155,14 @@ void SDLprinting(int position,char * mapName){
 
 
 
-
+        if(map->map[buffer] == 1 ){
+            SDL_FillRect(ecran, NULL, 0X9ed448); //on peut changer la couleur ici
+            SDL_Flip(ecran);
+            SDLprinting(10,"maps/route1");
+        }
 
         buffer = evenement(buffer,ecran);
+
 
 
     }
