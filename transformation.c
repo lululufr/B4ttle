@@ -1,156 +1,72 @@
 //void transform(char * map){
 
+//ce code permet de transformer les chars en des trucs plus sympas pour l'affichage
 int y = 0;
 while(map->map[y]!='\0') {
     switch (map->map[y]) {
-        //case '*':
-        //    //map->map[y]=125; //herbe type2(fleur)
-        //    break;
+        case '~': //chemin
+
+            map->map[y]=60;
+
+        break;
+
         case ' ':
             int herbe = rand()%10;
-            if (herbe>1){map->map[y]=4;} //herbe type 1
-            else if (herbe<1){map->map[y]=125;}//herbe type 2 (fleur)
+            if (herbe>=1){map->map[y]=1;} //herbe type 1
+            else if (herbe<=1){map->map[y]=4;}//herbe type 2 (fleur)
             break;
         case '#':
-            map->map[y]= 23 +40; // roche pleine
+            map->map[y]= 7; // Barriere Horizontale
+            if(map->map[y+map->width]=='#' ){
+                map->map[y]=10;
+            }else if(map->map[y+1] =='#'&&map->map[y-1]==7||map->map[y-1]==6|| map->map[y-1]==8|| map->map[y-1]==9){
+                map->map[y]=7;
+            }
             break;
+            case '|':
+                map->map[y]= 10; //Barriere Verticale
+            break;
+
         case '*':
-            map->map[y]= 23 +120; //
+            int cailloux = rand()%10;
+            if (cailloux>5){map->map[y]=2;}
+            else{map->map[y]=3;}
             break;
-        case 'g':
-            map->map[y]=7; //
-            break;
-        case 'h':
-            map->map[y]=8; //
-            break;
-        case 'i':
-            map->map[y]=9; //
-            break;
-        case 'j':
-            map->map[y]=10; //
-            break;
-        case 'k':
-            map->map[y]=11; //
-            break;
-        case 'l':
-            map->map[y]=12; //
-            break;
-        case 'm':
-            map->map[y]=13; //
-            break;
-        case 'n':
-            map->map[y]=14; //
-            break;
-        case 'o':
-            map->map[y]=15; //
-            break;
-        case 'p':
-            map->map[y]=16; //
-            break;
-        case 'q':
-            map->map[y]=17; //
-            break;
-        case 'r':
-            map->map[y]=18; //
-            break;
-        case 's':
-            map->map[y]=19; //
-            break;
-        case 't':
-            map->map[y]=20; //
-            break;
-        case 'u':
-            map->map[y]=21; //
-            break;
-        case 'v':
-            map->map[y]=22; //
-            break;
-        case 'w':
-            map->map[y]=23; //
-            break;
-        case 'x':
-            map->map[y]=24; //
-            break;
-        case 'y':
-            map->map[y]=25; //
-            break;
-        case 'z':
-            map->map[y]=26; //
-            break;
-        case '1':
-            map->map[y]=27; //
-            break;
-        case '2':
-            map->map[y]=28; //
-            break;
-        case '3':
-            map->map[y]=29; //
-            break;
-        case '4':
-            map->map[y]=30; //
-            break;
-        case '5':
-            map->map[y]=31; //
-            break;
-        case '6':
-            map->map[y]=32; //
-            break;
-        case '7':
-            map->map[y]=33; //
-            break;
-        case '8':
-            map->map[y]=34; //
-            break;
-        case '9':
-            map->map[y]=35; //
-            break;
-        case '&':
-            map->map[y]=36; //
-            break;
-        case '"':
-            map->map[y]=38; //
-            break;
-        case '|':
-            map->map[y]=39; //
-            break;
-        case '(':
-            map->map[y]=40; //
-            break;
+
+
         case '-':
-            map->map[y]=41; //
+                //map->map[y-2] =51;
+                map->map[y-1] =52;
+                map->map[y]=53;
+                map->map[y+1] =54;
+                //map->map[y-40] =51;
+
+                //map->map[y-43] =58;
+                map->map[y-42] =55;
+                map->map[y-41] =56;
+                map->map[y-40] =57;
+                //map->map[y-43] =58;
+
             break;
-        case '@':
-            map->map[y]=42; //
+            case 'w':
+                map->map[y] =51;
+                map->map[y-41] =58;
+                break;
+
+            case 'i': //chemin
+                map->map[y-1] =21;
+                map->map[y]=23;
+                map->map[y+1] =22;
             break;
 
+       case '!':
+         map->map[y]=65;
+           break;
 
-}
+        case '1':
+                map->map[y]=12;
+        break;
+
+    }
 ++y;
 }
-/*
-case '3':
-            map->map[y]=29; //
-            break;
-        case '_':
-            map->map[y]=30; //
-            break;
-        case 'ç':
-            map->map[y]=31; //
-            break;
-        case 'à':
-            map->map[y]=32; //
-            break;
-        case ')':
-            map->map[y]=30; //
-            break;
-        case '=':
-            map->map[y]=31; //
-            break;
-        case '~':
-            map->map[y]=32; //
-            break;
-
-#{[|`\^@
-]},;:!?.
-
- */

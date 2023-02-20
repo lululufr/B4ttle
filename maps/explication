@@ -3,7 +3,7 @@
 # = batiment
 1 = mur
 & = zone de changement de zone
-0 = combatant // il faudra trouver un moyen de leur donner un ID chacun pour leur donner : un sprite, un deck, et tout simplement les rendre "unique"
+! = combatant // il faudra trouver un moyen de leur donner un ID chacun pour leur donner : un sprite, un deck, et tout simplement les rendre "unique"
 
 
 

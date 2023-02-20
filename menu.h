@@ -78,6 +78,7 @@ void launching(int i){
         case 0 :
             endwin();
             //printmap();
+            SDLprinting(45,"maps/firstmap.txt");
             break;
 
         case 1 : // Charger partie

@@ -1,1 +1,0 @@
-BENZENINE_YASSINE | 09 | Point de Vie | Attaque | Defense | Description personnage | Competence(s) | Description Competence |
