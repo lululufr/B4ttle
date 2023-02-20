@@ -170,10 +170,7 @@ void SDLprinting(int position,char * mapName){ //la fonction d'affichage global
 
     SDL_Quit();
 
-
-
-    //printf("%s", map->map);
-exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 
 }
 

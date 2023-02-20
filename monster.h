@@ -4,11 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "combat.h"
+#include "struct.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#include "competence.h"
 //#include <dlfcn.h> //j'ai essayé plein de trucs mais j'ai pas réussi à les faire marcher.
-//#include <windows.h>
+//#include <windows.h> //j'ai essayé de faire des choses avec le .so mais pareil, j'ai pas réussi
 
 
 card * Read_Card( char * cardname){
@@ -36,7 +38,7 @@ card * Read_Card( char * cardname){
     card * card= malloc(sizeof (card)*8);
     card->name= malloc(sizeof (char ));
     int i =0;
-    while (fgetc(file) != '\n') {
+    while (fgetc(file) != '\n') {//lecture du nom
         fseek(file, -1, SEEK_CUR);
         card->name = realloc(card->name, sizeof(char) * (strlen(card->name) + 1));
         card->name[i] = fgetc(file);
@@ -45,7 +47,7 @@ card * Read_Card( char * cardname){
     i=0;
     char * buffer= malloc(sizeof (char ));
     buffer = malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
+    while (fgetc(file) != '\n') {//lecture des pv
         fseek(file, -1, SEEK_CUR);
         buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
         buffer[i] = fgetc(file);
@@ -55,7 +57,7 @@ card * Read_Card( char * cardname){
     i=0;
     free(buffer);
     buffer = malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
+    while (fgetc(file) != '\n') {//lecture de l'attaque
         fseek(file, -1, SEEK_CUR);
         buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
         buffer[i] = fgetc(file);
@@ -65,7 +67,7 @@ card * Read_Card( char * cardname){
     i=0;
     free(buffer);
     card->desc= malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
+    while (fgetc(file) != '\n') {//lecture de la description du personnage
         fseek(file, -1, SEEK_CUR);
         card->desc = realloc(card->desc, sizeof(char) * (strlen(card->desc) + 1));
         card->desc[i] = fgetc(file);
@@ -73,15 +75,26 @@ card * Read_Card( char * cardname){
     }
     i=0;
     card->comp_desc= malloc(sizeof (char ));
-    while (fgetc(file) != '\n') {
+    while (fgetc(file) != '\n') {//lecture de la description de la compétence
         fseek(file, -1, SEEK_CUR);
         card->comp_desc = realloc(card->comp_desc, sizeof(char) * (strlen(card->comp_desc) + 1));
         card->comp_desc[i] = fgetc(file);
         i++;
     }
     fclose(file);
+//non fonctionnel, permettrait de trouver la fonction associée à la carte qui est lue actuellement
 
-//#pragma comment(lib,card.name);
+    //Fonction * fonctions= malloc(sizeof (Fonction));
+    //Create_func_struct(fonctions);
+    //for(i=0;i<fonctions->number;++i){
+    //    if(!strcmp(card->name,fonctions[i].name[i])){
+    //        card->competence=fonctions->competence[i];
+    //    }
+    //}
+    //free(fonctions);
+
+
+//#pragma comment(lib,card.name); comment ça marche ???? (pour lire des librairies)
 
     return card;
 }
@@ -104,7 +117,7 @@ void Print_stat(card * card){
     printf("%d --",card->atk);
 }
 
-void Read_player(char * filename, Chain * player) {
+void Read_player(char * filename, Chain * player) {// permet la lecture du deck du joueur, non fonctionnel
     char * first = malloc(sizeof (char)*50);
     first = "./deck/";
     char * full = malloc(((strlen(filename)+10)*sizeof (char)));
@@ -137,7 +150,7 @@ void Read_player(char * filename, Chain * player) {
 
 
 
-card * Random_Card(){
+card * Random_Card(){//renvoit une carte aléatoire pour l'opponent
     int i;
     i = rand()%30;
     switch(i){

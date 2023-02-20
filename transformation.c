@@ -1,5 +1,6 @@
 //void transform(char * map){
 
+//ce code permet de transformer les chars en des trucs plus sympas pour l'affichage
 int y = 0;
 while(map->map[y]!='\0') {
     switch (map->map[y]) {
@@ -60,42 +61,8 @@ while(map->map[y]!='\0') {
 
        case '!':
          map->map[y]=65;
-          //else if (enemis==3){map->map[y]=64;}
-          //else if (enemis==4){map->map[y]=65;}
-          //else if (enemis==5){map->map[y]=66;}
-          //else if (enemis==6){map->map[y]=67;}
-          //else if (enemis==7){map->map[y]=68;}
-
-      //     };
            break;
 
     }
 ++y;
 }
-/*
-case '3':
-            map->map[y]=29; //
-            break;
-        case '_':
-            map->map[y]=30; //
-            break;
-        case 'ç':
-            map->map[y]=31; //
-            break;
-        case 'à':
-            map->map[y]=32; //
-            break;
-        case ')':
-            map->map[y]=30; //
-            break;
-        case '=':
-            map->map[y]=31; //
-            break;
-        case '~':
-            map->map[y]=32; //
-            break;
-
-#{[|`\^@
-]},;:!?.
-
- */

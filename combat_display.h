@@ -62,19 +62,10 @@ void print_card_sdl(card_sdl * card_sdl, SDL_Surface * screen,int x, int y){
     pos_atk.x = x + 10;
     pos_atk.y = y + 145;
 
-
     SDL_BlitSurface(card_sdl->message_nom, NULL, screen, &pos_nom);
     SDL_BlitSurface(card_sdl->message_hp, NULL, screen, &pos_hp);
     SDL_BlitSurface(card_sdl->message_atk, NULL, screen, &pos_atk);
     SDL_BlitSurface(card_sdl->SDL_card, NULL, screen, &pos);
-
-
-
-    //SDL_FreeSurface(card_sdl->SDL_card);
-    //SDL_FreeSurface(card_sdl->message_hp);
-    //SDL_FreeSurface(card_sdl->message_atk);
-    //SDL_FreeSurface(card_sdl->message_nom);
-
 
 }
 
@@ -332,7 +323,7 @@ void tour_adversaire(SDL_Surface* screen,TTF_Font* font) {
     Uint32 start_time = SDL_GetTicks();
     Uint32 elapsed_time = 0;
 
-    while (elapsed_time < 5000) {
+    while (elapsed_time < 2000) {
     // Afficher la barre de chargement
     SDL_FillRect(screen, &progress_bar_rect, SDL_MapRGB(screen->format, 255, 255, 255));
 
@@ -456,8 +447,6 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
 
             print_tour(screen, current->carte, font);
 //affichage menu
-            //menuSelection(screen, font, optionMenu(), 3);
-//
             choix = menuSelection(screen, font, optionMenu(), 3);
 
             if (choix == 9) {
@@ -470,12 +459,11 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
                     attack(current->carte->atk, opponent, choix_adv,font);
                 }
             } else if (choix == 1) {
-                printf("hello 2 ");
+                attack(current->carte->atk, opponent, rand()% Chain_length(opponent),font);
             } else if (choix == 2) {
                 //++tour_carte;
             }
-//SDL_FillRect(screen, NULL, 0x000000);
-            //SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+
             if(win(player, opponent)<=0){ break;}
             SDL_Flip(screen);
             ++tour_carte;
@@ -492,6 +480,9 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
             ++tour_carte;
             random = rand()%1;
             random_2 =rand()% Chain_length(player);
+            if(player->carte->hp==0&& random_2==0){
+                ++random_2;
+            }
             switch(random){
                 case 0:
                     attack(current->carte->atk,player,random_2,font);
@@ -508,16 +499,8 @@ int fight_print_sdl(Chain * player, Chain * opponent) {
         if(win(player, opponent)<=0){ break;}
     }
 
-
-    //SDL_Quit();
-
-
-
-
     return 0; // ou 1 si on gagne
 
 }
-
-
 
 #endif

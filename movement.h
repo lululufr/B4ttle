@@ -32,7 +32,7 @@ int isValid(int move, Map * map){
 int evenement(char buffer, SDL_Surface * ecran){
 
     if(buffer == 65) {
-        Chain * opponent = Chain_empty();
+        Chain * opponent = Chain_empty();//création des cartes du joueur et de l'ennemi
         Chain * player = Chain_empty();
         player->carte = Read_Card("ELEFTERIOU_Alexis");
         Chain_add_tail(player, Read_Card("AMBRY_Lukas"));
@@ -43,8 +43,8 @@ int evenement(char buffer, SDL_Surface * ecran){
         Chain_add_tail(opponent, Random_Card());
         Chain_add_tail(opponent, Random_Card());
 
-        fight_print_sdl(player,opponent);
-        //SDLprinting((buffer-1),map);
+        fight_print_sdl(player,opponent);//combat
+
 
         SDL_FillRect(ecran, NULL, 0X9ed448);
         return buffer-1;

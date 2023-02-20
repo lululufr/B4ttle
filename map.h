@@ -5,16 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curses.h>
-
-typedef struct Map{
-    char * name;
-    char * map;
-    int width;
-}Map;
+#include "struct.h"
 
 
 
-void MapFile(Map * map, char * filename){
+
+void MapFile(Map * map, char * filename){//pour lire une map
 
         FILE *map_file = fopen(filename, "r");
         if (map_file == NULL) {

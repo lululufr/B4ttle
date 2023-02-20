@@ -1,26 +1,13 @@
 #ifndef B4TTLE_COMBAT_H
 #define B4TTLE_COMBAT_H
 
-#include "card.h"
+#include "struct.h"
 #include "monster.h"
 #include "combat_display.h"
 //fPIC pour faire des fichiers .so
 //.so
 //-fPIC-shared
 
-
-typedef struct card_sdl{
-
-    SDL_Surface * SDL_card;
-    SDL_Surface * message_nom,*message_hp,*message_atk;
-
-} card_sdl ;
-
-typedef struct Chain {
-    struct card * carte;
-    struct card_sdl * cardSdl;
-    struct Chain * next;
-} Chain;
 
 Chain * Chain_empty(){
     Chain * empty= malloc(sizeof(Chain));
@@ -56,7 +43,9 @@ int Chain_add_tail(Chain * chaine, card * carte){
     return 0;
 }
 
-
+void Chain_pop_BOOM(Chain ** chain){
+    *chain = (*chain)->next;
+}
 
 void Chain_delete(Chain **chain, int id) {
     Chain *current = *chain;
@@ -116,15 +105,6 @@ int Chain_length(Chain *chain) {
 }
 
 
-//void Chain_print(const Chain * chain){
-//    while (chain->next != NULL){
-//        Print_Card(chain->carte);
-//        printf("\n");
-//        chain = chain->next;
-//    }
-//    Print_Card(chain->carte);
-//}
-
 
 int win(Chain * player, Chain * opponent){
     if(Chain_length(player)==1&&player->carte->hp<=0){
@@ -138,11 +118,6 @@ int win(Chain * player, Chain * opponent){
 
 }
 
-void Chain_action(Chain * chain){
-    while (chain->next != NULL){
-        //SDL EVENT plus tard
-    }
-}
 
 Chain * Chain_get(Chain * chain, int id){
     Chain * current= chain;
@@ -186,10 +161,6 @@ void attack(int attack, Chain * enemyChain, int enemy_id,TTF_Font *font){
     }
 
 }
-
-
-
-
 
 
 
