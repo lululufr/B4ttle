@@ -13,17 +13,18 @@
 
 int isValid(int move, Map * map){
     if(map->map[move]==6 ||
-    map->map[move]==7 ||
-    map->map[move]==8 ||
-    map->map[move]==9 ||
-    map->map[move]==10 ||
-    map->map[move]==3||
-    map->map[move]==2 ||
-    map->map[move]==58||
-    map->map[move]==55||
-    map->map[move]==56||
-    map->map[move]==57||
-    map->map[move]==58){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
+            map->map[move]==7 ||
+            map->map[move]==12 ||
+            map->map[move]==8 ||
+            map->map[move]==9 ||
+            map->map[move]==10 ||
+            map->map[move]==3||
+            map->map[move]==2 ||
+            map->map[move]==58||
+            map->map[move]==55||
+            map->map[move]==56||
+            map->map[move]==57||
+            map->map[move]==58){/*peut importe ce qu'il y a ici, c'est juste un exemple je connais pas tous les caractères valides*/
         return 0;          /*on peut mettre des OR dans le if*/
     }else{
         return 1;

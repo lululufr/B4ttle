@@ -153,8 +153,6 @@ void SDLprinting(int position,char * mapName){ //la fonction d'affichage global
         // Met à jour l'écran !!!!!!!
         SDL_Flip(ecran);
 
-
-
         if(buffer == 60 ){
             SDL_FillRect(ecran, NULL, 0X9ed448); //on peut changer la couleur ici
             SDL_Flip(ecran);
