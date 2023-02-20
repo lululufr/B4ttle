@@ -155,10 +155,10 @@ void SDLprinting(int position,char * mapName){ //la fonction d'affichage global
 
 
 
-        if(map->map[buffer] == 1 ){
+        if(buffer == 60 ){
             SDL_FillRect(ecran, NULL, 0X9ed448); //on peut changer la couleur ici
             SDL_Flip(ecran);
-            SDLprinting(10,"maps/route1");
+            SDLprinting(56,"maps/route1");
         }
 
         buffer = evenement(buffer,ecran);

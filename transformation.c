@@ -6,7 +6,7 @@ while(map->map[y]!='\0') {
     switch (map->map[y]) {
         case '~': //chemin
 
-            map->map[y]=225;
+            map->map[y]=60;
 
         break;
 
@@ -62,6 +62,10 @@ while(map->map[y]!='\0') {
        case '!':
          map->map[y]=65;
            break;
+
+        case '1':
+                map->map[y]=12;
+        break;
 
     }
 ++y;
